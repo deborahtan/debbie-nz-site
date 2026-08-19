@@ -13,183 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --text-primary: #f5f5f2;
-    --text-secondary: #a9a49c;
-    --text-tertiary: #6f6a62;
-    --border: #232220;
-    --accent: #d4b483;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    background: var(--bg);
-    color: var(--text-secondary);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  /* ---------- NAV ---------- */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 26px 56px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 18px;
-  }
-
-  .wordmark {
-    font-family: 'Instrument Serif', serif;
-    font-size: 22px;
-    color: var(--text-primary);
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 26px;
-    align-items: center;
-    font-size: 14.5px;
-  }
-
-  .nav-links a { color: var(--text-secondary); transition: color 0.2s ease; }
-  .nav-links a:hover, .nav-links a:focus-visible { color: var(--text-primary); }
-
-  .nav-search {
-    display: flex; align-items: center; gap: 8px;
-    border: 1px solid var(--border); border-radius: 6px;
-    padding: 7px 10px; width: 220px;
-    transition: border-color 0.2s ease;
-  }
-  .nav-search:focus-within { border-color: var(--accent); }
-  .nav-search svg { flex-shrink: 0; opacity: 0.55; }
-
-  #site-search {
-    background: none; border: none; color: var(--text-primary);
-    font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; width: 100%; outline: none;
-  }
-  #site-search::placeholder { color: var(--text-tertiary); }
-
-  /* ---------- MASTHEAD ---------- */
-  .masthead { padding: 72px 56px 56px; max-width: 720px; }
-
-  .masthead p.location {
-    color: var(--text-tertiary);
-    font-size: 14px;
-    margin-bottom: 14px;
-  }
-
-  .masthead h1 {
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
-  }
-
-  .masthead h1 .accent-word { color: var(--accent); }
-
-  .masthead .lede {
-    margin-top: 24px;
-    font-size: 17px;
-    line-height: 1.75;
-    max-width: 600px;
-  }
-
-  /* ---------- WORK / PLAY ---------- */
-  .work-play {
-    padding: 8px 56px 64px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    max-width: 900px;
-  }
-
-  .wp-col .wp-label {
-    color: var(--text-tertiary);
-    font-size: 13px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .wp-col ul { list-style: none; }
-  .wp-col li {
-    padding: 11px 0;
-    border-top: 1px solid var(--border);
-    font-size: 15px;
-    color: var(--text-secondary);
-  }
-  .wp-col li:first-of-type { border-top: none; }
-  .wp-col li strong { color: var(--text-primary); font-weight: 500; display: block; margin-bottom: 2px; }
-
-  /* ---------- POSTS ---------- */
-  .posts { padding: 40px 56px 90px; border-top: 1px solid var(--border); max-width: 760px; }
-  .posts .section-label { color: var(--text-tertiary); font-size: 13px; padding-top: 40px; margin-bottom: 8px; display: block; }
-
-  .post-list { list-style: none; }
-
-  .post-row {
-    display: block;
-    padding: 26px 0;
-    border-top: 1px solid var(--border);
-    cursor: pointer;
-  }
-  .post-row:first-of-type { border-top: none; }
-
-  .post-row .post-top {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
-  }
-
-  .post-row h3 {
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--text-primary);
-    transition: color 0.2s ease;
-  }
-  .post-row:hover h3, .post-row:focus-visible h3 { color: var(--accent); }
-
-  .post-row .read-time {
-    font-size: 13px;
-    color: var(--text-tertiary);
-    white-space: nowrap;
-  }
-
-  .post-row p.excerpt { font-size: 14.5px; margin-top: 6px; max-width: 560px; }
-
-  footer {
-    padding: 36px 56px 48px; border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-    font-size: 13px; color: var(--text-tertiary);
-  }
-
-  /* ---------- MOBILE ---------- */
-  @media (max-width: 680px) {
-    nav { padding: 20px 20px; }
-    .nav-right { width: 100%; justify-content: space-between; }
-    .nav-search { width: 100%; }
-    .masthead { padding: 48px 20px 40px; }
-    .masthead h1 { font-size: 28px; }
-    .work-play { grid-template-columns: 1fr; padding: 8px 20px 48px; gap: 32px; }
-    .posts { padding: 24px 20px 56px; }
-    footer { padding: 28px 20px 36px; flex-direction: column; }
-  }
-</style>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -198,11 +22,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <nav>
-  <div class="wordmark">Debbie Tan</div>
+  <a href="/" class="wordmark">Debbie Tan</a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="#">writing</a>
-      <a href="#">about</a>
+      <a href="/writing.html">writing</a>
+      <a href="/about.html">about</a>
       <a href="#" id="shop-teaser">shop (building)</a>
     </div>
     <div class="nav-search">
@@ -247,37 +71,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <span class="section-label">Recent writing</span>
   <ul class="post-list">
 
-    <li class="post-row" tabindex="0" data-post-id="post-one">
+    <li><a class="post-row" href="/writing/post-one.html" data-post-id="post-one">
       <div class="post-top">
         <h3>Post title goes here</h3>
         <span class="read-time">6 min</span>
       </div>
       <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy until the real post is written.</p>
-    </li>
+    </a></li>
 
-    <li class="post-row" tabindex="0" data-post-id="post-two">
+    <li><a class="post-row" href="/writing/post-two.html" data-post-id="post-two">
       <div class="post-top">
         <h3>Another working title</h3>
         <span class="read-time">8 min</span>
       </div>
       <p class="excerpt">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Swap this out before launch.</p>
-    </li>
+    </a></li>
 
-    <li class="post-row" tabindex="0" data-post-id="post-three">
+    <li><a class="post-row" href="/writing/post-three.html" data-post-id="post-three">
       <div class="post-top">
         <h3>Placeholder headline</h3>
         <span class="read-time">4 min</span>
       </div>
       <p class="excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-    </li>
+    </a></li>
 
-    <li class="post-row" tabindex="0" data-post-id="post-four">
+    <li><a class="post-row" href="/writing/post-four.html" data-post-id="post-four">
       <div class="post-top">
         <h3>Yet another title</h3>
         <span class="read-time">7 min</span>
       </div>
       <p class="excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </li>
+    </a></li>
 
   </ul>
 </section>
@@ -315,9 +139,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
       console.log('[dataLayer push] post_click:', this.dataset.postId);
     });
-    card.addEventListener('keydown', function(e) { if (e.key === 'Enter') this.click(); });
   });
 </script>
 
 </body>
 </html>
+
