@@ -2,15 +2,15 @@
   "exportFormatVersion": 2,
   "exportTime": "2026-08-19 00:00:00",
   "containerVersion": {
-    "path": "accounts/REPLACE_ACCOUNT_ID/containers/REPLACE_CONTAINER_ID/versions/0",
-    "accountId": "REPLACE_ACCOUNT_ID",
-    "containerId": "REPLACE_CONTAINER_ID",
+    "path": "accounts/6348004567/containers/248383150/versions/0",
+    "accountId": "6348004567",
+    "containerId": "248383150",
     "containerVersionId": "0",
     "name": "debbie.nz — Mission Scoring v1",
     "container": {
-      "path": "accounts/REPLACE_ACCOUNT_ID/containers/REPLACE_CONTAINER_ID",
-      "accountId": "REPLACE_ACCOUNT_ID",
-      "containerId": "REPLACE_CONTAINER_ID",
+      "path": "accounts/6348004567/containers/248383150",
+      "accountId": "6348004567",
+      "containerId": "248383150",
       "name": "debbie.nz",
       "publicId": "GTM-REPLACE",
       "usageContext": ["WEB"],
@@ -19,8 +19,8 @@
     },
     "variable": [
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "variableId": "1",
         "name": "DLV - search_term",
         "type": "v",
@@ -31,8 +31,8 @@
         ]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "variableId": "2",
         "name": "DLV - post_id",
         "type": "v",
@@ -43,8 +43,8 @@
         ]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "variableId": "3",
         "name": "DLV - content_group",
         "type": "v",
@@ -55,8 +55,8 @@
         ]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "variableId": "4",
         "name": "LT - Search Term to Mission",
         "type": "smm",
@@ -114,8 +114,8 @@
     ],
     "trigger": [
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "triggerId": "1",
         "name": "CE - search",
         "type": "customEvent",
@@ -127,8 +127,8 @@
         ]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "triggerId": "2",
         "name": "CE - shop_teaser_click",
         "type": "customEvent",
@@ -140,8 +140,8 @@
         ]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "triggerId": "3",
         "name": "CE - post_click",
         "type": "customEvent",
@@ -155,8 +155,8 @@
     ],
     "tag": [
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "tagId": "1",
         "name": "GA4 Configuration",
         "type": "googtag",
@@ -166,8 +166,8 @@
         "firingTriggerId": ["2147479553"]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "tagId": "2",
         "name": "GA4 Event - search",
         "type": "gaawe",
@@ -188,8 +188,8 @@
         "firingTriggerId": ["1"]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "tagId": "3",
         "name": "GA4 Event - mission_assigned",
         "type": "gaawe",
@@ -210,8 +210,8 @@
         "firingTriggerId": ["1"]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "tagId": "4",
         "name": "GA4 Event - shop_teaser_click",
         "type": "gaawe",
@@ -223,8 +223,8 @@
         "firingTriggerId": ["2"]
       },
       {
-        "accountId": "REPLACE_ACCOUNT_ID",
-        "containerId": "REPLACE_CONTAINER_ID",
+        "accountId": "6348004567",
+        "containerId": "248383150",
         "tagId": "5",
         "name": "GA4 Event - post_click",
         "type": "gaawe",
