@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debbie Tan</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-REPLACE');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --text-primary: #f5f5f2;
+    --text-secondary: #a9a49c;
+    --text-tertiary: #6f6a62;
+    --border: #232220;
+    --accent: #d4b483;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-secondary);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 56px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .wordmark {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+    font-size: 14.5px;
+  }
+
+  .nav-links a { color: var(--text-secondary); transition: color 0.2s ease; }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--text-primary); }
+
+  .nav-search {
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 7px 10px; width: 220px;
+    transition: border-color 0.2s ease;
+  }
+  .nav-search:focus-within { border-color: var(--accent); }
+  .nav-search svg { flex-shrink: 0; opacity: 0.55; }
+
+  #site-search {
+    background: none; border: none; color: var(--text-primary);
+    font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; width: 100%; outline: none;
+  }
+  #site-search::placeholder { color: var(--text-tertiary); }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead { padding: 72px 56px 56px; max-width: 720px; }
+
+  .masthead p.location {
+    color: var(--text-tertiary);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .masthead h1 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .masthead h1 .accent-word { color: var(--accent); }
+
+  .masthead .lede {
+    margin-top: 24px;
+    font-size: 17px;
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  /* ---------- WORK / PLAY ---------- */
+  .work-play {
+    padding: 8px 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 900px;
+  }
+
+  .wp-col .wp-label {
+    color: var(--text-tertiary);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .wp-col ul { list-style: none; }
+  .wp-col li {
+    padding: 11px 0;
+    border-top: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+  .wp-col li:first-of-type { border-top: none; }
+  .wp-col li strong { color: var(--text-primary); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* ---------- POSTS ---------- */
+  .posts { padding: 40px 56px 90px; border-top: 1px solid var(--border); max-width: 760px; }
+  .posts .section-label { color: var(--text-tertiary); font-size: 13px; padding-top: 40px; margin-bottom: 8px; display: block; }
+
+  .post-list { list-style: none; }
+
+  .post-row {
+    display: block;
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .post-row:first-of-type { border-top: none; }
+
+  .post-row .post-top {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  }
+
+  .post-row h3 {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+  }
+  .post-row:hover h3, .post-row:focus-visible h3 { color: var(--accent); }
+
+  .post-row .read-time {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+
+  .post-row p.excerpt { font-size: 14.5px; margin-top: 6px; max-width: 560px; }
+
+  footer {
+    padding: 36px 56px 48px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 680px) {
+    nav { padding: 20px 20px; }
+    .nav-right { width: 100%; justify-content: space-between; }
+    .nav-search { width: 100%; }
+    .masthead { padding: 48px 20px 40px; }
+    .masthead h1 { font-size: 28px; }
+    .work-play { grid-template-columns: 1fr; padding: 8px 20px 48px; gap: 32px; }
+    .posts { padding: 24px 20px 56px; }
+    footer { padding: 28px 20px 36px; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-REPLACE"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <div class="wordmark">Debbie Tan</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#">writing</a>
+      <a href="#">about</a>
+      <a href="#" id="shop-teaser">shop (building)</a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<div class="masthead">
+  <p class="location">Auckland, Aotearoa — data &amp; analytics, and everything else</p>
+  <h1>This is my <span class="accent-word">sandbox</span> — literally and otherwise.</h1>
+  <p class="lede">Thoughts, half-finished ideas, and the occasional finished one. Some of
+  this is analytics and AI, written the way I'd actually explain it to you
+  in person. Some of it is paint, lino, and things I'm making with my hands.
+  All of it is mine.</p>
+</div>
+
+<div class="work-play">
+  <div class="wp-col">
+    <span class="wp-label">Work</span>
+    <ul>
+      <li><strong>Dentsu Aotearoa</strong>Associate Director, Data &amp; Analytics</li>
+      <li><strong>MeasureCamp Auckland</strong>Organiser</li>
+      <li><strong>IAB New Zealand</strong>Member, Data, Privacy &amp; Measurement Council</li>
+    </ul>
+  </div>
+  <div class="wp-col">
+    <span class="wp-label">Play</span>
+    <ul>
+      <li><strong>Tautai Gallery</strong>Volunteer</li>
+      <li><strong>SHE Choir Auckland</strong>Member</li>
+      <li><strong>Studio practice</strong>Watercolour, oil, lino print, zines</li>
+    </ul>
+  </div>
+</div>
+
+<section class="posts">
+  <span class="section-label">Recent writing</span>
+  <ul class="post-list">
+
+    <li class="post-row" tabindex="0" data-post-id="post-one">
+      <div class="post-top">
+        <h3>Post title goes here</h3>
+        <span class="read-time">6 min</span>
+      </div>
+      <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy until the real post is written.</p>
+    </li>
+
+    <li class="post-row" tabindex="0" data-post-id="post-two">
+      <div class="post-top">
+        <h3>Another working title</h3>
+        <span class="read-time">8 min</span>
+      </div>
+      <p class="excerpt">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Swap this out before launch.</p>
+    </li>
+
+    <li class="post-row" tabindex="0" data-post-id="post-three">
+      <div class="post-top">
+        <h3>Placeholder headline</h3>
+        <span class="read-time">4 min</span>
+      </div>
+      <p class="excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    </li>
+
+    <li class="post-row" tabindex="0" data-post-id="post-four">
+      <div class="post-top">
+        <h3>Yet another title</h3>
+        <span class="read-time">7 min</span>
+      </div>
+      <p class="excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </li>
+
+  </ul>
+</section>
+
+<footer>
+  <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+</footer>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  const searchInput = document.getElementById('site-search');
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length > 0) {
+      const query = this.value.trim();
+      window.dataLayer.push({ event: 'search', search_term: query });
+      console.log('[dataLayer push] search:', query);
+    }
+  });
+
+  document.getElementById('shop-teaser').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({ event: 'shop_teaser_click' });
+    console.log('[dataLayer push] shop_teaser_click');
+    alert('Shop is currently being built — check back soon.');
+  });
+
+  document.querySelectorAll('.post-row').forEach(function(card) {
+    card.addEventListener('click', function() {
+      window.dataLayer.push({
+        event: 'post_click',
+        post_id: this.dataset.postId,
+        content_group: 'blog'
+      });
+      console.log('[dataLayer push] post_click:', this.dataset.postId);
+    });
+    card.addEventListener('keydown', function(e) { if (e.key === 'Enter') this.click(); });
+  });
+</script>
+
+</body>
+</html>
