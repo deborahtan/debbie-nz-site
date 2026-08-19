@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Another working title — Debbie Tan</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-REPLACE');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-REPLACE"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="wordmark">Debbie Tan</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/writing.html" aria-current="page">writing</a>
+      <a href="/about.html">about</a>
+      <a href="#" id="shop-teaser">shop (building)</a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <a class="back-link" href="/writing.html">← Back to writing</a>
+  <p class="article-meta">8 min read — placeholder post</p>
+  <h1>Another working title</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. This paragraph, like the rest of this post, is a placeholder — swap it out before this page goes live for real.</p>
+</article>
+
+<footer>
+  <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+</footer>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  const searchInput = document.getElementById('site-search');
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length > 0) {
+      const query = this.value.trim();
+      window.dataLayer.push({ event: 'search', search_term: query });
+      console.log('[dataLayer push] search:', query);
+    }
+  });
+
+  document.getElementById('shop-teaser').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({ event: 'shop_teaser_click' });
+    console.log('[dataLayer push] shop_teaser_click');
+    alert('Shop is currently being built — check back soon.');
+  });
+</script>
+
+</body>
+</html>
