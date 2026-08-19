@@ -1,0 +1,255 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-08-19 00:00:00",
+  "containerVersion": {
+    "path": "accounts/REPLACE_ACCOUNT_ID/containers/REPLACE_CONTAINER_ID/versions/0",
+    "accountId": "REPLACE_ACCOUNT_ID",
+    "containerId": "REPLACE_CONTAINER_ID",
+    "containerVersionId": "0",
+    "name": "debbie.nz — Mission Scoring v1",
+    "container": {
+      "path": "accounts/REPLACE_ACCOUNT_ID/containers/REPLACE_CONTAINER_ID",
+      "accountId": "REPLACE_ACCOUNT_ID",
+      "containerId": "REPLACE_CONTAINER_ID",
+      "name": "debbie.nz",
+      "publicId": "GTM-REPLACE",
+      "usageContext": ["WEB"],
+      "fingerprint": "0",
+      "tagManagerUrl": "https://tagmanager.google.com/"
+    },
+    "variable": [
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "variableId": "1",
+        "name": "DLV - search_term",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "search_term" }
+        ]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "variableId": "2",
+        "name": "DLV - post_id",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "post_id" }
+        ]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "variableId": "3",
+        "name": "DLV - content_group",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "content_group" }
+        ]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "variableId": "4",
+        "name": "LT - Search Term to Mission",
+        "type": "smm",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "input", "value": "{{DLV - search_term}}" },
+          { "type": "TEMPLATE", "key": "defaultValue", "value": "unclassified" },
+          {
+            "type": "LIST",
+            "key": "map",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "gtm" },
+                { "type": "TEMPLATE", "key": "value", "value": "practitioner_researcher" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "bigquery" },
+                { "type": "TEMPLATE", "key": "value", "value": "practitioner_researcher" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "measurement" },
+                { "type": "TEMPLATE", "key": "value", "value": "practitioner_researcher" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "ai" },
+                { "type": "TEMPLATE", "key": "value", "value": "ai_thought_leadership" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "claude" },
+                { "type": "TEMPLATE", "key": "value", "value": "ai_thought_leadership" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "art" },
+                { "type": "TEMPLATE", "key": "value", "value": "art_creative" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "lino" },
+                { "type": "TEMPLATE", "key": "value", "value": "art_creative" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "consulting" },
+                { "type": "TEMPLATE", "key": "value", "value": "consulting_prospect" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "bytesized" },
+                { "type": "TEMPLATE", "key": "value", "value": "consulting_prospect" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "key", "value": "measurecamp" },
+                { "type": "TEMPLATE", "key": "value", "value": "community_event" }
+              ]}
+            ]
+          }
+        ]
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "triggerId": "1",
+        "name": "CE - search",
+        "type": "customEvent",
+        "customEventFilter": [
+          { "type": "EQUALS", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "search" }
+          ]}
+        ]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "triggerId": "2",
+        "name": "CE - shop_teaser_click",
+        "type": "customEvent",
+        "customEventFilter": [
+          { "type": "EQUALS", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "shop_teaser_click" }
+          ]}
+        ]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "triggerId": "3",
+        "name": "CE - post_click",
+        "type": "customEvent",
+        "customEventFilter": [
+          { "type": "EQUALS", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "post_click" }
+          ]}
+        ]
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "tagId": "1",
+        "name": "GA4 Configuration",
+        "type": "googtag",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "tagId", "value": "G-REPLACE_MEASUREMENT_ID" }
+        ],
+        "firingTriggerId": ["2147479553"]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "tagId": "2",
+        "name": "GA4 Event - search",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName", "value": "search" },
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Configuration" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "parameter", "value": "search_term" },
+                { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - search_term}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["1"]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "tagId": "3",
+        "name": "GA4 Event - mission_assigned",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName", "value": "mission_assigned" },
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Configuration" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "parameter", "value": "visitor_mission" },
+                { "type": "TEMPLATE", "key": "parameterValue", "value": "{{LT - Search Term to Mission}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["1"]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "tagId": "4",
+        "name": "GA4 Event - shop_teaser_click",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName", "value": "shop_teaser_click" },
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Configuration" }
+        ],
+        "firingTriggerId": ["2"]
+      },
+      {
+        "accountId": "REPLACE_ACCOUNT_ID",
+        "containerId": "REPLACE_CONTAINER_ID",
+        "tagId": "5",
+        "name": "GA4 Event - post_click",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "eventName", "value": "post_click" },
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Configuration" },
+          {
+            "type": "LIST", "key": "eventParameters",
+            "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "parameter", "value": "post_id" },
+                { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - post_id}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "parameter", "value": "content_group" },
+                { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - content_group}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["3"]
+      }
+    ],
+    "fingerprint": "0",
+    "tagManagerUrl": "https://tagmanager.google.com/"
+  }
+}
