@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post title goes here — Debbie Tan</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXPF7HTS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="wordmark">Debbie Tan</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/writing.html" aria-current="page">writing</a>
+      <a href="/about.html">about</a>
+      <a href="#" id="shop-teaser">shop (building)</a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <a class="back-link" href="/writing.html">← Back to writing</a>
+  <p class="article-meta">6 min read — placeholder post</p>
+  <h1>Demystifying AI</h1>
+  <p>Trigger warning: Thoughts and opinions my own.</p>
+  <p>Is it just me, or is AI not quite the cost cutting silver bullet some people say it is?</p>
+  <p>82% of NZ businesses now use AI in some form, but over that same period labour productivity actually went down 0.7%, and multi factor productivity dropped 0.9% too. That's from Deloitte Access Economics research commissioned by 2degrees. Almost everyone's using it now, but the national numbers haven't really moved much yet.</p>
+  <p>BCG surveyed over 1,400 C-suite execs in 2024 and found 54% expected AI to bring real cost savings, about half of those expecting more than 10%. For a $10 billion revenue company that's a fair chunk of change.</p>
+  <p>BCG followed up in July 2026 with 152 CEOs at $500M+ companies, and the execution gap is still there two years later. Nearly nine in ten now see some cost or revenue benefit from AI, but only 14% have clearly defined the P&L impact of their AI initiatives. The gap between seeing a benefit and being able to measure it is still huge.</p>
+  <p>To be clear I don't think this means AI doesn't work. I think it just means having access to a tool and actually getting value out of it are two pretty different things, and it's easy to mix them up without meaning to.</p>
+  <p>It's a familiar pattern in tech generally, not just AI. Cloud went through a version of this. Marketing automation did too. New tech tends to have this phase where having access gets confused with having impact. Someone gets a login, not much actually changes day to day, and everyone's a little confused about why the results haven't shown up.</p>
+  <p>A chatbot licence by itself was probably never going to be a strategy on its own. Before any of the setup, there are a few questions worth asking first: what's the actual problem here? Is AI even the right tool for it? Without that planning and foresight, the risk is that anyone could fall into the trap of building solutions and then trying to find a problem. I know, I've done it before too, where there's a cool shiny new feature, but at the end of the day, the impact is minimal.</p>
+  <p>There is also an art to the setup of AI platforms. Documented skills, context files, a bit of prompt structure, a workflow. For some maybe that's a boring part, but one that's needed for it all to work.</p>
+  <p>So is it a silver bullet? Not on its own. It's a tool that pays off when the thinking and setup around it are solid, and does very little when they're not.</p>
+  <p>The places actually getting value from this stuff right now don't seem to be the ones with the flashiest tools. Usually just the ones treating capability building as the real investment, which is reflected as growth on a P&L eventually.</p>
+  <p>A subscription list mostly just shows up on an invoice.</p>
+</article>
+
+<footer>
+  <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+</footer>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  const searchInput = document.getElementById('site-search');
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length > 0) {
+      const query = this.value.trim();
+      window.dataLayer.push({ event: 'search', search_term: query });
+      console.log('[dataLayer push] search:', query);
+    }
+  });
+
+  document.getElementById('shop-teaser').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({ event: 'shop_teaser_click' });
+    console.log('[dataLayer push] shop_teaser_click');
+    alert('Shop is currently being built — check back soon.');
+  });
+</script>
+
+</body>
+</html>
