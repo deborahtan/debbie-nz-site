@@ -30,7 +30,26 @@ export default {
   },
 };
 
+// Tables are created on first use, so a fresh (auto-created) database works with no manual migration step.
+let schemaReady = false;
+async function ensureSchema(env) {
+  if (schemaReady) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS likes (slug TEXT NOT NULL, visitor TEXT NOT NULL, ip_hash TEXT,
+      created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')), PRIMARY KEY (slug, visitor))`),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS likes_ip ON likes (ip_hash, created_at)'),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTOINCREMENT, slug TEXT NOT NULL,
+      name TEXT NOT NULL, body TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','published')), ip_hash TEXT,
+      created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')))`),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_slug ON comments (slug, status, created_at)'),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_ip ON comments (ip_hash, created_at)'),
+  ]);
+  schemaReady = true;
+}
+
 async function api(request, env, url) {
+  await ensureSchema(env);
   const parts = url.pathname.replace(/^\/api\//, '').split('/').filter(Boolean);
   const method = request.method;
 

@@ -13,14 +13,14 @@ likes/comments API.
 
 ## Likes + comments — one-time setup
 
-1. `npm install`
-2. `npx wrangler d1 create debbie-nz-pulse` → paste the `database_id` into
-   `wrangler.jsonc`.
-3. `npx wrangler d1 migrations apply debbie-nz-pulse --remote`
-4. Secrets (any long random strings):
-   `npx wrangler secret put ADMIN_TOKEN` and `npx wrangler secret put HASH_SALT`
-5. Deploy (`npm run deploy`, or push and let Workers Builds deploy).
-6. Moderate at `/admin.html` with the ADMIN_TOKEN. Set
+1. Deploy (push and let Workers Builds deploy). The D1 database
+   `debbie-nz-pulse` is created automatically on first deploy, and the Worker
+   creates its tables on first request.
+2. Add two secrets (any long random strings) in Cloudflare → Workers →
+   debbie-nz-site → Settings → Variables and Secrets: `ADMIN_TOKEN` and
+   `HASH_SALT`. (Or `npx wrangler secret put <NAME>`.) Without `HASH_SALT`
+   nothing about IPs is stored and rate limiting is off.
+3. Moderate at `/admin.html` with the ADMIN_TOKEN. Set
    `COMMENTS_MODERATED` to `"false"` in `wrangler.jsonc` to publish instantly.
 
 Privacy: no emails or accounts. IPs are salted + hashed (never stored raw) and

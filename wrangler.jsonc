@@ -17,8 +17,7 @@
     {
       "binding": "DB",
       "database_name": "debbie-nz-pulse",
-      // Run: npx wrangler d1 create debbie-nz-pulse   then paste the id here
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      // No id needed: `wrangler deploy` creates this database on first deploy.
       "migrations_dir": "migrations"
     }
   ]
