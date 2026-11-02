@@ -15,6 +15,10 @@ to a line here.
 | `mission_assigned` | Custom | Immediately after `search`, once mission is resolved | Live |
 | `shop_teaser_click` | Custom, marked as conversion | "Shop" nav link clicked | Live |
 | `post_click` | Custom | A post card clicked on the homepage grid | Live |
+| `post_click` (newsletter) | Custom | An issue card clicked on the homepage (`content_group: newsletter`) | New |
+| `newsletter_like` | Custom | Like / unlike on an issue page | New |
+| `comment_submit` | Custom | Comment successfully submitted | New |
+| `share` | GA4 recommended | Share button (native share or copy link) | New |
 | `page_view` | GA4 automatic | Every page load | Live (automatic) |
 
 ## Parameters
@@ -24,7 +28,11 @@ to a line here.
 | `search_term` | `search` | Event | raw search string, lowercase-normalised in GTM |
 | `visitor_mission` | `mission_assigned` | **User** (see GA4 admin note below) | `practitioner_researcher` / `ai_thought_leadership` / `art_creative` / `consulting_prospect` / `community_event` / `unclassified` |
 | `post_id` | `post_click` | Event | slug string, e.g. `ai-crawlers` |
-| `content_group` | `post_click` | Event | `blog` (only value in use today; reserved for `shop`, `about` later) |
+| `content_group` | `post_click` | Event | `blog`, `newsletter` |
+| `item_id` | `newsletter_like`, `comment_submit`, `share` | Event | issue slug, e.g. `issue-09` |
+| `like_action` | `newsletter_like` | Event | `like` / `unlike` |
+| `comment_status` | `comment_submit` | Event | `pending` / `published` |
+| `method` | `share` | Event | `native` / `copy_link` |
 
 ## GA4 admin setup (manual — not part of GTM import)
 
@@ -54,6 +62,8 @@ doing once:
 ---
 
 ## Change log
+
+- **v2** — On the Pulse homepage: `newsletter_like`, `comment_submit`, `share`; `post_click` gains `content_group: newsletter`. Never send comment text or names to the dataLayer.
 
 - **v1** — initial dictionary, mission scoring via GTM Lookup Table
   (keyword match, no BigQuery/ML yet — see personalization-demo-plan.md

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Comment moderation</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0f1110; --panel:#171a18; --line:#2a2f2b; --fg:#e9ece6; --muted:#9aa39b; --blue:#5eb8f2; --warn:#f2b84a; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:"Hanken Grotesk", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  h1 { font-weight: 800; font-size: 28px; margin: 0 0 20px; }
+  .bar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom: 24px; }
+  input, select, button { font: inherit; background: var(--panel); color: var(--fg); border:1px solid var(--line); border-radius:8px; padding:9px 12px; }
+  input { flex: 1 1 220px; }
+  button { cursor:pointer; }
+  button.primary { background: var(--blue); color:#08131b; border:0; font-weight:600; }
+  button.danger { border-color: #5a3a30; color: var(--warn); }
+  .c { background: var(--panel); border:1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+  .c .top { font-family:"JetBrains Mono", monospace; font-size: 11px; color: var(--muted); display:flex; gap:12px; flex-wrap:wrap; }
+  .c .top b { color: var(--blue); font-weight: 400; }
+  .c .who { font-weight: 600; margin: 8px 0 4px; }
+  .c p { margin: 0 0 12px; white-space: pre-wrap; overflow-wrap:anywhere; }
+  .c .actions { display:flex; gap:8px; }
+  .msg { font-family:"JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Comment moderation</h1>
+  <form class="bar" id="login">
+    <input type="password" id="token" placeholder="Admin token" autocomplete="current-password" aria-label="Admin token">
+    <select id="status" aria-label="Show">
+      <option value="pending">Pending</option>
+      <option value="published">Published</option>
+      <option value="all">All</option>
+    </select>
+    <button class="primary" type="submit">Load</button>
+  </form>
+  <p class="msg" id="msg">Enter the ADMIN_TOKEN secret. It's kept only in this tab.</p>
+  <div id="list"></div>
+</main>
+<script>
+(function () {
+  var tokenEl = document.getElementById('token'), statusEl = document.getElementById('status');
+  var list = document.getElementById('list'), msg = document.getElementById('msg');
+  try { tokenEl.value = sessionStorage.getItem('otp_admin') || ''; } catch (e) {}
+
+  function call(path, opts) {
+    opts = opts || {};
+    opts.headers = { 'Authorization': 'Bearer ' + tokenEl.value, 'Content-Type': 'application/json' };
+    return fetch('/api/admin/' + path, opts).then(function (r) {
+      if (r.status === 401) throw new Error('Wrong token.');
+      if (!r.ok) throw new Error('Request failed (' + r.status + ').');
+      return r.json();
+    });
+  }
+
+  function load() {
+    try { sessionStorage.setItem('otp_admin', tokenEl.value); } catch (e) {}
+    msg.textContent = 'Loading…';
+    call('comments?status=' + statusEl.value).then(function (res) {
+      list.innerHTML = '';
+      msg.textContent = res.comments.length + ' comment' + (res.comments.length === 1 ? '' : 's');
+      res.comments.forEach(function (c) {
+        var d = document.createElement('div'); d.className = 'c';
+        var top = document.createElement('div'); top.className = 'top';
+        top.innerHTML = '<b></b><span></span><span></span>';
+        top.children[0].textContent = c.slug;
+        top.children[1].textContent = c.status;
+        top.children[2].textContent = new Date(c.created_at).toLocaleString('en-NZ');
+        var who = document.createElement('div'); who.className = 'who'; who.textContent = c.name;
+        var p = document.createElement('p'); p.textContent = c.body;
+        var actions = document.createElement('div'); actions.className = 'actions';
+        [c.status === 'pending' ? ['approve', 'Approve', 'primary'] : ['hide', 'Unpublish', ''], ['delete', 'Delete', 'danger']].forEach(function (a) {
+          var b = document.createElement('button'); b.type = 'button'; b.textContent = a[1]; if (a[2]) b.className = a[2];
+          b.addEventListener('click', function () {
+            if (a[0] === 'delete' && !confirm('Delete this comment permanently?')) return;
+            call('comments/' + c.id, { method: 'POST', body: JSON.stringify({ action: a[0] }) }).then(load, function (e) { msg.textContent = e.message; });
+          });
+          actions.appendChild(b);
+        });
+        d.appendChild(top); d.appendChild(who); d.appendChild(p); d.appendChild(actions);
+        list.appendChild(d);
+      });
+    }).catch(function (e) { list.innerHTML = ''; msg.textContent = e.message; });
+  }
+
+  document.getElementById('login').addEventListener('submit', function (e) { e.preventDefault(); load(); });
+  statusEl.addEventListener('change', function () { if (tokenEl.value) load(); });
+  if (tokenEl.value) load();
+})();
+</script>
+</body>
+</html>

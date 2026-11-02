@@ -3,19 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Debbie Tan</title>
+<title>On the Pulse — Debbie Tan</title>
+<meta name="description" content="Monthly notes on AI, data, measurement and privacy from Auckland, Aotearoa. Every item dated and sourced.">
+<link rel="canonical" href="https://debbie.nz/">
+<meta property="og:title" content="On the Pulse — Debbie Tan">
+<meta property="og:description" content="Monthly notes on AI, data, measurement and privacy from Auckland, Aotearoa. Every item dated and sourced.">
+<meta property="og:type" content="article">
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
 <!-- End Google Tag Manager -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/pulse.css">
+<link rel="alternate" type="application/rss+xml" title="On the Pulse" href="/pulse/feed.xml">
 </head>
-<body>
+<body class="pulse">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXPF7HTS"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -25,86 +32,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="/" class="wordmark">Debbie Tan</a>
   <div class="nav-right">
     <div class="nav-links">
+      <a href="/" aria-current="page">on the pulse</a>
       <a href="/writing.html">writing</a>
       <a href="/about.html">about</a>
-      <a href="#" id="shop-teaser">shop (building)</a>
+      <a href="#" id="shop-teaser">shop</a>
+      <a href="/form-test.html">sign up</a>
     </div>
     <div class="nav-search">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off" aria-label="Search writing">
     </div>
   </div>
 </nav>
 
-<div class="masthead">
-  <p class="location">Auckland, Aotearoa — data &amp; analytics, and everything else</p>
-  <h1>This is my <span class="accent-word">sandbox</span> — literally and otherwise.</h1>
-  <p class="lede">Thoughts, half-finished ideas, and the occasional finished one. Some of
-  this is analytics and AI, written the way I'd actually explain it to you
-  in person. Some of it is paint, lino, and things I'm making with my hands.
-  All of it is mine.</p>
-</div>
-
-<div class="work-play">
-  <div class="wp-col">
-    <span class="wp-label">Work</span>
-    <ul>
-      <li><strong>Dentsu Aotearoa</strong>Associate Director, Data &amp; Analytics</li>
-      <li><strong>MeasureCamp Auckland</strong>Organiser</li>
-      <li><strong>IAB New Zealand</strong>Member, Data, Privacy &amp; Measurement Council</li>
-    </ul>
+<main class="pulse-wrap home">
+<header class="pulse-mast">
+  <div class="kicker">On the Pulse · by Debbie Tan</div>
+  <h1>What's moving in AI, data &amp; <span>measurement.</span></h1>
+  <p class="intro">A monthly pull of what actually changed for anyone working in data, measurement or privacy in media and marketing — written from Auckland, Aotearoa. Every item is dated and links to its primary source.</p>
+</header>
+<article class="feature" data-issue-card="issue-09">
+  <div class="feature-meta"><span class="badge">Latest</span><span>Issue No. 09</span><span>29 October 2026</span><span>5 min read</span></div>
+  <h2><a href="/pulse/issue-09" class="issue-link" data-post-id="issue-09">AI labs kept shipping. Google quietly took <span>control.</span></a></h2>
+  <p class="lede">Here&#x27;s the one-line version: OpenAI and Anthropic both released new things this month, nothing in our stack broke, but Google quietly moved who controls your measurement data from Analytics into Ads. That&#x27;s the one to actually act on. Everything else below is useful context.</p>
+  <div class="stats-row"><div class="stat"><span class="n">54%</span><span class="l">Of companies have AI agents running</span></div><div class="stat"><span class="n">25%</span><span class="l">Actually measure if they&#x27;re working</span></div><div class="stat"><span class="n">80%</span><span class="l">Say they&#x27;re seeing real value</span></div><div class="stat"><span class="n">46%</span><span class="l">Say integration is the hard part now</span></div></div>
+  <div class="inside"><span>Inside</span><ol><li>ChatGPT&#x27;s free tier is now running on GPT‑6</li><li>Anthropic shipped a lot of small things, not one big one</li><li>Claude Dashboards — the one worth a proper look</li><li>Anthropic also gave away a slice of the company</li><li>Grok 5 was talked about, not shipped</li><li>Google Ads now controls your consent and IP data, not GA4</li><li>Tag Manager&#x27;s biggest change in years landed — then everything went quiet</li><li>BigQuery had its busiest month yet for AI features</li></ol></div>
+  <div class="feature-foot">
+    <a class="read" href="/pulse/issue-09" data-post-id="issue-09">Read the issue →</a>
+    <span class="counts"><span class="ct"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span data-like-count="issue-09">–</span></span><span class="ct"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span data-comment-count="issue-09">–</span></span></span>
   </div>
-  <div class="wp-col">
-    <span class="wp-label">Play</span>
-    <ul>
-      <li><strong>Tautai Gallery</strong>Volunteer</li>
-      <li><strong>SHE Choir Auckland</strong>Member</li>
-      <li><strong>Studio practice</strong>Watercolour, oil, lino print, zines</li>
-    </ul>
-  </div>
-</div>
-
-<section class="posts">
-  <span class="section-label">Recent writing</span>
-  <ul class="post-list">
-
-    <li><a class="post-row" href="/writing/post-one.html" data-post-id="post-one">
-      <div class="post-top">
-        <h3>Post title goes here</h3>
-        <span class="read-time">6 min</span>
-      </div>
-      <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy until the real post is written.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-two.html" data-post-id="post-two">
-      <div class="post-top">
-        <h3>Another working title</h3>
-        <span class="read-time">8 min</span>
-      </div>
-      <p class="excerpt">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Swap this out before launch.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-three.html" data-post-id="post-three">
-      <div class="post-top">
-        <h3>Placeholder headline</h3>
-        <span class="read-time">4 min</span>
-      </div>
-      <p class="excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-four.html" data-post-id="post-four">
-      <div class="post-top">
-        <h3>Yet another title</h3>
-        <span class="read-time">7 min</span>
-      </div>
-      <p class="excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </a></li>
-
-  </ul>
-</section>
+</article>
+<section class="archive"><h2>Earlier issues</h2><ol>
+<li data-issue-card="issue-08"><a class="arch-row issue-link" href="/pulse/issue-08" data-post-id="issue-08">
+  <div class="arch-top"><span class="no">No. 08</span><span class="date">4 September 2026</span>
+  <span class="counts"><span class="ct"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span data-like-count="issue-08">–</span></span><span class="ct"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span data-comment-count="issue-08">–</span></span></span></div>
+  <h3>Google quietly made AI Max mandatory for most Search campaigns</h3>
+  <p>Google quietly made its AI system the default for how most Search campaigns run, effective this week — with no public announcement, no rollback, and notification by email alone. Nielsen closed on absorbing one of only…</p>
+</a></li>
+<li data-issue-card="issue-07"><a class="arch-row issue-link" href="/pulse/issue-07" data-post-id="issue-07">
+  <div class="arch-top"><span class="no">No. 07</span><span class="date">26 August 2026</span>
+  <span class="counts"><span class="ct"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span data-like-count="issue-07">–</span></span><span class="ct"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span data-comment-count="issue-07">–</span></span></span></div>
+  <h3>ChatGPT Ads goes live across Europe</h3>
+  <p>This issue covers strictly the last 30 days — nothing older, nothing recycled from earlier in the year. AI agents are now planning, buying and reporting in one workspace, peer-reviewed research is challenging how much…</p>
+</a></li>
+</ol></section>
+</main>
 
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
@@ -113,35 +88,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
   window.dataLayer = window.dataLayer || [];
-
   const searchInput = document.getElementById('site-search');
   searchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && this.value.trim().length > 0) {
-      const query = this.value.trim();
-      window.dataLayer.push({ event: 'search', search_term: query });
-      console.log('[dataLayer push] search:', query);
+      window.dataLayer.push({ event: 'search', search_term: this.value.trim() });
     }
   });
-
   document.getElementById('shop-teaser').addEventListener('click', function(e) {
     e.preventDefault();
     window.dataLayer.push({ event: 'shop_teaser_click' });
-    console.log('[dataLayer push] shop_teaser_click');
     alert('Shop is currently being built — check back soon.');
   });
-
-  document.querySelectorAll('.post-row').forEach(function(card) {
-    card.addEventListener('click', function() {
-      window.dataLayer.push({
-        event: 'post_click',
-        post_id: this.dataset.postId,
-        content_group: 'blog'
-      });
-      console.log('[dataLayer push] post_click:', this.dataset.postId);
-    });
-  });
 </script>
-
+<script src="/pulse.js" defer></script>
 </body>
 </html>
-

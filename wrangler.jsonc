@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Same Worker name as the live site (debbie-nz-site.<account>.workers.dev)
+  "name": "debbie-nz-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./debbie-nz-site",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    // "true" = comments wait for approval at /admin; "false" = publish immediately
+    "COMMENTS_MODERATED": "true"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "debbie-nz-pulse",
+      // Run: npx wrangler d1 create debbie-nz-pulse   then paste the id here
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

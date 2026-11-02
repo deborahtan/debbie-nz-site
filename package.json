@@ -1,0 +1,12 @@
+{
+  "name": "debbie-nz-site",
+  "private": true,
+  "scripts": {
+    "build:pulse": "python3 scripts/build_pulse.py",
+    "dev": "wrangler d1 migrations apply debbie-nz-pulse --local && wrangler dev",
+    "deploy": "wrangler d1 migrations apply debbie-nz-pulse --remote && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.2"
+  }
+}

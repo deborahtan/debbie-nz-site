@@ -1,7 +1,30 @@
 # debbie.nz
 
-Personal site — writing, mission-scored search, shop teaser. Static HTML,
-no build step, deploys via Cloudflare Pages.
+Personal site — On the Pulse (homepage), writing, mission-scored search, shop
+teaser. Static HTML served by a small Cloudflare Worker that also runs the
+likes/comments API.
+
+## On the Pulse (homepage)
+
+- Content lives in `content/pulse/issue-XX.json` (repo root, not served).
+- `python3 scripts/build_pulse.py` regenerates `index.html`,
+  `pulse/issue-XX.html` and `pulse/feed.xml` (RSS). Commit the output.
+- New edition: add `issue-10.json` in the same shape, run the script, push.
+
+## Likes + comments — one-time setup
+
+1. `npm install`
+2. `npx wrangler d1 create debbie-nz-pulse` → paste the `database_id` into
+   `wrangler.jsonc`.
+3. `npx wrangler d1 migrations apply debbie-nz-pulse --remote`
+4. Secrets (any long random strings):
+   `npx wrangler secret put ADMIN_TOKEN` and `npx wrangler secret put HASH_SALT`
+5. Deploy (`npm run deploy`, or push and let Workers Builds deploy).
+6. Moderate at `/admin.html` with the ADMIN_TOKEN. Set
+   `COMMENTS_MODERATED` to `"false"` in `wrangler.jsonc` to publish instantly.
+
+Privacy: no emails or accounts. IPs are salted + hashed (never stored raw) and
+only used for rate limiting. Local dev: `npm run dev` (uses `.dev.vars`).
 
 ## Deploy (Cloudflare Pages)
 

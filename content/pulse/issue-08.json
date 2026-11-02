@@ -1,0 +1,351 @@
+{
+  "number": 8,
+  "slug": "issue-08",
+  "date": "2026-09-04",
+  "period": "1 Aug – 4 Sep 2026",
+  "format": "industry",
+  "kicker": "Industry Edition",
+  "title": "Google quietly made AI Max mandatory for most Search campaigns",
+  "lede": "Google quietly made its AI system the default for how most Search campaigns run, effective this week — with no public announcement, no rollback, and notification by email alone. Nielsen closed on absorbing one of only two independent ad-verification vendors with real scale. Peer-reviewed research shows platform-reported lift can overstate true impact by a factor of 13. And new WARC data puts hard numbers on why social-first budget strategies are hitting a ceiling. Every item below earned its place on merit, not just because it happened in the window.",
+  "stats": [
+    {
+      "value": "31",
+      "label": "European markets where ChatGPT Ads is now live",
+      "source": "OPENAI — AUG 24, 2026"
+    },
+    {
+      "value": "1,306%",
+      "label": "The overstatement in one platform-reported lift estimate versus true experimental results, per peer-reviewed research",
+      "source": "GORDON ET AL. — CITED AUG 2026"
+    },
+    {
+      "value": "$2.15B",
+      "label": "Nielsen's price to acquire DoubleVerify, taking one of two major independent verification vendors off the public market",
+      "source": "NIELSEN — AUG 6, 2026"
+    },
+    {
+      "value": "29%",
+      "label": "Share of exact-match keyword impressions Google's AI Max was already influencing before this month's mandatory migration",
+      "source": "PPC LAND, VIA NATECUE — AUG 2026"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "AI & Agents",
+      "tag": "Platforms",
+      "description": null,
+      "items": [
+        {
+          "title": "ChatGPT Ads goes live across Europe",
+          "meta": "Aug 24, 2026 — San Francisco",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "OpenAI opened ChatGPT Ads in 31 European markets, launching first through agency and technology partners after announcing the expansion on Aug 18."
+            },
+            {
+              "label": "Implication",
+              "text": "Budget question, not a trend piece: a channel that didn't exist in most 2026 media plans now has European scale. A defensible answer for why this either is or isn't in next year's mix is needed — 'we haven't evaluated it yet' will not survive scrutiny once a competitor's numbers show they have."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Choice OMG",
+              "url": "https://choice.marketing/blog/chatgpt-ads-2026-field-guide/"
+            }
+          ]
+        },
+        {
+          "title": "ChatGPT Ads gets real targeting and bidding",
+          "meta": "Aug 20, 2026 — San Francisco",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "OpenAI added conversion-optimized bidding (oCPC), custom audiences from email/phone lists, and dropped its $50,000 minimum spend requirement."
+            },
+            {
+              "label": "Implication",
+              "text": "The barrier that justified waiting — enterprise-only, high minimum spend — is gone. That removes the easiest excuse for deferring a test-and-learn budget line, and shifts the real question from 'can we afford to try this' to 'can we afford not to know how it performs before a competitor does.'"
+            }
+          ],
+          "sources": [
+            {
+              "name": "Choice OMG",
+              "url": "https://choice.marketing/blog/chatgpt-ads-2026-field-guide/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Measuring Marketing Impact",
+      "tag": "Marketing Science & Experimentation",
+      "description": null,
+      "items": [
+        {
+          "title": "Platform-reported lift can be off by a factor of 13, peer-reviewed research finds",
+          "meta": "Cited Aug 2026 — Academic research",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "A widely-cited comparison of observational (platform-reported) versus randomized-experiment estimates of ad effectiveness found that in half of 15 Facebook experiments studied, observational estimates were off by a factor of three or more — in one case, a true 2.4% lift was reported observationally as 1,306%. A separate documented case put reported ROAS above 4,100% while the randomized experiment on the same spend returned minus 63%."
+            },
+            {
+              "label": "Implication",
+              "text": "This is ammunition for a conversation most marketing leaders are already losing: if platform-reported lift can overstate true impact by an order of magnitude, then any high-level ROI number sourced solely from platform dashboards is a defensibility risk, not just an optimism bias. The fix — independent experimentation, not better dashboards — is a budget line, not a reporting-cadence change."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Koji, citing Gordon et al.",
+              "url": "https://www.koji.so/blog/marketing-mix-modeling-vs-attribution-vs-incrementality-2026"
+            }
+          ]
+        },
+        {
+          "title": "Google Ads will ignore offline conversions uploaded more than 7 days late",
+          "meta": "Sep 2, 2026 — Google Ads",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Google Ads instituted a 7-day cutoff for offline conversion uploads: conversions uploaded after that window still appear in standard reports, but are excluded from data-driven attribution calculations entirely."
+            },
+            {
+              "label": "Implication",
+              "text": "Any organisation with a sales cycle or CRM reconciliation process slower than 7 days — common in B2B, high-consideration purchases, and anything requiring manual sign-off — is now structurally locked out of having that revenue properly credited in Google's own attribution model, regardless of whether the sale genuinely came from the ad. Worth an audit of how long offline conversion data actually takes to reach Google in practice, not how long it's assumed to take."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Two Octobers",
+              "url": "https://twooctobers.com/blog/digital-marketing-updates-september-2026/"
+            }
+          ]
+        },
+        {
+          "title": "Measuring visibility in AI search is now its own software category",
+          "meta": "Aug 11, 2026 — Industry tracker",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "At least ten distinct tools (Profound, AthenaHQ, Peec AI, Otterly.ai, Knowatoa, Scrunch AI, Brandlight, Goodie AI, and AI-visibility add-ons from Ahrefs and Semrush) are now competing to measure how often and how accurately brands are cited inside ChatGPT, Perplexity, Gemini and Google's AI Overviews — each using a different methodology."
+            },
+            {
+              "label": "Implication",
+              "text": "A twelve-month-old measurement problem has become a fragmented, unstandardized software category before any shared methodology has been agreed. That mirrors the early, chaotic years of web analytics and viewability measurement — and raises the same question the industry eventually had to answer then: who arbitrates whose numbers are right when every vendor's tool disagrees with the others?"
+            }
+          ],
+          "sources": [
+            {
+              "name": "IndustryLens",
+              "url": "https://industry-lens.com/intelligence/ai-search"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Data & Cloud Platforms",
+      "tag": "GCP, Tableau & Snowflake",
+      "description": "Google Cloud and Tableau's biggest AI moves this cycle (Gemini Enterprise Agent Platform, Agentic Data Cloud) landed at their respective conferences in April — outside this issue's 30-day window, so they're not represented below as \"this month's news.\" Only what genuinely shipped in the last 30 days is included.",
+      "items": [
+        {
+          "title": "Snowflake added a cost-control layer for runaway AI spend",
+          "meta": "Aug 18, 2026 — Snowflake",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Snowflake announced dynamic model routing inside Cortex AI Gateway, which automatically selects which AI model handles a given task based on quality, speed and cost, alongside new tools to track AI usage, allocate costs, and set spending quotas across teams and agents."
+            },
+            {
+              "label": "Implication",
+              "text": "This is a direct answer to a question that's been open industry-wide since agentic tools started running with less human oversight: who's watching what AI inference actually costs, and can anyone attribute or cap it by team. Any organisation running AI workloads on Snowflake now has a real governance lever here — worth routing to whoever owns the AI budget line, not leaving it as a data-team-only concern."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Snowflake",
+              "url": "https://www.snowflake.com/en/news/press-releases/snowflake-unlocks-better-ai-economics-dynamic-model-routing/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Activation",
+      "tag": "How Campaigns Actually Run",
+      "description": null,
+      "items": [
+        {
+          "title": "Google quietly made AI Max mandatory for most Search campaigns",
+          "meta": "Sep 1, 2026 — Mountain View",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Starting September 1, Google began automatically migrating all Search campaigns using Automatically Created Assets or campaign-level Broad Match to AI Max — with AI-driven search-term matching and ad-copy rewriting turned on by default, and no rollback option once a campaign migrates. The rollout is progressive through September. Dynamic Search Ads follow a separate migration in February 2027. Google notified affected advertisers by email on Aug 5, with no accompanying public announcement."
+            },
+            {
+              "label": "Implication",
+              "text": "This is the platform-power version of the AI-and-consent debate the industry usually has about consumer data: an advertiser's actual campaign mechanics — what queries it matches, what the ad copy says — are changing by default, on Google's timeline, communicated by email rather than a public announcement. Any organisation running Search campaigns on ACA or campaign-level Broad Match should treat this as already live, not upcoming, and should be asking whether Google's silent-default approach here sets a precedent other platforms will follow."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Search Engine Land, via Optimixed",
+              "url": "https://www.optimixed.com/google-sets-ai-max-migration-timeline-for-search-campaigns/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Market Structure",
+      "tag": "Vendor Consolidation",
+      "description": null,
+      "items": [
+        {
+          "title": "Nielsen is buying DoubleVerify for $2.15 billion",
+          "meta": "Aug 6, 2026 — New York",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Nielsen Holdings and DoubleVerify entered a definitive agreement for Nielsen to acquire DoubleVerify in an all-cash deal at $13.60/share, a 30% premium to DoubleVerify's 60-day average price. The combined company is expected to generate over $4 billion in pro forma revenue, expanding Nielsen's addressable market to $300B+. The deal is expected to close around Q1 2027, pending shareholder and regulatory approval."
+            },
+            {
+              "label": "Implication",
+              "text": "This is a direct vendor-risk event for any organisation relying on DoubleVerify for independent verification: one of only two vendors with genuine scale in that category is being absorbed into a larger holding company, reducing the number of truly arms-length options in the market. Worth a procurement review of measurement-vendor concentration risk now, not at next contract renewal."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Nielsen",
+              "url": "https://www.nielsen.com/news-center/2026/nielsen-to-acquire-doubleverify-creating-a-leading-independent-media-intelligence/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Regulatory",
+      "tag": "Data, AI, PII & Consent",
+      "description": null,
+      "items": [
+        {
+          "title": "EU makes AI-content labeling law, not policy",
+          "meta": "Aug 2, 2026 — Brussels",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Article 50 of the EU AI Act took effect, requiring AI-generated synthetic content shown to EU users to carry a machine-readable marking, with deepfakes needing a distinguishable label."
+            },
+            {
+              "label": "Implication",
+              "text": "This is now a strategic compliance line item, not a marketing guideline: it's the first hard legal mandate for AI-content labeling anywhere in the world, and it applies regardless of who generated the content — the agency, the brand's own team, or a platform's AI tool. Whoever owns data or content strategy should confirm now whether existing content pipelines can actually produce the required disclosure, not assume creative or legal already has it covered."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Cinerads",
+              "url": "https://www.cinerads.com/blog/ai-ad-disclosure-requirements"
+            }
+          ]
+        },
+        {
+          "title": "California enabled mass data-broker deletion",
+          "meta": "Aug 1, 2026 — Sacramento",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "The Delete Act's centralised deletion system went live — one consumer request now removes their data from every registered California data broker at once."
+            },
+            {
+              "label": "Implication",
+              "text": "This is a data-supply risk to flag to whoever owns audience planning and budget: a single, centralised deletion mechanism shrinks the reliable pool of third-party and appended data industry-wide, which means any budget still allocated against broker-sourced audiences is funding a pool that's actively shrinking and getting less reliable in real time."
+            }
+          ],
+          "sources": [
+            {
+              "name": "CPPA",
+              "url": "https://cppa.ca.gov/announcements"
+            }
+          ]
+        },
+        {
+          "title": "ICO enforcement action shows what \"reasonable care\" actually means",
+          "meta": "Aug 2026 — London",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "The ICO issued the Metropolitan Police Service with an enforcement notice and reprimand after an officer emailed 18 people affected by a sensitive case with all recipients visible in the \"To\" field, potentially exposing highly sensitive inferences about them."
+            },
+            {
+              "label": "Implication",
+              "text": "This sets a precedent worth routing to legal immediately: liability turns on what can be inferred, not on whether personal data is technically named. Any organisation building or sharing lists from sensitive segments — health, legal, financial — carries the same exposure this enforcement action punished, regardless of sector."
+            }
+          ],
+          "sources": [
+            {
+              "name": "UK ICO",
+              "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2026/08/metropolitan-police-service-issued-with-enforcement-notice-and-reprimand-following-data-protection-failures/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Effectiveness Research",
+      "tag": "Evidence",
+      "description": null,
+      "items": [
+        {
+          "title": "Social-first marketing has a growth ceiling, new research finds",
+          "meta": "Aug 6, 2026 — WARC (World Advertising Research Center)",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "WARC's \"The Pace Principle 2.0 — From Social Sprint to Sustained Growth\" analyzed 210 advertising case studies from Southeast Asia, Greater China and India and found broad emotional brand campaigns outperform broad social campaigns by 2.1x on brand and business impact, with nearly four times the long-term effect. Aligning target market to creative strategy correctly boosts campaign effectiveness by up to 70% — but targeted social campaigns still beat targeted emotional ones by 2.4x, meaning neither approach works well when narrowly targeted alone."
+            },
+            {
+              "label": "Implication",
+              "text": "This is independent evidence, with actual numbers attached, that can be put directly in front of leadership that's been pushing hard toward short-term, high-frequency social spend: the research comes from a source with no commercial stake in the channel-mix answer, which makes it more defensible in a budget conversation than anything from a platform with an obvious interest in the outcome."
+            }
+          ],
+          "sources": [
+            {
+              "name": "WARC, via Global Brands Magazine",
+              "url": "https://www.globalbrandsmagazine.com/social-first-marketing-limits/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "NZ / Local",
+      "tag": "Aotearoa",
+      "description": null,
+      "items": [
+        {
+          "title": "NZ privacy and cyber law is shifting personal liability onto executives",
+          "meta": "Aug 7, 2026 — Auckland",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "New Zealand legal analysis flags a new landscape of privacy penalties and personal liability under NZ cyber law, as regulatory expectations tighten around who is accountable when data protection fails."
+            },
+            {
+              "label": "Implication",
+              "text": "This is the sharpest possible version of a strategic question New Zealand leadership should be raising proactively: liability is shifting toward the individual decision-maker, not just the organisation. Worth confirming personally, not assuming, that governance and sign-off structures have been updated to reflect that — waiting for legal to raise it first is the wrong order of operations."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Bell Gully",
+              "url": "https://www.bellgully.com/insights/privacy-penalties-and-personal-liability-a-new-world-for-nz-cyber-laws/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "about": "On the Pulse is a strictly last-30-days news pull covering measurement, privacy and AI standards across NZ, Australia, the UK, the US and globally — for anyone working in data, measurement or privacy in media and marketing. Every item is sourced directly from a regulator, standards body, platform, or named publication — never from unverified vendor content — and links to its primary source."
+}

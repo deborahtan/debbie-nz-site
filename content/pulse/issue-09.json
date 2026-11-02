@@ -1,0 +1,370 @@
+{
+  "number": 9,
+  "slug": "issue-09",
+  "date": "2026-10-29",
+  "period": "29 Sep – 29 Oct 2026",
+  "format": "memo",
+  "kicker": "Monthly",
+  "title": "AI labs kept shipping. Google quietly took control.",
+  "title_accent": "control.",
+  "greeting": "Kia ora,",
+  "lede": "Here's the one-line version: OpenAI and Anthropic both released new things this month, nothing in our stack broke, but Google quietly moved who controls your measurement data from Analytics into Ads. That's the one to actually act on. Everything else below is useful context.",
+  "stats": [],
+  "sections": [
+    {
+      "heading": "What the AI companies did",
+      "tag": "5 things",
+      "description": null,
+      "items": [
+        {
+          "title": "ChatGPT's free tier is now running on GPT‑6",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "On 7–8 October, OpenAI switched the model behind unlimited free chats from GPT‑5.6 to GPT‑6. No price change — just a swap under the hood, plus a visual refresh."
+            },
+            {
+              "label": "Why it matters",
+              "text": "This is the first time GPT‑6 has reached everyday ChatGPT users, not just developers testing it early. If you've built anything that relies on how ChatGPT responds — a demo, a comparison, a brief — it's worth checking it still behaves the way you expect. The model changed quietly; nobody got a notification about it."
+            }
+          ],
+          "sources": [
+            {
+              "name": "pricingsaas.com product-change tracker, 8 Oct",
+              "url": "https://pricingsaas.com/companies/openai/diffs/2026D281"
+            }
+          ]
+        },
+        {
+          "title": "Anthropic shipped a lot of small things, not one big one",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Eight separate releases through October, no headline model: a fast small model (Claude Haiku 5.5, 7 Oct); Docs, Slides and Design made free for everyone (8 Oct); Claude Dashboards and Claude Motion entering beta the same day (more on Dashboards below); a Code Review tool went fully live for Team/Enterprise plans (15 Oct); a new \"Duet\" feature opened a waitlist (21 Oct); a security product went into beta (21 Oct); and the Agent Skills format was handed over to an open-source foundation (22 Oct)."
+            },
+            {
+              "label": "Why it matters",
+              "text": "This is Anthropic polishing the product, not chasing a bigger number. The one to actually try: Docs, Slides and Design are now free, so it's worth testing whether Claude can take over a real deliverable instead of just drafting it."
+            }
+          ],
+          "sources": [
+            {
+              "name": "OrcaRouter, Anthropic shipped-in-October roundup",
+              "url": "https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026"
+            }
+          ]
+        },
+        {
+          "title": "Claude Dashboards — the one worth a proper look",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What it is",
+              "text": "You connect your data (Snowflake, Databricks, Redshift, ClickHouse, or Claude's existing connectors like Salesforce), describe what you want in plain English, and Claude builds a live dashboard. Click any number and it shows you the query behind it — or just asks Claude to explain the number in words if you don't read SQL. Charts refresh as the underlying data changes, with a timestamp on each one."
+            },
+            {
+              "label": "Why it matters to us",
+              "text": "It's built to sit alongside BI tools, not replace them — dashboards can be pushed into Grafana, Hex, Mixpanel, monday.com, Omni, PostHog and Sigma, with Looker, Tableau and Perplexity support coming later. It's the clearest sign yet that Anthropic wants Claude sitting on top of a company's data warehouse — worth keeping an eye on whether a Looker Studio or other enterprise BI connector shows up, or whether Claude's own dashboarding grows enough enterprise BI capability to matter here. On sharing: each viewer's own data access controls what they see, and on Enterprise it's off by default until an admin turns it on — worth checking our Enterprise settings if anyone wants to trial it."
+            }
+          ],
+          "sources": [
+            {
+              "name": "The New Stack",
+              "url": "https://thenewstack.io/claude-dashboards-data-motion/"
+            },
+            {
+              "name": "The Star",
+              "url": "https://www.thestar.com.my/tech/tech-news/2026/10/09/anthropic-launches-dashboard-animation-tools-for-claude"
+            }
+          ]
+        },
+        {
+          "title": "Anthropic also gave away a slice of the company",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "On 18 October, Anthropic set aside 5% of company shares into a separate fund for public-benefit purposes (still needs shareholder sign-off), with more available later if the company's value keeps rising."
+            },
+            {
+              "label": "Why it matters",
+              "text": "Not a product change — more of a reputation move. Worth knowing in case it comes up in a conversation about which AI companies to trust."
+            }
+          ],
+          "sources": [
+            {
+              "name": "OrcaRouter, Anthropic shipped-in-October roundup",
+              "url": "https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026"
+            }
+          ]
+        },
+        {
+          "title": "Grok 5 was talked about, not shipped",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Elon Musk has repeated a figure for a much larger Grok model through October, but nothing has shipped yet. Betting markets price it at roughly 86% odds of arriving sometime before 2027."
+            },
+            {
+              "label": "Why it matters",
+              "text": "Nothing to act on yet — just keeping it on the radar."
+            }
+          ],
+          "sources": [
+            {
+              "name": "simplefunctions.dev prediction market",
+              "url": "https://simplefunctions.dev/answer/grok-grok5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "How companies are actually using AI agents",
+      "tag": "2 reports",
+      "description": null,
+      "items": [
+        {
+          "title": null,
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Two surveys, same story. A Liferay study of 500 US companies found 54% are running AI agents (72% in tech, down to 24% in education) — but only 25% measure whether they're actually working, and only 24% have a company-wide policy on using AI at all."
+            },
+            {
+              "label": null,
+              "text": "Anthropic's own survey of agent users backs this up: the model itself isn't the problem anymore. People now say the hard part is plugging it into existing systems (46%), getting at clean data (42%), and security (40%). The good news: 80% say they're already seeing a real return."
+            },
+            {
+              "label": "Why it matters",
+              "text": "This is the gap that shows up constantly — everyone's running something, almost nobody can prove it's working. If this becomes something we explore with a company in future, building the measurement framework and weighing cost against benefit for any agent pilot is already part of our methodology."
+            }
+          ],
+          "sources": [
+            {
+              "name": "CMSWire on the Liferay report",
+              "url": "https://www.cmswire.com/the-wire/new-liferay-study-finds-54-of-companies-are-running-ai-agents-yet-only-25-measure-their-impact/"
+            },
+            {
+              "name": "Arcade.dev on Anthropic's State of AI Agents Report",
+              "url": "https://arcade.dev/blog/5-takeaways-2026-state-of-ai-agents-claude"
+            }
+          ]
+        }
+      ],
+      "stats": [
+        {
+          "value": "54%",
+          "label": "Of companies have AI agents running",
+          "source": null
+        },
+        {
+          "value": "25%",
+          "label": "Actually measure if they're working",
+          "source": null
+        },
+        {
+          "value": "80%",
+          "label": "Say they're seeing real value",
+          "source": null
+        },
+        {
+          "value": "46%",
+          "label": "Say integration is the hard part now",
+          "source": null
+        }
+      ]
+    },
+    {
+      "heading": "What changed in our Google stack",
+      "tag": "4 things",
+      "description": null,
+      "items": [
+        {
+          "title": "Google Ads now controls your consent and IP data, not GA4",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Google has been shifting consent settings and IP address data out of Analytics and into the linked Ads account. IPs are now encrypted and sent straight to Ads, and this consolidation keeps rolling through the rest of 2026."
+            },
+            {
+              "label": "Why it matters",
+              "text": "If anyone ever checks a company's consent or IP setup, the Ads account is now where to look — not just the GA4 property. The control has genuinely moved."
+            }
+          ],
+          "sources": [
+            {
+              "name": "support.google.com/analytics",
+              "url": "https://support.google.com/analytics/answer/17016975"
+            }
+          ]
+        },
+        {
+          "title": "Tag Manager's biggest change in years landed — then everything went quiet",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Google standardised how tags configure themselves across Tag Manager on 8 October, with a follow-up tweak on 12 October. Simo Ahava (the GTM expert everyone in our field reads) called it the biggest Tag Manager change in a decade. Nothing new since."
+            },
+            {
+              "label": "Why it matters",
+              "text": "Good time to finish any GTM migration work on our books while things are stable — check container setups against the new behaviour this fortnight, before the next change lands."
+            }
+          ],
+          "sources": [
+            {
+              "name": "simoahava.com",
+              "url": "https://simoahava.com/analytics/optimized-tagging-experience-google-tag-manager/"
+            },
+            {
+              "name": "support.google.com/tagmanager",
+              "url": "https://support.google.com/tagmanager/answer/4620708"
+            }
+          ]
+        },
+        {
+          "title": "BigQuery had its busiest month yet for AI features",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "A steady stream of new BigQuery features landed through late September and October — you can now chat with your data in plain English, ask it to explain key drivers behind a trend, and the system is getting better at understanding your data on its own."
+            },
+            {
+              "label": "Why it matters",
+              "text": "The tools have moved faster than most of our actual workflows. Worth trying Conversational Analytics (BigQuery's chat-with-data feature) on one live dashboard this quarter and seeing if it's ready to use for real."
+            }
+          ],
+          "sources": [
+            {
+              "name": "BigQuery release notes",
+              "url": "https://docs.cloud.google.com/bigquery/docs/release-notes"
+            }
+          ]
+        },
+        {
+          "title": "Google Ads is pushing further into online shopping",
+          "meta": null,
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Google Ads cleaned up old settings and switched on a one-click checkout feature (\"Universal Cart\") for US search ads, plus clearer controls for which ad channel gets priority when budgets are tight."
+            },
+            {
+              "label": "Why it matters",
+              "text": "Companies managing budget splits across channels should check those new priority settings before the next reporting cycle — the defaults may have changed."
+            }
+          ],
+          "sources": [
+            {
+              "name": "relevantaudience.com",
+              "url": "https://relevantaudience.com"
+            },
+            {
+              "name": "ppcnewsfeed.com",
+              "url": "https://ppcnewsfeed.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Market moves",
+      "tag": null,
+      "description": null,
+      "items": [],
+      "note": {
+        "strong": "Nothing worth reporting this month.",
+        "text": "No real merger, acquisition, or agency shake-up turned up — just recycled AI statistics dressed up as news. Rather than pad this section, I'm leaving it empty."
+      }
+    }
+  ],
+  "take": [
+    "Nobody's waiting for one big \"GPT‑6 moment\" anymore — the big labs are just shipping constantly and letting people absorb the changes quietly. And the thing everyone keeps running into isn't the AI itself anymore — it's getting it to actually plug into existing systems and data, safely. That shows up twice this month: once in the agent-adoption surveys, and once in Google quietly moving who controls your consent data. The AI is ready. The plumbing isn't."
+  ],
+  "actions": [
+    {
+      "heading": "Do this fortnight",
+      "items": [
+        "Check which accounts have consent and IP data sitting in Google Ads now, not just GA4.",
+        "Double-check GTM container setups against the new tag behaviour while things are quiet.",
+        "Try BigQuery's chat-with-data feature on one live dashboard, just to see what it can do."
+      ]
+    },
+    {
+      "heading": "Do this quarter",
+      "items": [
+        "If we've built anything on ChatGPT's free tier, test it again — the model underneath just changed.",
+        "Keep the measurement framework and cost-vs-benefit review ready for whenever an agent pilot comes up — most companies still can't prove theirs are working.",
+        "Review channel-priority settings on paid search budgets rather than leaving them on default."
+      ]
+    }
+  ],
+  "signoff": [
+    "Ngā mihi,",
+    "Debbie"
+  ],
+  "sources": [
+    {
+      "name": "pricingsaas.com — OpenAI product-change tracker, 8 Oct 2026",
+      "url": "https://pricingsaas.com/companies/openai/diffs/2026D281"
+    },
+    {
+      "name": "OrcaRouter — \"What Anthropic shipped in October 2026\"",
+      "url": "https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026"
+    },
+    {
+      "name": "The New Stack — Claude Dashboards and Motion detail",
+      "url": "https://thenewstack.io/claude-dashboards-data-motion/"
+    },
+    {
+      "name": "The Star — Anthropic launches dashboard and animation tools",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/10/09/anthropic-launches-dashboard-animation-tools-for-claude"
+    },
+    {
+      "name": "simplefunctions.dev — Grok 5 release-date prediction market",
+      "url": "https://simplefunctions.dev/answer/grok-grok5"
+    },
+    {
+      "name": "CMSWire — Liferay 2026 Agentic AI Adoption and Governance Report",
+      "url": "https://www.cmswire.com/the-wire/new-liferay-study-finds-54-of-companies-are-running-ai-agents-yet-only-25-measure-their-impact/"
+    },
+    {
+      "name": "Arcade.dev — 5 takeaways from Anthropic's 2026 State of AI Agents Report",
+      "url": "https://arcade.dev/blog/5-takeaways-2026-state-of-ai-agents-claude"
+    },
+    {
+      "name": "support.google.com/analytics — GA4/Ads data-controls consolidation",
+      "url": "https://support.google.com/analytics/answer/17016975"
+    },
+    {
+      "name": "Simo Ahava — GTM gtag merger, 13 Oct 2026",
+      "url": "https://simoahava.com/analytics/optimized-tagging-experience-google-tag-manager/"
+    },
+    {
+      "name": "support.google.com/tagmanager",
+      "url": "https://support.google.com/tagmanager/answer/4620708"
+    },
+    {
+      "name": "BigQuery release notes",
+      "url": "https://docs.cloud.google.com/bigquery/docs/release-notes"
+    },
+    {
+      "name": "relevantaudience.com — DV360 / Universal Cart coverage",
+      "url": "https://relevantaudience.com"
+    },
+    {
+      "name": "ppcnewsfeed.com — Google Ads commerce updates",
+      "url": "https://ppcnewsfeed.com"
+    }
+  ],
+  "notes": [
+    "For NZ: nothing above is NZ-specific — all of it comes from global/US sources, so local timing and availability (feature rollouts, pricing, data residency) may lag what's reported here."
+  ]
+}
