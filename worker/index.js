@@ -9,7 +9,30 @@
  * Secrets: ADMIN_TOKEN, HASH_SALT   (npx wrangler secret put <NAME>)
  */
 
-const SLUG = /^issue-\d{2,3}$/;
+const SLUG = /^\d{4}-(0[1-9]|1[0-2])$/; // editions are keyed by month, e.g. 2026-10
+
+// Comments need a real address from a mainstream provider. Keep in sync with pulse.js.
+const ALLOWED_DOMAINS = new Set(['gmail.com','googlemail.com','outlook.com','outlook.co.nz','hotmail.com','hotmail.co.nz','hotmail.co.uk',
+  'live.com','live.co.nz','live.com.au','msn.com','yahoo.com','yahoo.co.nz','yahoo.co.uk','yahoo.com.au','ymail.com',
+  'icloud.com','me.com','mac.com','proton.me','protonmail.com','pm.me','aol.com','zoho.com','fastmail.com','gmx.com',
+  'gmx.net','mail.com','hey.com','tutanota.com','tuta.io','xtra.co.nz','slingshot.co.nz','orcon.net.nz',
+  'vodafone.co.nz','clear.net.nz','paradise.net.nz','bigpond.com','optusnet.com.au','btinternet.com','qq.com','163.com','naver.com']);
+const FAKE_LOCAL = /^(test\d*|testing|tester|example|sample|demo|asdf\w*|qwerty\w*|foo|bar|foobar|fake|none|null|noreply|no-reply|abc|abc123|xxx+|aaa+|user\d*|admin)$/i;
+
+function checkEmail(raw) {
+  const v = typeof raw === 'string' ? raw.trim().toLowerCase() : '';
+  const m = v.match(/^([a-z0-9._%+-]{1,64})@([a-z0-9.-]+\.[a-z]{2,})$/);
+  if (!m || v.length > 120) return { error: "That doesn't look like an email address." };
+  if (!ALLOWED_DOMAINS.has(m[2])) return { error: 'Please use an address from a mainstream provider like Gmail, Outlook, iCloud, Yahoo, Proton or Xtra.' };
+  if (FAKE_LOCAL.test(m[1].replace(/\+.*$/, ''))) return { error: 'Please use your real email address.' };
+  return { email: v, local: m[1], domain: m[2] };
+}
+
+// What's shown publicly: first two characters + domain, e.g. de•••@gmail.com
+function maskEmail({ local, domain }) {
+  const keep = local.length > 3 ? 2 : 1;
+  return local.slice(0, keep) + '•••@' + domain;
+}
 const LIMITS = {
   comment: { max: 3, minutes: 10 },
   like: { max: 40, minutes: 10 },
@@ -44,6 +67,15 @@ async function ensureSchema(env) {
       created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')))`),
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_slug ON comments (slug, status, created_at)'),
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_ip ON comments (ip_hash, created_at)'),
+  ]);
+  const cols = await env.DB.prepare('PRAGMA table_info(comments)').all();
+  if (!cols.results.some((c) => c.name === 'email')) {
+    await env.DB.prepare('ALTER TABLE comments ADD COLUMN email TEXT').run();
+  }
+  // Clear pre-launch test likes/comments from the old issue-XX slugs (one-off, harmless afterwards)
+  await env.DB.batch([
+    env.DB.prepare("DELETE FROM comments WHERE slug LIKE 'issue-%'"),
+    env.DB.prepare("DELETE FROM likes WHERE slug LIKE 'issue-%'"),
   ]);
   schemaReady = true;
 }
@@ -104,18 +136,21 @@ async function api(request, env, url) {
       return json({ likes, liked });
     }
 
-    // POST /api/issues/:slug/comments   {name, body, website(honeypot)}
+    // POST /api/issues/:slug/comments   {email, body, website(honeypot)} — published immediately
     if (parts[2] === 'comments' && method === 'POST') {
       const b = await readJson(request);
-      if (b.website) return json({ status: 'pending' }, 201); // bot filled the honeypot: pretend success, store nothing
-      const name = clean(b.name, 60);
+      if (b.website) return json({ status: 'published' }, 201); // bot filled the honeypot: pretend success, store nothing
       const text = clean(b.body, 2000, true);
-      if (!name || !text) return json({ error: 'Add your name and a comment first.' }, 400);
+      if (!text) return json({ error: 'Add a comment first.' }, 400);
+      const em = checkEmail(b.email);
+      if (em.error) return json({ error: em.error }, 400);
       if (/https?:\/\/\S+.*https?:\/\/\S+.*https?:\/\//is.test(text)) return json({ error: 'Too many links in one comment.' }, 400);
       const ipHash = await hashIp(request, env);
       if (await overLimit(env, 'comments', ipHash, LIMITS.comment)) return json({ error: 'Too many comments — try again shortly.' }, 429);
-      const status = env.COMMENTS_MODERATED === 'false' ? 'published' : 'pending';
-      await env.DB.prepare('INSERT INTO comments (slug, name, body, status, ip_hash) VALUES (?, ?, ?, ?, ?)').bind(slug, name, text, status, ipHash).run();
+      const status = env.COMMENTS_MODERATED === 'true' ? 'pending' : 'published';
+      // name = the masked address shown publicly; email = full address, only visible on the admin page
+      await env.DB.prepare('INSERT INTO comments (slug, name, email, body, status, ip_hash) VALUES (?, ?, ?, ?, ?, ?)')
+        .bind(slug, maskEmail(em), em.email, text, status, ipHash).run();
       return json({ status }, 201);
     }
   }
@@ -128,8 +163,8 @@ async function api(request, env, url) {
     if (parts[1] === 'comments' && parts.length === 2 && method === 'GET') {
       const st = url.searchParams.get('status') || 'pending';
       const q = st === 'all'
-        ? env.DB.prepare('SELECT id, slug, name, body, status, created_at FROM comments ORDER BY created_at DESC LIMIT 300')
-        : env.DB.prepare('SELECT id, slug, name, body, status, created_at FROM comments WHERE status=? ORDER BY created_at DESC LIMIT 300').bind(st);
+        ? env.DB.prepare('SELECT id, slug, name, email, body, status, created_at FROM comments ORDER BY created_at DESC LIMIT 300')
+        : env.DB.prepare('SELECT id, slug, name, email, body, status, created_at FROM comments WHERE status=? ORDER BY created_at DESC LIMIT 300').bind(st);
       return json({ comments: (await q.all()).results });
     }
 

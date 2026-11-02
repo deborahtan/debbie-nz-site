@@ -1,6 +1,5 @@
 {
-  "number": 9,
-  "slug": "issue-09",
+  "slug": "2026-10",
   "date": "2026-10-29",
   "period": "29 Sep – 29 Oct 2026",
   "format": "memo",
@@ -181,7 +180,7 @@
     },
     {
       "heading": "What changed in our Google stack",
-      "tag": "4 things",
+      "tag": "6 things",
       "description": null,
       "items": [
         {
@@ -201,6 +200,30 @@
             {
               "name": "support.google.com/analytics",
               "url": "https://support.google.com/analytics/answer/17016975"
+            }
+          ]
+        },
+        {
+          "title": "Server-side Tag Manager will start passing full IP addresses to Google's ad tags",
+          "meta": "Late addition · surfaced 2 November 2026",
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Google has started emailing advertisers about a change to server-side Tag Manager. From 11 January 2027, IP handling moves from one container-wide redaction setting to tag-by-tag processing. Tags for Google Ads, Display & Video 360, Search Ads 360 and Campaign Manager 360 (which includes Floodlight) will receive the visitor's full IP address by default unless you opt out. Google Analytics tags keep redacting the IP. Tags for other platforms such as Meta, TikTok and LinkedIn keep their own controls over which signals they accept, and Google hasn't said whether anything changes for them. Transformations can still strip the IP before any tag sees it. As of 2 November there was no entry in the Tag Manager release notes, and the help article for the opt-out isn't named."
+            },
+            {
+              "label": "Why it matters",
+              "text": "It's on by default, and it follows straight on from the consent and IP control moving into Ads (above). If you run a server container, decide before January whether Google's ad tags should get full IPs, and whether your privacy notice covers that. It's also worth checking what your Meta Conversions API or TikTok Events API tags are sending: a server container is how many sites now feed those platforms (Google's Tag Gateway only handles Google products), and what each of those tags sends is set tag by tag, not by Google."
+            }
+          ],
+          "sources": [
+            {
+              "name": "PPC Land, 2 Nov",
+              "url": "https://ppc.land/google-ad-tags-gain-full-visitor-ip-addresses-in-server-side-gtm-in-2027/"
+            },
+            {
+              "name": "TAGGRS on Tag Gateway vs server-side GTM",
+              "url": "https://taggrs.io/google-tag-gateway-vs-server-side-gtm/"
             }
           ]
         },
@@ -249,6 +272,95 @@
           ]
         },
         {
+          "title": "Google's Data Agent Kit is out — and every data platform now has one",
+          "meta": "GA in October · preview since April",
+          "paragraphs": [
+            {
+              "label": "What happened",
+              "text": "Google made its Data Agent Kit generally available after a preview that began at Cloud Next in April (version 1.0.0 landed 29 September, 1.1.0 on 13 October). It's a free, open-source bundle of 37 Google-written skills plus tools that plug coding agents into more than fifteen Google Cloud data services, including BigQuery, Bigtable and managed Spark. It works inside Claude Code, Codex, Cursor, VS Code and Google's Antigravity, and comes preinstalled in Cloud Shell."
+            },
+            {
+              "label": "What it can do",
+              "text": "Write and tune BigQuery SQL to Google's own best practice, build data pipelines (it can write, deploy and troubleshoot Airflow pipelines, and tell a quota or memory limit apart from a bug in your code), and run data science work from wrangling to model training. You pay only for the cloud services the agent uses."
+            },
+            {
+              "label": "How it compares",
+              "text": "Snowflake, Databricks and Microsoft have all shipped the same idea this year, and all four work inside Claude Code. The differences are what each can reach and where the guardrails actually sit."
+            }
+          ],
+          "table": {
+            "head": [
+              "",
+              "Google Data Agent Kit",
+              "Snowflake Cortex Code",
+              "Databricks agent skills",
+              "Microsoft Skills for Fabric"
+            ],
+            "rows": [
+              [
+                "What it is",
+                "Free, open-source skills + tools",
+                "Snowflake's own coding agent",
+                "Official skills, installed via the Databricks CLI",
+                "Open-source skills (MIT)"
+              ],
+              [
+                "Works in",
+                "Claude Code, Codex, Cursor, VS Code, Antigravity",
+                "Its own CLI and Snowsight, plus VS Code and a Claude Code plugin (previews)",
+                "Claude Code, GitHub Copilot, Cursor",
+                "Copilot CLI, VS Code, Claude Code, Cursor, Windsurf, Codex"
+              ],
+              [
+                "Reaches beyond its own platform",
+                "Airflow, dbt and Spark (Google-managed)",
+                "Yes: AWS Glue, Databricks, Postgres, dbt, Airflow",
+                "No, Databricks only",
+                "No, Fabric only"
+              ],
+              [
+                "Where the hard guardrail sits",
+                "IAM policy can block any write tool; the 'don't drop tables' rule is only advice",
+                "Snowflake's data governance applies to the agent too",
+                "Unity Catalog governs its MCP tools (set up separately)",
+                "Skills are guidance only; actions go through Fabric's MCP server"
+              ]
+            ]
+          },
+          "paragraphs_after": [
+            {
+              "label": "Why it matters",
+              "text": "The skills kit you use will follow your warehouse, not your coding agent. And the most important line in Google's version is easy to miss: the instruction to ask before deleting anything is a suggestion the agent is asked to follow, not a lock. Anyone letting an agent loose on BigQuery should set the IAM policy that blocks write tools first, then open things up deliberately."
+            }
+          ],
+          "sources": [
+            {
+              "name": "InfoQ, 24 Oct",
+              "url": "https://www.infoq.com/news/2026/10/data-agent-kit-ga/"
+            },
+            {
+              "name": "IT Brief",
+              "url": "https://itbrief.com.au/story/google-cloud-launches-data-agent-kit-for-airflow-pipelines"
+            },
+            {
+              "name": "Google Cloud blog",
+              "url": "https://cloud.google.com/blog/products/data-analytics/whats-new-in-the-agentic-data-cloud"
+            },
+            {
+              "name": "Snowflake",
+              "url": "https://www.snowflake.com/content/snowflake-site/global/en/blog/cortex-code-governed-agent-data-stack"
+            },
+            {
+              "name": "Databricks docs",
+              "url": "https://docs.databricks.com/aws/en/agent-skills/"
+            },
+            {
+              "name": "Microsoft Learn",
+              "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/skills-for-fabric-overview"
+            }
+          ]
+        },
+        {
           "title": "Google Ads is pushing further into online shopping",
           "meta": null,
           "paragraphs": [
@@ -293,6 +405,7 @@
       "heading": "Do this fortnight",
       "items": [
         "Check which accounts have consent and IP data sitting in Google Ads now, not just GA4.",
+        "If you run server-side GTM, decide before 11 January whether Google's ad tags should receive full IP addresses — and check what your Meta and TikTok server tags already send.",
         "Double-check GTM container setups against the new tag behaviour while things are quiet.",
         "Try BigQuery's chat-with-data feature on one live dashboard, just to see what it can do."
       ]
@@ -301,6 +414,7 @@
       "heading": "Do this quarter",
       "items": [
         "If we've built anything on ChatGPT's free tier, test it again — the model underneath just changed.",
+        "Before any coding agent touches BigQuery, set the IAM policy that blocks write tools — don't rely on the Data Agent Kit's 'ask first' skill.",
         "Keep the measurement framework and cost-vs-benefit review ready for whenever an agent pilot comes up — most companies still can't prove theirs are working.",
         "Review channel-priority settings on paid search budgets rather than leaving them on default."
       ]
@@ -362,9 +476,42 @@
     {
       "name": "ppcnewsfeed.com — Google Ads commerce updates",
       "url": "https://ppcnewsfeed.com"
+    },
+    {
+      "name": "PPC Land — Google ad tags gain full visitor IP addresses in server-side GTM (2 Nov 2026)",
+      "url": "https://ppc.land/google-ad-tags-gain-full-visitor-ip-addresses-in-server-side-gtm-in-2027/"
+    },
+    {
+      "name": "TAGGRS — Google Tag Gateway vs server-side GTM",
+      "url": "https://taggrs.io/google-tag-gateway-vs-server-side-gtm/"
+    },
+    {
+      "name": "InfoQ — Google's Data Agent Kit hits GA (24 Oct 2026)",
+      "url": "https://www.infoq.com/news/2026/10/data-agent-kit-ga/"
+    },
+    {
+      "name": "IT Brief — Data Agent Kit for Airflow pipelines",
+      "url": "https://itbrief.com.au/story/google-cloud-launches-data-agent-kit-for-airflow-pipelines"
+    },
+    {
+      "name": "Google Cloud — What's new in the Agentic Data Cloud",
+      "url": "https://cloud.google.com/blog/products/data-analytics/whats-new-in-the-agentic-data-cloud"
+    },
+    {
+      "name": "Snowflake — Cortex Code expands",
+      "url": "https://www.snowflake.com/content/snowflake-site/global/en/blog/cortex-code-governed-agent-data-stack"
+    },
+    {
+      "name": "Databricks — Agent skills for AI coding assistants",
+      "url": "https://docs.databricks.com/aws/en/agent-skills/"
+    },
+    {
+      "name": "Microsoft Learn — Skills for Fabric",
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/skills-for-fabric-overview"
     }
   ],
   "notes": [
     "For NZ: nothing above is NZ-specific — all of it comes from global/US sources, so local timing and availability (feature rollouts, pricing, data residency) may lag what's reported here."
-  ]
+  ],
+  "month": "2026-10"
 }

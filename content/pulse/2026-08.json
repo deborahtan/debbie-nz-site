@@ -1,10 +1,9 @@
 {
-  "number": 8,
-  "slug": "issue-08",
+  "slug": "2026-08",
   "date": "2026-09-04",
-  "period": "1 Aug – 4 Sep 2026",
+  "period": "26 Jul – 4 Sep 2026",
   "format": "industry",
-  "kicker": "Industry Edition",
+  "kicker": "Monthly",
   "title": "Google quietly made AI Max mandatory for most Search campaigns",
   "lede": "Google quietly made its AI system the default for how most Search campaigns run, effective this week — with no public announcement, no rollback, and notification by email alone. Nielsen closed on absorbing one of only two independent ad-verification vendors with real scale. Peer-reviewed research shows platform-reported lift can overstate true impact by a factor of 13. And new WARC data puts hard numbers on why social-first budget strategies are hitting a ceiling. Every item below earned its place on merit, not just because it happened in the window.",
   "stats": [
@@ -72,6 +71,46 @@
             {
               "name": "Choice OMG",
               "url": "https://choice.marketing/blog/chatgpt-ads-2026-field-guide/"
+            }
+          ]
+        },
+        {
+          "title": "Meta let AI agents run its ad platform directly",
+          "meta": "Aug 7, 2026 — Menlo Park",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Meta opened Ads Manager to AI agents through a first-party MCP server, and began AI-rewriting text baked into ad images without prompting advertisers."
+            },
+            {
+              "label": "Implication",
+              "text": "This is a governance and liability question before it's a media-buying one: if an AI agent commits budget or misconfigures a live account, no platform, agency or vendor contract has yet clarified where that liability sits. Any CMO or CDO permitting agent access to a live ad account should be asking legal and procurement that question now, not after an incident forces the answer."
+            }
+          ],
+          "sources": [
+            {
+              "name": "AdMake AI",
+              "url": "https://admakeai.com/blog/meta-ads-updates-august-2026"
+            }
+          ]
+        },
+        {
+          "title": "An AI agent that plans, measures and buys media in one conversational workspace",
+          "meta": "Aug 4, 2026 — New York",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "PulsePoint launched Hatch, unifying research and planning, audience intelligence, measurement, and programmatic activation into a single conversational AI workspace. Marketers describe what they need in plain language; Hatch interprets intent, configures itself, and returns campaign delivery, pacing, budget and performance answers from live data."
+            },
+            {
+              "label": "Implication",
+              "text": "This is a build-vs-buy signal for the marketing org chart, not just a product launch: functions that used to justify separate specialist headcount or agency line items — planning, audience building, measurement, activation — are being sold as one seat. Worth war-gaming what that does to agency fee structures and in-house team sizing over the next planning cycle, regardless of whether this specific vendor wins."
+            }
+          ],
+          "sources": [
+            {
+              "name": "The Agile Brand Guide",
+              "url": "https://agilebrandguide.com/yesterdays-marketing-technology-ai-news-august-5-2026/"
             }
           ]
         }
@@ -193,6 +232,46 @@
             {
               "name": "Search Engine Land, via Optimixed",
               "url": "https://www.optimixed.com/google-sets-ai-max-migration-timeline-for-search-campaigns/"
+            }
+          ]
+        },
+        {
+          "title": "AI agents are becoming a second audience brands write for",
+          "meta": "Early Aug 2026 — Industry analysis",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "New industry analysis argues that content increasingly needs to serve two audiences at once: the human who eventually reads it, and the AI system — search engine, shopping agent, recommendation assistant — that decides whether to surface it at all. The recommendation is to write around explicit decision cues (\"best for,\" \"choose this when\") that both people and AI systems can use to shortlist an option."
+            },
+            {
+              "label": "Implication",
+              "text": "This changes what marketing is actually buying when it buys reach: a growing share of what used to be direct human exposure is now brokered by an AI system with its own selection logic, which means budget aimed purely at human attention may be increasingly mis-targeted regardless of channel. Worth a genuine strategy review, not a content-guidelines update."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Davler Media",
+              "url": "https://www.davlermedia.com/executive-marketing-brief-august-2026-edition/"
+            }
+          ]
+        },
+        {
+          "title": "Attention is being redefined from proof-of-click to proof-of-exposure",
+          "meta": "Early Aug 2026 — Industry-wide",
+          "paragraphs": [
+            {
+              "label": null,
+              "text": "Advertisers are increasingly able to build audiences from users who were simply shown an ad — with no click, site visit or consented identifier required — turning previously invisible mid-funnel exposure into a usable signal, industry analysis of 2026's media technology shortlist finds."
+            },
+            {
+              "label": "Implication",
+              "text": "This quietly changes what counts as a paid outcome, which is a finance question as much as a media one: if impressions without action are treated as equivalent to genuine engagement in vendor reporting, budget can get allocated against a weaker signal than the CFO believes it's paying for. Worth confirming with any vendor exactly what their 'attention' or 'exposure' metric is actually counting before renewing that line item."
+            }
+          ],
+          "sources": [
+            {
+              "name": "Adweek",
+              "url": "https://www.adweek.com/brand-marketing/2026-tech-stack-awards-ai-data-marketing-technology/"
             }
           ]
         }
@@ -347,5 +426,6 @@
       ]
     }
   ],
-  "about": "On the Pulse is a strictly last-30-days news pull covering measurement, privacy and AI standards across NZ, Australia, the UK, the US and globally — for anyone working in data, measurement or privacy in media and marketing. Every item is sourced directly from a regulator, standards body, platform, or named publication — never from unverified vendor content — and links to its primary source."
+  "about": "On the Pulse is a strictly last-30-days news pull covering measurement, privacy and AI standards across NZ, Australia, the UK, the US and globally — for anyone working in data, measurement or privacy in media and marketing. Every item is sourced directly from a regulator, standards body, platform, or named publication — never from unverified vendor content — and links to its primary source.",
+  "month": "2026-08"
 }

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What&#x27;s Cooking — Debbie Tan</title>
+<meta name="description" content="The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.">
+<link rel="canonical" href="https://debbie.nz/whats-cooking">
+<meta property="og:title" content="What&#x27;s Cooking — Debbie Tan">
+<meta property="og:description" content="The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.">
+<meta name="color-scheme" content="light dark">
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
+<!-- End Google Tag Manager -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/pulse.css">
+<link rel="alternate" type="application/rss+xml" title="On the Pulse" href="/pulse/feed.xml">
+</head>
+<body class="pulse">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXPF7HTS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<a class="skip" href="#main">Skip to content</a>
+<nav>
+  <a href="/" class="wordmark">Debbie Tan</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/">on the pulse</a>
+      <a href="/whats-cooking" aria-current="page">what's cooking</a>
+      <a href="/about.html">about</a>
+      <a href="#" id="shop-teaser">shop</a>
+      <a href="/form-test.html">sign up</a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="site-search" placeholder="Search" autocomplete="off" aria-label="Search">
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="pulse-wrap cooking">
+<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>What&#x27;s cooking 🍳</h1><p>The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.</p></header>
+<div class="dish-tools"><button type="button" data-expand="open">Open all</button><button type="button" data-expand="close">Close all</button></div>
+<ul class="dishes">
+<li class="dish" id="ga4-audit">
+  <details data-project="ga4-audit">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🔍</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>Audit</span><span>GA4</span></span>
+        <span class="dish-name">GA4 audit</span>
+        <span class="dish-sum">An automated health check of a Google Analytics 4 property that gives the same answer every time it runs.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the property&#x27;s set-up through Google&#x27;s APIs: data streams, events, key events, custom definitions, data retention, consent and links like BigQuery and Google Ads</li><li>Checks each one against a fixed set of rules, so the result is deterministic rather than an opinion</li><li>Never touches personal data: it audits configuration, not people</li><li>Produces a scored report with what&#x27;s wrong, why it matters and how to fix it</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Hours of clicking through admin screens becomes a few minutes</li><li>Re-run it after changes and compare like with like</li><li>Catches gaps (missing key events, short retention, broken links) before they quietly cost months of data</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="gtm-audit-datalayer-generator-end-to-end">
+  <details data-project="gtm-audit-datalayer-generator-end-to-end">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🏷️</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>Audit</span><span>GTM</span><span>Tracking</span></span>
+        <span class="dish-name">GTM audit + dataLayer generator, end to end</span>
+        <span class="dish-sum">From &#x27;what should we track?&#x27; to a tested Tag Manager container, with one source of truth the whole way through.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Audits an existing GTM container: tags, triggers, variables, naming, duplicates, unused items and consent settings</li><li>Turns a measurement plan into a dataLayer spec and ready-to-paste developer snippets</li><li>Generates an importable GTM container and a data dictionary that match the spec exactly</li><li>Keeps personal data out by design: hashing where it&#x27;s needed, nothing raw in the dataLayer</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Developers, analysts and marketers all work from the same spec</li><li>Days of hand-building tags drops to an import and a check</li><li>New tracking always traces back to a documented line, so audits stay easy</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="personal-dashboard-automated-data-warehouse">
+  <details data-project="personal-dashboard-automated-data-warehouse">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">📊</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>BigQuery</span><span>Dashboards</span></span>
+        <span class="dish-name">Personal dashboard + automated data warehouse</span>
+        <span class="dish-sum">My own data flowing into BigQuery on a schedule, with a dashboard that&#x27;s always up to date.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Pulls data from the sources I use into BigQuery automatically</li><li>Cleans and models it with version-controlled SQL, so every number has a known definition</li><li>Feeds a dashboard that refreshes itself, with no manual exports</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>A working reference build for the same pattern at any scale</li><li>No more copy-paste reporting or stale screenshots</li><li>A safe sandbox for trying new tools (like the ones below) on real data</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="data-agent-kit-experiments">
+  <details data-project="data-agent-kit-experiments">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🤖</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span></span>
+        <span class="dish-name">Data Agent Kit experiments</span>
+        <span class="dish-sum">Testing Google&#x27;s new Data Agent Kit: coding agents that can query, build pipelines and do data science on BigQuery.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Connects a coding agent to BigQuery and other Google Cloud data services with Google&#x27;s own skills and tools</li><li>Lets the agent write and tune SQL, build and fix pipelines, and run analysis from a plain-English request</li><li>Puts real guardrails in place first: an IAM policy that blocks write actions, rather than trusting the agent&#x27;s &#x27;ask before deleting&#x27; instruction</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Finds out what&#x27;s genuinely useful versus what&#x27;s demo-only, before anyone relies on it</li><li>Builds a safe set-up pattern others can copy</li><li>Compares Google&#x27;s approach with Snowflake, Databricks and Microsoft (see the October edition)</li></ul></div>
+      <a class="dish-link" href="/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one">Read the October edition →</a>
+    </div>
+  </details>
+</li>
+<li class="dish" id="playwright-tracking-tests">
+  <details data-project="playwright-tracking-tests">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🎭</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>QA</span><span>GTM</span><span>Automation</span></span>
+        <span class="dish-name">Playwright tracking tests</span>
+        <span class="dish-sum">A robot browser that clicks through a site and checks the tracking actually fired, in preview and in production.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Opens pages and runs the key journeys (page views, clicks, forms) like a real visitor</li><li>Watches network requests to see exactly which tags fired and what they sent</li><li>Inspects the dataLayer at each step against the spec</li><li>Reads the site&#x27;s Content Security Policy and flags any vendor (Meta, Google Ads and others) it would block</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Tests GTM changes in preview before they go live</li><li>Diagnoses production issues in minutes instead of guesswork</li><li>Catches silent breakages, like a site release that quietly kills a conversion tag</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="environmental-scan-automation">
+  <details data-project="environmental-scan-automation">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">📰</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>Research</span><span>AI</span></span>
+        <span class="dish-name">Environmental scan automation</span>
+        <span class="dish-sum">A monthly sweep of what changed in measurement, privacy and AI, with every item dated and linked to its source.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Searches a fixed window (the last month) across platforms, regulators, standards bodies and trusted practitioners</li><li>Filters out recycled stats and vendor fluff, keeping only what actually changed</li><li>Writes each item as what happened, why it matters and what to do about it</li><li>Publishes as a readable briefing, like On the Pulse</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Staying current takes a read, not a day of searching</li><li>Every claim can be checked against its source</li><li>Turns news into a short list of actions</li></ul></div>
+      <a class="dish-link" href="/">Read the latest edition →</a>
+    </div>
+  </details>
+</li>
+</ul>
+<p class="note">Got a tool you&#x27;d like to see here, or want to compare notes? Leave a comment on the latest edition.</p>
+</main>
+
+<footer>
+  <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+</footer>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  const searchInput = document.getElementById('site-search');
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length > 0) {
+      window.dataLayer.push({ event: 'search', search_term: this.value.trim() });
+    }
+  });
+  document.getElementById('shop-teaser').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({ event: 'shop_teaser_click' });
+    alert('Shop is currently being built — check back soon.');
+  });
+</script>
+<script src="/pulse.js" defer></script>
+</body>
+</html>

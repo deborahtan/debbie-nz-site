@@ -29,12 +29,12 @@
 </head>
 <body>
 <main>
-  <h1>Comment moderation</h1>
+  <h1>Comments</h1>
   <form class="bar" id="login">
     <input type="password" id="token" placeholder="Admin token" autocomplete="current-password" aria-label="Admin token">
     <select id="status" aria-label="Show">
-      <option value="pending">Pending</option>
       <option value="published">Published</option>
+      <option value="pending">Pending</option>
       <option value="all">All</option>
     </select>
     <button class="primary" type="submit">Load</button>
@@ -71,7 +71,7 @@
         top.children[0].textContent = c.slug;
         top.children[1].textContent = c.status;
         top.children[2].textContent = new Date(c.created_at).toLocaleString('en-NZ');
-        var who = document.createElement('div'); who.className = 'who'; who.textContent = c.name;
+        var who = document.createElement('div'); who.className = 'who'; who.textContent = (c.email || c.name) + (c.email ? '  (shown as ' + c.name + ')' : '');
         var p = document.createElement('p'); p.textContent = c.body;
         var actions = document.createElement('div'); actions.className = 'actions';
         [c.status === 'pending' ? ['approve', 'Approve', 'primary'] : ['hide', 'Unpublish', ''], ['delete', 'Delete', 'danger']].forEach(function (a) {

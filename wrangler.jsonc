@@ -10,8 +10,8 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": {
-    // "true" = comments wait for approval at /admin; "false" = publish immediately
-    "COMMENTS_MODERATED": "true"
+    // "false" = comments publish immediately (default); "true" = they wait for approval at /admin.html
+    "COMMENTS_MODERATED": "false"
   },
   "d1_databases": [
     {

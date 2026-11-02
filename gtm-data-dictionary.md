@@ -19,6 +19,7 @@ to a line here.
 | `newsletter_like` | Custom | Like / unlike on an issue page | New |
 | `comment_submit` | Custom | Comment successfully submitted | New |
 | `share` | GA4 recommended | Share button (native share or copy link) | New |
+| `project_expand` | Custom | A tool card opened on What's Cooking | New |
 | `page_view` | GA4 automatic | Every page load | Live (automatic) |
 
 ## Parameters
@@ -29,7 +30,7 @@ to a line here.
 | `visitor_mission` | `mission_assigned` | **User** (see GA4 admin note below) | `practitioner_researcher` / `ai_thought_leadership` / `art_creative` / `consulting_prospect` / `community_event` / `unclassified` |
 | `post_id` | `post_click` | Event | slug string, e.g. `ai-crawlers` |
 | `content_group` | `post_click` | Event | `blog`, `newsletter` |
-| `item_id` | `newsletter_like`, `comment_submit`, `share` | Event | issue slug, e.g. `issue-09` |
+| `item_id` | `newsletter_like`, `comment_submit`, `share` | Event | edition slug, e.g. `2026-10`; for `project_expand`, the tool's slug |
 | `like_action` | `newsletter_like` | Event | `like` / `unlike` |
 | `comment_status` | `comment_submit` | Event | `pending` / `published` |
 | `method` | `share` | Event | `native` / `copy_link` |
@@ -63,7 +64,8 @@ doing once:
 
 ## Change log
 
-- **v2** — On the Pulse homepage: `newsletter_like`, `comment_submit`, `share`; `post_click` gains `content_group: newsletter`. Never send comment text or names to the dataLayer.
+- **v2** — On the Pulse homepage: `newsletter_like`, `comment_submit`, `share`; `post_click` gains `content_group: newsletter`. Never send comment text or emails to the dataLayer.
+- **v3** — editions keyed by month (`2026-10`); `project_expand` on What's Cooking.
 
 - **v1** — initial dictionary, mission scoring via GTM Lookup Table
   (keyword match, no BigQuery/ML yet — see personalization-demo-plan.md

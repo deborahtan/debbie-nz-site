@@ -12,7 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
   /* Page-specific additions only — everything else inherits style.css */
@@ -26,11 +26,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .field input, .field select {
     width: 100%;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: var(--card);
+    border: 1.5px solid var(--line-strong);
+    border-radius: 12px;
     padding: 12px 14px;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: var(--body);
     font-size: 15px;
     color: var(--text-primary);
     transition: border-color 0.2s ease;
@@ -42,23 +42,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .field input::placeholder { color: var(--text-tertiary); }
   .submit-btn {
     background: var(--accent);
-    color: #0a0a0a;
+    color: var(--accent-ink);
     border: none;
-    border-radius: 6px;
-    padding: 13px 24px;
-    font-family: 'Instrument Sans', sans-serif;
+    border-radius: 999px;
+    padding: 13px 26px;
+    font-family: var(--body);
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: opacity 0.2s ease;
   }
-  .submit-btn:hover { opacity: 0.88; }
+  .submit-btn:hover { filter: brightness(1.08); }
   .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .success-panel { display: none; }
   .success-panel.show { display: block; }
   .success-panel h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: var(--display); font-weight: 700;
     font-size: 24px;
     color: var(--text-primary);
     margin-bottom: 12px;
@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .success-panel p { font-size: 15px; margin-bottom: 8px; max-width: 520px; }
   .hash-preview {
     margin-top: 20px;
-    background: #111110;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 14px 16px;
@@ -99,14 +99,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: var(--accent);
     border-radius: 6px;
     padding: 10px 18px;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: var(--body);
     font-size: 14px;
     font-weight: 600;
     transition: background 0.2s ease, color 0.2s ease;
   }
   .badge-download:hover {
     background: var(--accent);
-    color: #0a0a0a;
+    color: var(--accent-ink);
   }
 
   @media (max-width: 680px) {
@@ -125,7 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="nav-right">
     <div class="nav-links">
       <a href="/">on the pulse</a>
-      <a href="/writing.html">writing</a>
+      <a href="/whats-cooking">what's cooking</a>
       <a href="/about.html">about</a>
       <a href="#" id="shop-teaser">shop</a>
       <a href="/form-test.html">sign up</a>
@@ -135,7 +135,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+      <input type="text" id="site-search" placeholder="Search" autocomplete="off">
     </div>
   </div>
 </nav>
@@ -242,7 +242,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
-    const colors = ['#d4b483', '#f5f5f2', '#c98a6b'];
+    const colors = ['#FF7A9C', '#F2A541', '#7AA874', '#FFC2D1'];
     const particles = Array.from({ length: 140 }, () => ({
       x: Math.random() * canvas.width,
       y: -20 - Math.random() * canvas.height * 0.3,
@@ -296,48 +296,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const ctx = canvas.getContext('2d');
     const w = canvas.width, h = canvas.height;
 
-    ctx.fillStyle = '#111110';
+    ctx.fillStyle = '#FFF4EC';
     ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = '#d4b483';
+    ctx.strokeStyle = '#FF7A9C';
     ctx.lineWidth = 2;
     ctx.strokeRect(14, 14, w - 28, h - 28);
-    ctx.strokeStyle = '#232220';
+    ctx.strokeStyle = 'rgba(62,42,36,0.18)';
     ctx.lineWidth = 1;
     ctx.strokeRect(22, 22, w - 44, h - 44);
 
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#d4b483';
-    ctx.font = '600 12px "Instrument Sans", sans-serif';
+    ctx.fillStyle = '#B8285A';
+    ctx.font = '600 12px "Nunito", sans-serif';
     ctx.save();
     ctx.letterSpacing = '2px';
     ctx.fillText('OFFICIAL MEMBER', w / 2, 64);
     ctx.restore();
 
-    ctx.fillStyle = '#f5f5f2';
-    ctx.font = '400 30px "Instrument Serif", serif';
+    ctx.fillStyle = '#3E2A24';
+    ctx.font = '400 30px "Baloo 2", sans-serif';
     ctx.fillText('Form Submission', w / 2, 108);
     ctx.fillText('Appreciation Society', w / 2, 142);
 
-    ctx.fillStyle = '#a9a49c';
-    ctx.font = '400 13px "Instrument Sans", sans-serif';
+    ctx.fillStyle = '#6B4F45';
+    ctx.font = '400 13px "Nunito", sans-serif';
     ctx.fillText('This certifies that', w / 2, 190);
 
     const firstName = (fullName || 'Anonymous Submitter').trim().split(/\s+/)[0];
-    ctx.fillStyle = '#d4b483';
-    ctx.font = '400 34px "Instrument Serif", serif';
+    ctx.fillStyle = '#B8285A';
+    ctx.font = '400 34px "Baloo 2", sans-serif';
     ctx.fillText(firstName, w / 2, 232);
 
-    ctx.fillStyle = '#a9a49c';
-    ctx.font = '400 13px "Instrument Sans", sans-serif';
+    ctx.fillStyle = '#6B4F45';
+    ctx.font = '400 13px "Nunito", sans-serif';
     ctx.fillText('has successfully clicked submit on purpose.', w / 2, 262);
 
     const memberNo = hashedEmail ? hashedEmail.slice(0, 6).toUpperCase() : '000000';
     const dateStr = new Date().toLocaleDateString('en-NZ', { year: 'numeric', month: 'long', day: 'numeric' });
-    ctx.fillStyle = '#6f6a62';
-    ctx.font = '400 11px "Instrument Sans", sans-serif';
+    ctx.fillStyle = '#85675C';
+    ctx.font = '400 11px "Nunito", sans-serif';
     ctx.fillText('№ ' + memberNo + '   ·   ' + dateStr, w / 2, 310);
 
-    ctx.font = '400 10px "Instrument Sans", sans-serif';
+    ctx.font = '400 10px "Nunito", sans-serif';
     ctx.fillText('debbie-tan test site — not a real organisation, no data was stored', w / 2, 344);
   }
 

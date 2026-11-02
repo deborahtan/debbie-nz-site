@@ -6,10 +6,13 @@ likes/comments API.
 
 ## On the Pulse (homepage)
 
-- Content lives in `content/pulse/issue-XX.json` (repo root, not served).
-- `python3 scripts/build_pulse.py` regenerates `index.html`,
-  `pulse/issue-XX.html` and `pulse/feed.xml` (RSS). Commit the output.
-- New edition: add `issue-10.json` in the same shape, run the script, push.
+- One edition per month, named for the month it covers:
+  `content/pulse/YYYY-MM.json` (repo root, not served).
+- `content/whats-cooking.json` drives the What's Cooking page.
+- `python3 scripts/build_pulse.py` regenerates `index.html` (full latest
+  edition + previous editions), `pulse/YYYY-MM.html`, `pulse/feed.xml` and
+  `whats-cooking.html`. Commit the output.
+- New edition: add e.g. `2026-11.json`, run the script, push.
 
 ## Likes + comments — one-time setup
 
@@ -20,10 +23,11 @@ likes/comments API.
    debbie-nz-site → Settings → Variables and Secrets: `ADMIN_TOKEN` and
    `HASH_SALT`. (Or `npx wrangler secret put <NAME>`.) Without `HASH_SALT`
    nothing about IPs is stored and rate limiting is off.
-3. Moderate at `/admin.html` with the ADMIN_TOKEN. Set
-   `COMMENTS_MODERATED` to `"false"` in `wrangler.jsonc` to publish instantly.
+3. Comments publish instantly and need an email from a mainstream provider
+   (list in `worker/index.js`); only a masked version is shown. Delete any
+   comment at `/admin.html` with the ADMIN_TOKEN.
 
-Privacy: no emails or accounts. IPs are salted + hashed (never stored raw) and
+Privacy: no accounts; commenter emails are stored but only ever shown masked, and never sent to analytics. IPs are salted + hashed (never stored raw) and
 only used for rate limiting. Local dev: `npm run dev` (uses `.dev.vars`).
 
 ## Deploy (Cloudflare Pages)

@@ -1,0 +1,109 @@
+{
+  "title": "What's cooking 🍳",
+  "intro": "The tools I'm building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it's worth having.",
+  "projects": [
+    {
+      "emoji": "🔍",
+      "name": "GA4 audit",
+      "tags": ["Audit", "GA4"],
+      "summary": "An automated health check of a Google Analytics 4 property that gives the same answer every time it runs.",
+      "does": [
+        "Reads the property's set-up through Google's APIs: data streams, events, key events, custom definitions, data retention, consent and links like BigQuery and Google Ads",
+        "Checks each one against a fixed set of rules, so the result is deterministic rather than an opinion",
+        "Never touches personal data: it audits configuration, not people",
+        "Produces a scored report with what's wrong, why it matters and how to fix it"
+      ],
+      "benefits": [
+        "Hours of clicking through admin screens becomes a few minutes",
+        "Re-run it after changes and compare like with like",
+        "Catches gaps (missing key events, short retention, broken links) before they quietly cost months of data"
+      ]
+    },
+    {
+      "emoji": "🏷️",
+      "name": "GTM audit + dataLayer generator, end to end",
+      "tags": ["Audit", "GTM", "Tracking"],
+      "summary": "From 'what should we track?' to a tested Tag Manager container, with one source of truth the whole way through.",
+      "does": [
+        "Audits an existing GTM container: tags, triggers, variables, naming, duplicates, unused items and consent settings",
+        "Turns a measurement plan into a dataLayer spec and ready-to-paste developer snippets",
+        "Generates an importable GTM container and a data dictionary that match the spec exactly",
+        "Keeps personal data out by design: hashing where it's needed, nothing raw in the dataLayer"
+      ],
+      "benefits": [
+        "Developers, analysts and marketers all work from the same spec",
+        "Days of hand-building tags drops to an import and a check",
+        "New tracking always traces back to a documented line, so audits stay easy"
+      ]
+    },
+    {
+      "emoji": "📊",
+      "name": "Personal dashboard + automated data warehouse",
+      "tags": ["BigQuery", "Dashboards"],
+      "summary": "My own data flowing into BigQuery on a schedule, with a dashboard that's always up to date.",
+      "does": [
+        "Pulls data from the sources I use into BigQuery automatically",
+        "Cleans and models it with version-controlled SQL, so every number has a known definition",
+        "Feeds a dashboard that refreshes itself, with no manual exports"
+      ],
+      "benefits": [
+        "A working reference build for the same pattern at any scale",
+        "No more copy-paste reporting or stale screenshots",
+        "A safe sandbox for trying new tools (like the ones below) on real data"
+      ]
+    },
+    {
+      "emoji": "🤖",
+      "name": "Data Agent Kit experiments",
+      "tags": ["AI agents", "BigQuery"],
+      "summary": "Testing Google's new Data Agent Kit: coding agents that can query, build pipelines and do data science on BigQuery.",
+      "does": [
+        "Connects a coding agent to BigQuery and other Google Cloud data services with Google's own skills and tools",
+        "Lets the agent write and tune SQL, build and fix pipelines, and run analysis from a plain-English request",
+        "Puts real guardrails in place first: an IAM policy that blocks write actions, rather than trusting the agent's 'ask before deleting' instruction"
+      ],
+      "benefits": [
+        "Finds out what's genuinely useful versus what's demo-only, before anyone relies on it",
+        "Builds a safe set-up pattern others can copy",
+        "Compares Google's approach with Snowflake, Databricks and Microsoft (see the October edition)"
+      ],
+      "link": { "label": "Read the October edition", "url": "/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one" }
+    },
+    {
+      "emoji": "🎭",
+      "name": "Playwright tracking tests",
+      "tags": ["QA", "GTM", "Automation"],
+      "summary": "A robot browser that clicks through a site and checks the tracking actually fired, in preview and in production.",
+      "does": [
+        "Opens pages and runs the key journeys (page views, clicks, forms) like a real visitor",
+        "Watches network requests to see exactly which tags fired and what they sent",
+        "Inspects the dataLayer at each step against the spec",
+        "Reads the site's Content Security Policy and flags any vendor (Meta, Google Ads and others) it would block"
+      ],
+      "benefits": [
+        "Tests GTM changes in preview before they go live",
+        "Diagnoses production issues in minutes instead of guesswork",
+        "Catches silent breakages, like a site release that quietly kills a conversion tag"
+      ]
+    },
+    {
+      "emoji": "📰",
+      "name": "Environmental scan automation",
+      "tags": ["Research", "AI"],
+      "summary": "A monthly sweep of what changed in measurement, privacy and AI, with every item dated and linked to its source.",
+      "does": [
+        "Searches a fixed window (the last month) across platforms, regulators, standards bodies and trusted practitioners",
+        "Filters out recycled stats and vendor fluff, keeping only what actually changed",
+        "Writes each item as what happened, why it matters and what to do about it",
+        "Publishes as a readable briefing, like On the Pulse"
+      ],
+      "benefits": [
+        "Staying current takes a read, not a day of searching",
+        "Every claim can be checked against its source",
+        "Turns news into a short list of actions"
+      ],
+      "link": { "label": "Read the latest edition", "url": "/" }
+    }
+  ],
+  "outro": "Got a tool you'd like to see here, or want to compare notes? Leave a comment on the latest edition."
+}
