@@ -5,9 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy &amp; cookies — Debbie Tan</title>
 <meta name="description" content="What this site collects, why, and how to change your cookie choices.">
-<link rel="canonical" href="https://debbie.nz/privacy">
+<link rel="canonical" href="https://debbie-nz-site.deborahtanyl.workers.dev/privacy">
+<meta property="og:site_name" content="Debbie Tan — On the Pulse">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://debbie-nz-site.deborahtanyl.workers.dev/privacy">
 <meta property="og:title" content="Privacy &amp; cookies — Debbie Tan">
 <meta property="og:description" content="What this site collects, why, and how to change your cookie choices.">
+<meta property="og:image" content="https://debbie-nz-site.deborahtanyl.workers.dev/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Privacy &amp; cookies — Debbie Tan">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -16,9 +24,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
 <!-- End Google Tag Manager -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/baloo-2-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/pulse.css">
@@ -36,9 +44,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav-links">
       <a href="/">on the pulse</a>
       <a href="/whats-cooking">what's cooking</a>
+      <a href="/roadmap">roadmap</a>
+      <a href="/site-health">site health</a>
       <a href="/about.html">about</a>
-      <a href="#" id="shop-teaser">shop</a>
-      <a href="/form-test.html">sign up</a>
+      <a href="/shop">shop <span class="test-tag">test</span></a>
+      <a href="/form-test.html">sign up <span class="test-tag">test</span></a>
     </div>
     <div class="nav-search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -49,6 +59,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </nav>
+<div class="ribbon" role="note">
+  <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
+  <b>🧪 Also a test bench:</b> anything marked <span class="test-tag">test</span> (the shop and sign-up) is pretend, built for testing tracking.
+  <a href="/about#this-site">How this site works</a></p>
+</div>
 
 <main id="main" class="pulse-wrap privacy">
 <header class="brand">
@@ -79,11 +94,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <form id="consent-form" class="consent-panel">
     <div class="consent-row">
-      <div><h3>Essential</h3><p>Makes the site work: remembering your cookie choice, likes and spam protection. Always on.</p></div>
+      <div><h3>Essential</h3><p>Makes the site work: remembering your cookie choice, likes, spam protection, and Cloudflare Turnstile tokens. Always on.</p></div>
       <span class="pill-on">Always on</span>
     </div>
     <label class="consent-row" for="consent-analytics">
-      <div><h3>Analytics</h3><p>Google Analytics 4 counts visits and which posts are read, so I know what's useful. No advertising use.</p></div>
+      <div><h3>Analytics</h3><p>Google Analytics 4 counts visits, which posts are read, and errors, so I know what's useful and if the site breaks. No advertising use.</p></div>
       <input type="checkbox" id="consent-analytics" name="analytics" class="switch">
     </label>
     <label class="consent-row" for="consent-marketing">
@@ -116,7 +131,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="sec policy" id="analytics">
   <h2>Analytics</h2>
-  <p>With your consent, Google Analytics 4 collects things like pages viewed, how far you scroll, which posts you open, likes, shares and comments posted (never the comment text or your email). Google Analytics 4 doesn't log or store IP addresses. Search terms typed into the site search are recorded to improve the site, so please don't type personal details there.</p>
+  <p>With your consent, Google Analytics 4 collects things like pages viewed, how far you scroll, which posts you open, likes, shares and comments posted (never the comment text or your email), search terms (site search only), and errors. Google Analytics 4 doesn't log or store IP addresses. Please don't type personal details into site search.</p>
 </section>
 
 <section class="sec policy" id="storage">
@@ -130,6 +145,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <tr><th scope="row">_ga, _ga_*</th><td>Your browser (analytics only)</td><td>Google Analytics visitor and session</td><td>Up to 2 years</td></tr>
         <tr><th scope="row">Comments, likes</th><td>Cloudflare</td><td>Showing comments and like counts</td><td>Until removed</td></tr>
         <tr><th scope="row">Scrambled IP</th><td>Cloudflare</td><td>Spam and abuse limits</td><td>30 days</td></tr>
+        <tr><th scope="row">Visit count</th><td>Cloudflare (this site's database)</td><td>The old-school hit counter in the footer: one number per day, nothing about you</td><td>Kept as a running total</td></tr>
+        <tr><th scope="row">dn_hit</th><td>Your browser (session storage)</td><td>Stops the hit counter counting you twice in one visit</td><td>Until you close the tab</td></tr>
+        <tr><th scope="row">dn_cart, dn_orders, dn_coupon, dn_visits, tb_open</th><td>Your browser</td><td>Shop state, dataLayer viewer state</td><td>Session (closed on tab close)</td></tr>
+        <tr><th scope="row">cf_turnstile_token</th><td>Your browser</td><td>Cloudflare Turnstile tokens</td><td>Session (until commenting complete)</td></tr>
       </tbody>
     </table>
   </div>
@@ -138,7 +157,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="sec policy" id="rights">
   <h2>Your rights</h2>
-  <p>Under New Zealand's Privacy Act 2020 you can ask to see or correct personal information held about you. Because comments aren't linked to an email or account, tell me which comment (the edition, date and wording) if you'd like it removed. If you're not happy with how I've handled a privacy request, you can contact the <a href="https://www.privacy.org.nz/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>.</p>
+  <p>Under New Zealand's Privacy Act 2020 you can ask to see or correct personal information held about you. Because comments aren't linked to an email or account, tell me which comment (the edition, date and wording) if you'd like it removed. Your visit nickname is generated in the browser and cannot be linked back to you. If you're not happy with how I've handled a privacy request, you can contact the <a href="https://www.privacy.org.nz/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>.</p>
   <p><b>Contact:</b> <a href="mailto:privacy@debbie.nz">privacy@debbie.nz</a></p>
   <p class="note">Last updated 3 November 2026.</p>
 </section>
@@ -147,24 +166,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
-  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
-  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+  <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a> · <a href="/site-health">Site health</a></span>
+  <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
 </footer>
-
-<script>
-  window.dataLayer = window.dataLayer || [];
-  const searchInput = document.getElementById('site-search');
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && this.value.trim().length > 0) {
-      window.dataLayer.push({ event: 'search', search_term: this.value.trim() });
-    }
-  });
-  document.getElementById('shop-teaser').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.dataLayer.push({ event: 'shop_teaser_click' });
-    alert('Shop is currently being built — check back soon.');
-  });
-</script>
+<script src="/site.js" defer></script>
+<script src="/tools.js" defer></script>
 <script src="/pulse.js" defer></script>
 </body>
 </html>

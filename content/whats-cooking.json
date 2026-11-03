@@ -42,35 +42,33 @@
   "groups": [
     {
       "heading": "The measurement pipeline",
-      "blurb": "Eleven pieces that take a client from brief to trustworthy data, in the order they run.",
+      "blurb": "10 pieces that take a project from brief to trustworthy data, in the order they run.",
       "projects": [
         {
           "emoji": "🗺️",
           "name": "Measurement plan, event spec and data dictionary",
-          "status": "drafted",
-          "next": "Refining it, and customising it to each client's needs.",
+          "status": "done",
           "tags": [
             "Planning",
             "GA4"
           ],
-          "summary": "Turns a client brief and a site audit into a measurement plan, an event spec and a data dictionary.",
+          "summary": "Turns a brief and a site audit into a measurement plan, an event spec and a data dictionary.",
           "does": [
-            "Reads the client brief and the site audit",
+            "Reads the brief and the site audit",
             "Maps business goals to KPIs, then to the events and parameters that measure them",
             "Writes the event spec and a data dictionary with consistent naming",
             "Becomes the single source of truth that every later step builds from"
           ],
           "benefits": [
             "Days of planning becomes hours",
-            "The same naming rules across every client",
+            "The same naming rules across every project",
             "Everything downstream (GTM, dev briefs, tests) traces back to one approved plan"
           ]
         },
         {
           "emoji": "🏷️",
           "name": "GTM container builder",
-          "status": "drafted",
-          "next": "Refining.",
+          "status": "done",
           "tags": [
             "GTM",
             "Tracking"
@@ -86,6 +84,27 @@
             "No more hand-building tags one by one",
             "The container always matches the spec",
             "Easy to rebuild when the plan changes"
+          ]
+        },
+        {
+          "emoji": "⚙️",
+          "name": "GA4 + GTM config updater",
+          "status": "drafted",
+          "next": "Drafted, not in use yet.",
+          "tags": [
+            "GA4",
+            "Automation"
+          ],
+          "summary": "Pushes approved GA4 and GTM configuration changes live automatically.",
+          "does": [
+            "Takes a set of approved changes (events, key events, custom definitions, settings)",
+            "Applies them to the GA4 property only after sign-off",
+            "Keeps a record of what changed and when"
+          ],
+          "benefits": [
+            "No manual clicking through GA4 admin",
+            "Changes match exactly what was approved",
+            "A clear audit trail of every change"
           ]
         },
         {
@@ -114,8 +133,8 @@
         {
           "emoji": "🎫",
           "name": "Developer briefs and ticketing",
-          "status": "blocked",
-          "next": "Waiting on build time. Next up: generating the briefs, then exploring Jira and Confluence.",
+          "status": "done",
+          "next": "Next: creating Jira and Confluence tickets automatically.",
           "tags": [
             "Dev handoff",
             "Jira",
@@ -125,7 +144,7 @@
           "does": [
             "Writes a developer brief per event: the dataLayer code to add, where it fires and what each value should be",
             "Adds acceptance criteria and test steps so 'done' is clear",
-            "Exploring: creating Jira tickets and Confluence pages automatically, linked back to the plan"
+            "Coming next: creating Jira tickets and Confluence pages automatically, linked back to the plan"
           ],
           "benefits": [
             "Developers get exactly what they need, first time",
@@ -179,14 +198,14 @@
         },
         {
           "emoji": "🚨",
-          "name": "Event-health monitoring and alerts",
-          "status": "gemini",
+          "name": "Event-health monitoring (part of conversational analytics)",
+          "status": "done",
           "tags": [
             "Monitoring",
             "Gemini",
             "BigQuery"
           ],
-          "summary": "Checks event health on demand and flags issues. Built on Gemini.",
+          "summary": "A branch of the conversational analytics agent: checks event health on demand and flags issues.",
           "does": [
             "Runs health checks across key events when prompted",
             "Flags drops, spikes, missing parameters and broken values",
@@ -200,17 +219,16 @@
         },
         {
           "emoji": "🧪",
-          "name": "Agent evaluation + Cloud Run AI harness",
+          "name": "Agent evaluation + AI harness",
           "status": "drafted",
           "next": "Refining.",
           "tags": [
             "AI agents",
-            "Cloud Run",
             "Testing"
           ],
-          "summary": "Runs the agents at scale in the cloud instead of on a laptop, and scores how well they answer.",
+          "summary": "Runs the agents at scale instead of on a laptop, and scores how well they answer.",
           "does": [
-            "Runs batches of test questions against an agent on Cloud Run",
+            "Runs batches of test questions against an agent",
             "Scores the answers and flags made-up ones",
             "Tracks the Google Cloud cost of each agent and each run"
           ],
@@ -221,71 +239,28 @@
           ]
         },
         {
-          "emoji": "⚙️",
-          "name": "GA4 config updates on approval",
-          "status": "idle",
-          "next": "Refining before first live use.",
-          "tags": [
-            "GA4",
-            "Automation"
-          ],
-          "summary": "Pushes approved GA4 configuration changes live in a property automatically.",
-          "does": [
-            "Takes a set of approved changes (events, key events, custom definitions, settings)",
-            "Applies them to the GA4 property only after sign-off",
-            "Keeps a record of what changed and when"
-          ],
-          "benefits": [
-            "No manual clicking through GA4 admin",
-            "Changes match exactly what was approved",
-            "A clear audit trail of every change"
-          ]
-        },
-        {
-          "emoji": "🕸️",
-          "name": "Enterprise BigQuery set-up + knowledge graph",
-          "status": "rnd",
-          "next": "Client-requested. Researching what can be automated.",
-          "tags": [
-            "BigQuery",
-            "Data engineering",
-            "GCP"
-          ],
-          "summary": "Stands up the BigQuery structure and a knowledge graph in Google Cloud directly from a client's tracking definitions.",
-          "does": [
-            "Reads the tracking definitions from the data dictionary",
-            "Creates the BigQuery datasets, tables and data-engineering fields to match",
-            "Builds a knowledge graph so business terms, events and tables are linked"
-          ],
-          "benefits": [
-            "Warehouse and tracking stay in sync by design",
-            "Agents and analysts share the same definitions",
-            "Weeks of set-up shrinks once it's automated"
-          ]
-        },
-        {
           "emoji": "📰",
-          "name": "Client-specific GA4 / GMP / GCP news summary",
-          "status": "drafted",
-          "next": "Customising per client.",
+          "name": "GA4 / GMP / GCP news summary",
+          "status": "done",
+          "next": "You're reading it: On the Pulse is what this makes.",
           "tags": [
             "Research",
             "AI"
           ],
-          "summary": "Pulls the latest GA4, Google Marketing Platform and Google Cloud news into a client-ready summary.",
+          "summary": "Pulls the latest GA4, Google Marketing Platform and Google Cloud news into a monthly summary.",
           "does": [
             "Searches a fixed window across Google release notes, practitioners and trusted publications",
             "Keeps only what changed, with every item dated and sourced",
-            "Explains what it means for that client and what to do about it"
+            "Explains what it means for the work and what to do about it"
           ],
           "benefits": [
-            "Clients hear about changes from you first",
+            "Hear about changes before they become problems",
             "Staying current takes a read, not a day of searching",
             "The same engine behind On the Pulse"
           ],
           "link": {
-            "label": "Read the latest On the Pulse",
-            "url": "/"
+            "url": "/",
+            "label": "Read the latest edition"
           }
         }
       ]

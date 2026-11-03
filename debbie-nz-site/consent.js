@@ -50,6 +50,7 @@
     gtag('consent', 'update', toGoogle(c));
     dl.push({ event: 'consent_update', consent_analytics: c.analytics, consent_marketing: c.marketing, consent_source: source || 'banner' });
     saved = c;
+    try { window.dispatchEvent(new CustomEvent('dn:consent', { detail: c })); } catch (e) {}
     closeBanner();
     syncControls();
   }

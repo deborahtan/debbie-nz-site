@@ -7,7 +7,7 @@
   "title": "AI labs kept shipping. Google quietly took control.",
   "title_accent": "control.",
   "greeting": "Kia ora,",
-  "lede": "Here's the one-line version: OpenAI and Anthropic both released new things this month, nothing in our stack broke, but Google quietly moved who controls your measurement data from Analytics into Ads. That's the one to actually act on. Everything else below is useful context.",
+  "lede": "Here's the short version: the AI labs kept shipping, nothing in the stack broke, but Google is steadily moving control of measurement data towards Ads. This month it was consent and IP settings; from 11 January, server-side Tag Manager starts handing full IP addresses to Google's ad tags unless you opt out. That's the thread to act on. Data Agent Kit is the other one worth your time.",
   "stats": [],
   "sections": [
     {
@@ -513,5 +513,65 @@
   "notes": [
     "For NZ: nothing above is NZ-specific — all of it comes from global/US sources, so local timing and availability (feature rollouts, pricing, data residency) may lag what's reported here."
   ],
-  "month": "2026-10"
+  "month": "2026-10",
+  "recap": {
+    "heading": "The month in 60 seconds",
+    "items": [
+      {
+        "text": "ChatGPT's free tier quietly moved to GPT‑6. Re-test anything built on how it behaves.",
+        "anchor": "chatgpt-s-free-tier-is-now-running-on-gpt-6"
+      },
+      {
+        "text": "Anthropic shipped eight smaller releases instead of one big one; Docs, Slides and Design are now free.",
+        "anchor": "anthropic-shipped-a-lot-of-small-things-not-one-big-one"
+      },
+      {
+        "text": "Claude Dashboards puts live BI on top of a data warehouse (beta). Watch for a Looker connector.",
+        "anchor": "claude-dashboards-the-one-worth-a-proper-look"
+      },
+      {
+        "text": "Anthropic set aside 5% of its shares for public benefit. Reputation, not product.",
+        "anchor": "anthropic-also-gave-away-a-slice-of-the-company"
+      },
+      {
+        "text": "Grok 5 was talked about, not shipped.",
+        "anchor": "grok-5-was-talked-about-not-shipped"
+      },
+      {
+        "text": "54% of companies run AI agents, but only 25% measure them. Integration, not the model, is the new bottleneck.",
+        "anchor": "how-companies-are-actually-using-ai-agents"
+      },
+      {
+        "text": "Consent and IP control moved from GA4 into the linked Google Ads account.",
+        "anchor": "google-ads-now-controls-your-consent-and-ip-data-not-ga4",
+        "flag": "act"
+      },
+      {
+        "text": "From 11 January 2027, server-side GTM sends full IP addresses to Google's ad tags by default. Decide on the opt-out now.",
+        "anchor": "server-side-tag-manager-will-start-passing-full-ip-addresses",
+        "flag": "new"
+      },
+      {
+        "text": "Tag Manager's biggest change in a decade landed on 8 October. It's quiet now, so finish any migrations.",
+        "anchor": "tag-manager-s-biggest-change-in-years-landed-then-everything"
+      },
+      {
+        "text": "BigQuery had its busiest AI month yet. Try Conversational Analytics on one live dashboard.",
+        "anchor": "bigquery-had-its-busiest-month-yet-for-ai-features"
+      },
+      {
+        "text": "Google's Data Agent Kit is generally available, and Snowflake, Databricks and Microsoft all have one too. The difference is where the guardrails sit.",
+        "anchor": "google-s-data-agent-kit-is-out-and-every-data-platform-now-h",
+        "flag": "new"
+      },
+      {
+        "text": "Google Ads switched on one-click checkout in US search and added channel-priority controls. Check your budget defaults.",
+        "anchor": "google-ads-is-pushing-further-into-online-shopping"
+      },
+      {
+        "text": "No market moves worth reporting, so that section stays empty.",
+        "anchor": "market-moves"
+      }
+    ]
+  }
 }

@@ -26,11 +26,11 @@
 
   <form id="consent-form" class="consent-panel">
     <div class="consent-row">
-      <div><h3>Essential</h3><p>Makes the site work: remembering your cookie choice, likes and spam protection. Always on.</p></div>
+      <div><h3>Essential</h3><p>Makes the site work: remembering your cookie choice, likes, spam protection, and Cloudflare Turnstile tokens. Always on.</p></div>
       <span class="pill-on">Always on</span>
     </div>
     <label class="consent-row" for="consent-analytics">
-      <div><h3>Analytics</h3><p>Google Analytics 4 counts visits and which posts are read, so I know what's useful. No advertising use.</p></div>
+      <div><h3>Analytics</h3><p>Google Analytics 4 counts visits, which posts are read, and errors, so I know what's useful and if the site breaks. No advertising use.</p></div>
       <input type="checkbox" id="consent-analytics" name="analytics" class="switch">
     </label>
     <label class="consent-row" for="consent-marketing">
@@ -63,7 +63,7 @@
 
 <section class="sec policy" id="analytics">
   <h2>Analytics</h2>
-  <p>With your consent, Google Analytics 4 collects things like pages viewed, how far you scroll, which posts you open, likes, shares and comments posted (never the comment text or your email). Google Analytics 4 doesn't log or store IP addresses. Search terms typed into the site search are recorded to improve the site, so please don't type personal details there.</p>
+  <p>With your consent, Google Analytics 4 collects things like pages viewed, how far you scroll, which posts you open, likes, shares and comments posted (never the comment text or your email), search terms (site search only), and errors. Google Analytics 4 doesn't log or store IP addresses. Please don't type personal details into site search.</p>
 </section>
 
 <section class="sec policy" id="storage">
@@ -77,6 +77,10 @@
         <tr><th scope="row">_ga, _ga_*</th><td>Your browser (analytics only)</td><td>Google Analytics visitor and session</td><td>Up to 2 years</td></tr>
         <tr><th scope="row">Comments, likes</th><td>Cloudflare</td><td>Showing comments and like counts</td><td>Until removed</td></tr>
         <tr><th scope="row">Scrambled IP</th><td>Cloudflare</td><td>Spam and abuse limits</td><td>30 days</td></tr>
+        <tr><th scope="row">Visit count</th><td>Cloudflare (this site's database)</td><td>The old-school hit counter in the footer: one number per day, nothing about you</td><td>Kept as a running total</td></tr>
+        <tr><th scope="row">dn_hit</th><td>Your browser (session storage)</td><td>Stops the hit counter counting you twice in one visit</td><td>Until you close the tab</td></tr>
+        <tr><th scope="row">dn_cart, dn_orders, dn_coupon, dn_visits, tb_open</th><td>Your browser</td><td>Shop state, dataLayer viewer state</td><td>Session (closed on tab close)</td></tr>
+        <tr><th scope="row">cf_turnstile_token</th><td>Your browser</td><td>Cloudflare Turnstile tokens</td><td>Session (until commenting complete)</td></tr>
       </tbody>
     </table>
   </div>
@@ -85,7 +89,7 @@
 
 <section class="sec policy" id="rights">
   <h2>Your rights</h2>
-  <p>Under New Zealand's Privacy Act 2020 you can ask to see or correct personal information held about you. Because comments aren't linked to an email or account, tell me which comment (the edition, date and wording) if you'd like it removed. If you're not happy with how I've handled a privacy request, you can contact the <a href="https://www.privacy.org.nz/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>.</p>
+  <p>Under New Zealand's Privacy Act 2020 you can ask to see or correct personal information held about you. Because comments aren't linked to an email or account, tell me which comment (the edition, date and wording) if you'd like it removed. Your visit nickname is generated in the browser and cannot be linked back to you. If you're not happy with how I've handled a privacy request, you can contact the <a href="https://www.privacy.org.nz/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>.</p>
   <p><b>Contact:</b> <a href="mailto:privacy@debbie.nz">privacy@debbie.nz</a></p>
   <p class="note">Last updated 3 November 2026.</p>
 </section>

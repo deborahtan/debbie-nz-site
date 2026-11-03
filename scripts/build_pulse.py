@@ -13,14 +13,18 @@ Writes:
 New edition: add content/pulse/YYYY-MM.json (YYYY-MM = the month it covers),
 run this script, commit.
 """
-import json, re, datetime, pathlib
+import json, re, datetime, pathlib, os
 from html import escape
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "debbie-nz-site"
 CONTENT = ROOT / "content"
 GTM_ID = "GTM-NXPF7HTS"
-SITE_URL = "https://debbie.nz"
+# Cloudflare Turnstile site key (public). Default is Cloudflare's always-pass test key until you create a widget.
+TURNSTILE_SITE_KEY = os.environ.get("TURNSTILE_SITE_KEY", "1x00000000000000000000AA")
+# Where the site lives. debbie.nz still points at the Soundbytes blog, so canonical links and share
+# images use the Workers address until the domain moves:  SITE_URL=https://debbie.nz python3 scripts/build_pulse.py
+SITE_URL = os.environ.get("SITE_URL", "https://debbie-nz-site.deborahtanyl.workers.dev").rstrip("/")
 
 
 def e(s):
@@ -64,11 +68,18 @@ def title_html(issue):
 
 
 # ------------------------------------------------------------------ shell
-NAV_ITEMS = [("/", "on the pulse", "pulse"), ("/whats-cooking", "what's cooking", "cooking"),
-             ("/about.html", "about", "about")]
+NAV_ITEMS = [("/", "on the pulse", "pulse"), ("/whats-cooking", "what's cooking", "cooking"), ("/roadmap", "roadmap", "roadmap"),
+             ("/site-health", "site health", "health"), ("/about.html", "about", "about")]
+
+RIBBON = """<div class="ribbon" role="note">
+  <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
+  <b>🧪 Also a test bench:</b> anything marked <span class="test-tag">test</span> (the shop and sign-up) is pretend, built for testing tracking.
+  <a href="/about#this-site">How this site works</a></p>
+</div>"""
 
 
-def head(title, description, path, current):
+def head(title, description, path, current, image=None):
+    image = image or "/og/site.png"
     links = "\n      ".join(
         f'<a href="{href}"{" aria-current=\"page\"" if key == current else ""}>{label}</a>'
         for href, label, key in NAV_ITEMS)
@@ -80,8 +91,16 @@ def head(title, description, path, current):
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="canonical" href="{SITE_URL}{path}">
+<meta property="og:site_name" content="Debbie Tan — On the Pulse">
+<meta property="og:type" content="{"article" if path.startswith("/pulse/") else "website"}">
+<meta property="og:url" content="{SITE_URL}{path}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(description)}">
+<meta property="og:image" content="{SITE_URL}{image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="{e(title)}">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
@@ -90,9 +109,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 }})(window,document,'script','dataLayer','{GTM_ID}');</script>
 <!-- End Google Tag Manager -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/baloo-2-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/pulse.css">
@@ -109,8 +128,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="nav-right">
     <div class="nav-links">
       {links}
-      <a href="#" id="shop-teaser">shop</a>
-      <a href="/form-test.html">sign up</a>
+      <a href="/shop"{" aria-current=\"page\"" if current == "shop" else ""}>shop <span class="test-tag">test</span></a>
+      <a href="/form-test.html">sign up <span class="test-tag">test</span></a>
     </div>
     <div class="nav-search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -121,30 +140,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </nav>
+""" + RIBBON + """
 """
 
 
 FOOT = """
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
-  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
-  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+  <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a> · <a href="/site-health">Site health</a></span>
+  <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
 </footer>
-
-<script>
-  window.dataLayer = window.dataLayer || [];
-  const searchInput = document.getElementById('site-search');
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && this.value.trim().length > 0) {
-      window.dataLayer.push({ event: 'search', search_term: this.value.trim() });
-    }
-  });
-  document.getElementById('shop-teaser').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.dataLayer.push({ event: 'shop_teaser_click' });
-    alert('Shop is currently being built — check back soon.');
-  });
-</script>
+<script src="/site.js" defer></script>
+<script src="/tools.js" defer></script>
 <script src="/pulse.js" defer></script>
 </body>
 </html>
@@ -220,7 +228,9 @@ def comments_block(slug):
     <label for="c-body">Comment</label>
     <textarea id="c-body" name="body" required maxlength="2000" rows="5"></textarea>
     <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    <div class="turnstile" data-sitekey="{TURNSTILE_SITE_KEY}"></div>
     <button type="submit">Post comment</button>
+    <p class="hint small">Protected by Cloudflare Turnstile, an invisible check that you're not a bot.</p>
     <p class="form-status" role="status"></p>
   </form>
   <ol class="comment-list" aria-live="polite"><li class="comment-empty">Loading comments…</li></ol>
@@ -245,6 +255,11 @@ def issue_body(issue, heading_level_link=None):
     out.append(f'<p class="lede">{e(issue["lede"])}</p>')
     if issue.get("stats"):
         out.append(stats_html(issue["stats"]))
+    if issue.get("recap"):
+        rc = issue["recap"]
+        flags = {"new": '<span class="recap-flag new">new</span>', "act": '<span class="recap-flag act">act</span>'}
+        lis = "".join(f'<li>{flags.get(r.get("flag"), "")}<a href="#{e(r["anchor"])}">{e(r["text"])}</a></li>' for r in rc["items"])
+        out.append(f'<section class="recap" aria-labelledby="recap-h"><h2 id="recap-h">⏱️ {e(rc["heading"])}</h2><ol>{lis}</ol></section>')
     toc = "".join(f'<a href="#{slugify(s["heading"])}">{e(s["heading"])}</a>' for s in issue["sections"])
     out.append(f'<nav class="toc" aria-label="In this edition"><span>In this edition</span>{toc}</nav>')
 
@@ -303,7 +318,7 @@ def previous_list(issues, exclude):
 # ------------------------------------------------------------------ pages
 def render_issue(issue, issues):
     out = [head(f"{issue['title']} — On the Pulse, {month_label(issue['month'])}", issue["lede"][:200],
-                f"/pulse/{issue['slug']}", "pulse")]
+                f"/pulse/{issue['slug']}", "pulse", f"/og/{issue['slug']}.png")]
     out.append(f'<main id="main" class="pulse-wrap issue" data-issue="{issue["slug"]}">')
     out.append('<a class="back" href="/">← Latest edition</a>')
     out.append(issue_body(issue))
@@ -317,10 +332,10 @@ def render_home(issues):
     latest = issues[0]
     out = [head("On the Pulse — Debbie Tan",
                 "A monthly read on AI, data, measurement and privacy, from Auckland, Aotearoa. Every item dated and sourced.",
-                "/", "pulse")]
+                "/", "pulse", f"/og/{latest['slug']}.png")]
     out.append(f'<main id="main" class="pulse-wrap issue home" data-issue="{latest["slug"]}">')
     out.append('<header class="brand"><span class="badge">💗 On the Pulse · monthly</span>'
-               '<p>A monthly read on AI, data, measurement &amp; privacy from Auckland, Aotearoa. Every item dated and sourced.</p></header>')
+               '<p>A real, ongoing monthly read on data, technology, measurement &amp; privacy from Auckland, Aotearoa. News is dated and sourced; the commentary is mine.</p></header>')
     out.append(issue_body(latest, heading_level_link=f"/pulse/{latest['slug']}"))
     out.append(previous_list(issues, latest["slug"]))
     out.append("</main>")
@@ -331,7 +346,7 @@ def render_home(issues):
 def render_cooking(data):
     statuses = data["statuses"]
     projects = [p for g in data["groups"] for p in g["projects"]]
-    out = [head("What's Cooking — Debbie Tan", data["intro"], "/whats-cooking", "cooking")]
+    out = [head("What's Cooking — Debbie Tan", data["intro"], "/whats-cooking", "cooking", "/og/whats-cooking.png")]
     out.append('<main id="main" class="pulse-wrap cooking">')
     out.append(f'<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>{e(data["title"])}</h1><p>{e(data["intro"])}</p></header>')
 
@@ -386,8 +401,291 @@ def render_cooking(data):
     return "\n".join(out)
 
 
-def render_page(title, desc, path, body_html, extra_class=""):
-    return "\n".join([head(title, desc, path, ""), f'<main id="main" class="pulse-wrap {extra_class}">', body_html, "</main>", FOOT])
+def render_health():
+    body = """<header class="brand"><span class="badge">🩺 checked daily</span><h1>Site health</h1>
+<p>How this site is doing, measured on itself: uptime, real-visitor speed (Core Web Vitals), Lighthouse,
+accessibility, security-policy blocks and errors. Updated automatically.</p></header>
+<p class="health-updated" id="health-updated" role="status">Loading the latest numbers…</p>
+<div class="health-summary" id="health-summary"></div>
+
+<section class="sec health-sec" aria-labelledby="h-up"><h2 id="h-up">Uptime <span class="count">last 7 days · checked every 15 min</span></h2>
+<div class="health-grid" id="health-uptime"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-cwv"><h2 id="h-cwv">Core Web Vitals <span class="count">real visitors · 75th percentile · last 28 days</span></h2>
+<p class="sec-desc">From visitors who allowed analytics. Green is Google's "good" threshold: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.</p>
+<div class="health-grid" id="health-cwv"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-lh"><h2 id="h-lh">Lighthouse <span class="count">lab test · mobile · daily</span></h2>
+<div class="table-wrap" tabindex="0"><table id="health-lh"><thead><tr><th scope="col">Page</th><th scope="col">Performance</th><th scope="col">Accessibility</th><th scope="col">Best practices</th><th scope="col">SEO</th><th scope="col">LCP</th><th scope="col">CLS</th><th scope="col">Tested</th></tr></thead><tbody></tbody></table></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-a11y"><h2 id="h-a11y">Accessibility <span class="count">axe-core · keyboard · structure · daily</span></h2>
+<div class="health-grid" id="health-a11y"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-csp"><h2 id="h-csp">Security policy blocks <span class="count">last 7 days</span></h2>
+<p class="sec-desc">Things the Content Security Policy stopped from loading. A marketing tag showing up here means it needs adding to the policy.</p>
+<div id="health-csp"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-err"><h2 id="h-err">JavaScript errors <span class="count">last 7 days</span></h2>
+<p class="sec-desc">Errors marked <span class="test-tag">chaos</span> were caused on purpose by the chaos gremlin button.</p>
+<div id="health-errors"></div></section>
+"""
+    return render_page("Site health — Debbie Tan", "Uptime, Core Web Vitals, Lighthouse, accessibility and error monitoring for this site.",
+                       "/site-health", body, "health", current="health") .replace('<script src="/pulse.js" defer></script>',
+                       '<script src="/pulse.js" defer></script>\n<script src="/site-health.js" defer></script>')
+
+
+# ------------------------------------------------------------------ test shop
+def money(n):
+    return f"${n:,.2f}"
+
+
+def shop_shell(title, desc, path, body, page_kind, image="/og/shop.png"):
+    data = (CONTENT / "shop.json").read_text()
+    out = [head(f"{title} — The (not set) Shop (test)", desc, path, "shop", image)]
+    out.append(f'<main id="main" class="pulse-wrap shop" data-shop-page="{page_kind}">')
+    out.append('<p class="shop-test-note" role="note">🧪 <b>Test shop.</b> Nothing here is real: no products, no payments, no deliveries. '
+               'It exists to test ecommerce tracking. Please don\'t enter a real card.</p>')
+    out.append(body)
+    out.append("</main>")
+    out.append(f'<script type="application/json" id="shop-data">{data}</script>')
+    out.append(FOOT.replace('<script src="/pulse.js" defer></script>', '<script src="/pulse.js" defer></script>\n<script src="/shop.js" defer></script>'))
+    return "\n".join(out)
+
+
+def product_card(p, idx):
+    price = "Pay what you want" if p.get("pay_what_you_want") else ("from " if p.get("variants") and any("price" in o for o in p["variants"]["options"]) else "") + money(p["price"])
+    return f"""<li class="product" data-item-id="{p['id']}" data-index="{idx}">
+  <a class="product-link" href="/shop/{p['id']}" data-select-item="{p['id']}">
+    <span class="product-art" aria-hidden="true">{p['emoji']}</span>
+    <span class="product-name">{e(p['name'])}</span>
+    <span class="product-blurb">{e(p['blurb'])}</span>
+    <span class="product-price">{e(price)}</span>
+  </a>
+</li>"""
+
+
+def render_shop(shop):
+    promo = shop["promo"]
+    cards = "".join(product_card(p, i + 1) for i, p in enumerate(shop["products"]))
+    body = f"""<header class="brand"><span class="badge">🛍️ {e(shop['name'])}</span><h1>Cute things, fake money</h1>
+<p>{e(shop['tagline'])}</p></header>
+<a class="promo" href="/shop/cart" data-promo-id="{promo['id']}" data-promo-name="{e(promo['name'])}" data-creative="{promo['creative']}">🎟️ {e(promo['text'])}</a>
+<div class="shop-bar"><a class="cart-link" href="/shop/cart">🛒 Cart <span data-cart-count>0</span></a><a href="/shop/orders">📦 Your test orders</a></div>
+<ul class="products" data-item-list-id="shop_all" data-item-list-name="All products">{cards}</ul>"""
+    return shop_shell("Shop", shop["tagline"], "/shop", body, "list")
+
+
+def render_product(shop, p):
+    det = "".join(f"<li>{e(d)}</li>" for d in p.get("details", []))
+    opts = ""
+    if p.get("variants"):
+        v = p["variants"]
+        radios = "".join(
+            f'<label class="variant{" oos" if o.get("out_of_stock") else ""}"><input type="radio" name="variant" value="{o["id"]}"'
+            f'{" disabled" if o.get("out_of_stock") else ""}{" checked" if i == 0 else ""} data-price="{o.get("price", p["price"])}">'
+            f'<span>{e(o["label"])}{" · " + money(o["price"]) if "price" in o else ""}</span></label>'
+            for i, o in enumerate(v["options"]))
+        opts += f'<fieldset class="variants"><legend>{e(v["label"])}</legend>{radios}</fieldset>'
+    if p.get("custom_text"):
+        c = p["custom_text"]
+        opts += f'<label class="custom-text">{e(c["label"])}<input name="custom_text" maxlength="{c["max"]}" placeholder="{e(c["placeholder"])}" autocomplete="off" required></label>'
+    if p.get("pay_what_you_want"):
+        opts += f'<label class="custom-text">Your amount (NZD)<input name="amount" type="number" min="1" max="500" step="0.5" value="{p["price"]}" inputmode="decimal"></label>'
+    price = money(p["price"])
+    body = f"""<a class="back" href="/shop">← All products</a>
+<article class="pdp" data-item-id="{p['id']}">
+  <div class="pdp-art" aria-hidden="true">{p['emoji']}</div>
+  <div class="pdp-info">
+    <span class="badge">{e(p['category'])}{" · digital" if p.get("digital") else ""}</span>
+    <h1>{e(p['name'])}</h1>
+    <p class="pdp-price" data-price-label>{"Pay what you want" if p.get("pay_what_you_want") else price}</p>
+    <p class="pdp-blurb">{e(p['blurb'])}</p>
+    <form class="pdp-form" novalidate>
+      {opts}
+      <div class="qty-row">
+        <label>Quantity <input name="qty" type="number" min="1" max="10" value="1" inputmode="numeric"></label>
+        <button type="submit" class="btn-primary">{"Buy now" if p.get("psych") else "Add to cart"}</button>
+        <button type="button" class="btn-ghost" data-wishlist aria-pressed="false">♡ Wishlist</button>
+      </div>
+      <p class="form-status" role="status"></p>
+    </form>
+    <ul class="pdp-details">{det}</ul>
+  </div>
+</article>
+<div class="shop-bar"><a class="cart-link" href="/shop/cart">🛒 Cart <span data-cart-count>0</span></a><a href="/shop/orders">📦 Your test orders</a></div>"""
+    return shop_shell(p["name"], p["blurb"], f"/shop/{p['id']}", body, "product")
+
+
+def render_cart():
+    body = """<header class="brand"><span class="badge">🛒 Cart</span><h1>Your (pretend) cart</h1></header>
+<div id="cart-root" aria-live="polite"><p class="health-empty">Loading…</p></div>"""
+    return shop_shell("Cart", "Your pretend cart", "/shop/cart", body, "cart")
+
+
+def render_checkout(shop):
+    cards = "".join(f'<li><button type="button" class="card-fill" data-card="{c["number"]}"><code>{c["number"]}</code> {e(c["label"])}</button></li>' for c in shop["test_cards"])
+    ship = "".join(f'<label class="variant"><input type="radio" name="shipping" value="{s["id"]}"{" checked" if i == 0 else ""}><span>{e(s["label"])} · <b data-ship-price="{s["id"]}">{money(s["price"])}</b></span></label>'
+                   for i, s in enumerate(shop["shipping"]))
+    body = f"""<header class="brand"><span class="badge">🔒 Pretend checkout</span><h1>Checkout</h1>
+<p>Use a test card below. Real cards are refused, and nothing you type leaves this page.</p></header>
+<div class="checkout" id="checkout-root">
+  <form class="checkout-form" novalidate autocomplete="off">
+    <fieldset class="step" data-step="contact"><legend><span>1</span> Contact</legend>
+      <label>Email for your pretend receipt<input name="email" type="email" placeholder="you@example.com" autocomplete="off" required></label>
+      <p class="hint">Use a made-up address if you like. It stays in your browser (only a scrambled hash is offered to tag tests, with marketing consent).</p>
+      <button type="button" class="btn-primary" data-next="contact">Continue</button>
+    </fieldset>
+    <fieldset class="step" data-step="shipping" hidden><legend><span>2</span> Delivery</legend>
+      <div class="ship-options">{ship}</div>
+      <p class="hint" data-digital-note hidden>Everything in your cart is digital, so there's nothing to ship. 🎉</p>
+      <button type="button" class="btn-primary" data-next="shipping">Continue to payment</button>
+    </fieldset>
+    <fieldset class="step" data-step="payment" hidden><legend><span>3</span> Payment</legend>
+      <div class="wallets">
+        <button type="button" class="wallet" data-wallet="apple_pay">Apple Pay <span class="test-tag">pretend</span></button>
+        <button type="button" class="wallet" data-wallet="google_pay">Google Pay <span class="test-tag">pretend</span></button>
+      </div>
+      <p class="or"><span>or pay by test card</span></p>
+      <label>Card number<input name="card" inputmode="numeric" autocomplete="off" placeholder="4242 4242 4242 4242" maxlength="23"></label>
+      <div class="two-col"><label>Expiry<input name="exp" autocomplete="off" placeholder="12 / 34" maxlength="7"></label>
+      <label>CVC<input name="cvc" autocomplete="off" inputmode="numeric" placeholder="123" maxlength="4"></label></div>
+      <details class="test-cards"><summary>Test cards to try</summary><ul>{cards}</ul></details>
+      <button type="submit" class="btn-primary pay-btn">Pay <span data-total></span></button>
+    </fieldset>
+    <p class="form-status" role="status" aria-live="assertive"></p>
+  </form>
+  <aside class="summary" aria-labelledby="sum-h"><h2 id="sum-h">Order summary</h2>
+    <ul class="summary-lines" id="summary-lines"></ul>
+    <form class="coupon" novalidate><label>Coupon code<input name="coupon" autocomplete="off" placeholder="CONSENT10, NOTSET or BADUTM"></label><button type="submit" class="btn-ghost">Apply</button><p class="form-status" role="status"></p></form>
+    <dl class="totals" id="totals"></dl>
+  </aside>
+</div>
+<div class="modal" id="verify-modal" hidden role="dialog" aria-modal="true" aria-labelledby="verify-h">
+  <div class="modal-card"><h2 id="verify-h">🏦 Pretend Bank: verify it's you</h2>
+  <p>This is a fake 3-D Secure check. A real bank would send you a code.</p>
+  <div class="modal-actions"><button type="button" class="btn-primary" data-verify="pass">Approve</button><button type="button" class="btn-ghost" data-verify="fail">Fail verification</button></div></div>
+</div>
+<div class="modal" id="wallet-modal" hidden role="dialog" aria-modal="true" aria-labelledby="wallet-h">
+  <div class="modal-card"><h2 id="wallet-h">📱 Pretend wallet</h2><p>Approve this pretend payment?</p>
+  <div class="modal-actions"><button type="button" class="btn-primary" data-wallet-answer="approve">Approve</button><button type="button" class="btn-ghost" data-wallet-answer="cancel">Cancel</button></div></div>
+</div>"""
+    return shop_shell("Checkout", "Pretend checkout", "/shop/checkout", body, "checkout")
+
+
+def render_order():
+    body = """<header class="brand"><span class="badge">🎉 Order confirmed</span><h1>Thanks for your pretend order!</h1>
+<p>Nothing will arrive, and no money moved. But the tracking did.</p></header>
+<div id="order-root" aria-live="polite"></div>
+<div class="shop-bar"><a href="/shop">Keep shopping</a><a href="/shop/orders">📦 Your test orders</a></div>"""
+    return shop_shell("Order confirmed", "Pretend order confirmation", "/shop/order", body, "order")
+
+
+def render_orders():
+    body = """<header class="brand"><span class="badge">📦 Your test orders</span><h1>Order history</h1>
+<p>Stored only in this browser. Request a refund to test the refund event.</p></header>
+<div id="orders-root" aria-live="polite"></div>"""
+    return shop_shell("Your test orders", "Pretend order history", "/shop/orders", body, "orders")
+
+
+def render_roadmap(data, cooking):
+    """Roadmap: (1) what I do, (2) tasks on an impact/effort matrix, (3) kanban of the products.
+    Every task and card names a What's Cooking product; links, status and 'automated or not' come from there."""
+    statuses = cooking["statuses"]
+    products = [p for g in cooking["groups"] for p in g["projects"]]
+
+    def find(ref):
+        hits = [p for p in products if ref.lower() in p["name"].lower()]
+        if len(hits) != 1:
+            raise SystemExit(f"roadmap.json: product reference {ref!r} matched {len(hits)} products")
+        p = hits[0]
+        return p, f"/whats-cooking#{slugify(p['name'])}"
+
+    def bubble(p, status=None):
+        key = status or p["status"]
+        st = statuses[key]
+        return f'<span class="status-bubble st-{key}">{st["emoji"]} {e(st["label"])}</span>'
+
+    def state(p):
+        # how the task is handled today, derived from the product that covers it
+        return ("auto", "🤖 Automated") if p["status"] == "done" else (("build", "🛠️ Automating") if p["status"] in ("drafted", "testing", "progress", "idle") else ("rnd", "🔬 Exploring"))
+
+    out = [head("Roadmap — Debbie Tan", data["intro"], "/roadmap", "roadmap", "/og/whats-cooking.png")]
+    out.append('<main id="main" class="pulse-wrap roadmap">')
+    out.append(f'<header class="brand"><span class="badge">🧭 built in my own time</span><h1>{e(data["title"])}</h1><p>{e(data["intro"])}</p></header>')
+    out.append('<div class="dish-tools"><button type="button" data-rm-expand="open">Open all</button><button type="button" data-rm-expand="close">Close all</button></div>')
+
+    # (1) recap
+    stages = []
+    for s in data["recap"]:
+        prods = "".join(f'<li><a href="{find(r)[1]}">{e(find(r)[0]["name"])}</a> {bubble(find(r)[0])}</li>' for r in s["products"])
+        stages.append(f"""<li class="rm-stage">
+  <h3><span aria-hidden="true">{e(s['emoji'])}</span> {e(s['stage'])}</h3>
+  <p>{e(s['what'])}</p>
+  <p class="rm-time"><b>⏳ Where the time goes:</b> {e(s['time'])}</p>
+  <ul class="rm-prods" aria-label="What I've built for it">{prods}</ul>
+</li>""")
+    out.append(f"""<details class="rm-sec" id="what-i-do" data-rm="recap" open>
+<summary><span class="rm-no">1</span><span><b>What I do, end to end</b><small>The work in the order it happens, what eats the time, and what I've built for it</small></span></summary>
+<ol class="rm-stages">{''.join(stages)}</ol>
+</details>""")
+
+    # (2) impact / effort matrix
+    q = data["quadrants"]
+    dots, keys = [], {"tl": [], "tr": [], "bl": [], "br": []}
+    for n, t in enumerate(data["tasks"], 1):
+        p, href = find(t["product"])
+        quad = ("t" if t["impact"] == "high" else "b") + ("r" if t["effort"] == "high" else "l")
+        cls, lab = state(p)
+        tip = f'{t["task"]} · {t["impact"]} impact, {t["effort"]} effort · {lab[2:].strip()} by {p["name"]}'
+        dots.append(f'<a class="rm-dot q-{quad} s-{cls}" href="{href}" style="left:{t["x"]}%;bottom:{t["y"]}%" '
+                    f'data-n="{n}" data-task="{e(t["task"])}" aria-label="{e(tip)}"><span>{n}</span>'
+                    f'<span class="rm-tip" aria-hidden="true"><b>{e(t["task"])}</b>{e(t["effort"].capitalize())} effort · {lab}<i>{e(p["name"])} →</i></span></a>')
+        keys.setdefault(quad if t["effort"] != "medium" else "tm", []).append(
+            f'<li><a href="{href}" data-n="{n}"><span class="rm-k s-{cls}">{n}</span><span class="rm-kt">{e(t["task"])}</span>'
+            f'<span class="rm-ks s-{cls}">{lab}</span><span class="rm-kp">→ {e(p["name"])}</span></a></li>')
+    groups = [("tl", q["tl"]["name"], q["tl"]["hint"]), ("tm", "Steady earners", "High impact, medium effort"),
+              ("tr", q["tr"]["name"], q["tr"]["hint"]), ("bl", q["bl"]["name"], q["bl"]["hint"]), ("br", q["br"]["name"], q["br"]["hint"])]
+    key_html = "".join(f'<div class="rm-kg q-{k}"><h4>{e(name)} <small>{e(hint)}</small></h4><ul>{"".join(keys.get(k, []))}</ul></div>'
+                       for k, name, hint in groups if keys.get(k))
+    out.append(f"""<details class="rm-sec" id="impact-effort" data-rm="matrix" open>
+<summary><span class="rm-no">2</span><span><b>Impact / effort matrix</b><small>Every task I do, plotted. The quick wins and time sinks are how I picked what to automate first</small></span></summary>
+<div class="rm-matrix-wrap">
+  <p class="rm-howto">Hover or tap a number to see the task, then click through to the product that handles it.</p>
+  <div class="rm-legend"><span class="rm-k s-auto">#</span> Automated <span class="rm-k s-build">#</span> Automating <span class="rm-k s-rnd">#</span> Exploring</div>
+  <div class="rm-plot-wrap">
+    <span class="rm-axis-y" aria-hidden="true">Impact →</span>
+    <div class="rm-plot" role="group" aria-label="Impact and effort matrix of {len(data['tasks'])} tasks">
+      <span class="rm-q rm-q-tl" aria-hidden="true">{e(q['tl']['name'])}</span><span class="rm-q rm-q-tm" aria-hidden="true">Steady earners</span><span class="rm-q rm-q-tr" aria-hidden="true">{e(q['tr']['name'])}</span>
+      <span class="rm-q rm-q-bl" aria-hidden="true">{e(q['bl']['name'])}</span><span class="rm-q rm-q-br" aria-hidden="true">{e(q['br']['name'])}</span>
+      {''.join(dots)}
+    </div>
+    <div class="rm-axis-x" aria-hidden="true"><span>Low effort</span><span>Medium</span><span>High effort →</span></div>
+  </div>
+  <div class="rm-key">{key_html}</div>
+</div>
+</details>""")
+
+    # (3) kanban
+    cols = []
+    for c in data["kanban"]:
+        cards = []
+        for card in c["cards"]:
+            p, href = find(card["product"])
+            note = f'<span class="kb-note">{e(card["note"])}</span>' if card.get("note") else ""
+            cards.append(f'<li><a class="kb-card" href="{href}"><span class="kb-emoji" aria-hidden="true">{e(p.get("emoji", "🍳"))}</span>'
+                         f'<span class="kb-name">{e(card.get("label") or p["name"])}</span>{bubble(p, card.get("status"))}{note}<span class="kb-go" aria-hidden="true">→</span></a></li>')
+        cols.append(f'<section class="kb-col kb-{c["key"]}" aria-labelledby="kb-{c["key"]}"><h3 id="kb-{c["key"]}">{e(c["name"])} <span class="kb-count">{len(c["cards"])}</span></h3><ul>{"".join(cards)}</ul></section>')
+    out.append(f"""<details class="rm-sec" id="kanban" data-rm="kanban" open>
+<summary><span class="rm-no">3</span><span><b>Kanban</b><small>Where each product is up to. Tap a card to open it</small></span></summary>
+<div class="kb-board">{''.join(cols)}</div>
+</details>""")
+    out.append("</main>")
+    out.append(FOOT)
+    return "\n".join(out)
+
+
+def render_page(title, desc, path, body_html, extra_class="", current=""):
+    return "\n".join([head(title, desc, path, current), f'<main id="main" class="pulse-wrap {extra_class}">', body_html, "</main>", FOOT])
 
 
 def render_404():
@@ -397,7 +695,7 @@ def render_404():
 
 
 def render_sitemap(issues):
-    urls = ["/", "/whats-cooking", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
+    urls = ["/", "/whats-cooking", "/roadmap", "/site-health", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
     rows = "".join(f"<url><loc>{SITE_URL}{u}</loc></url>" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
 
@@ -430,13 +728,27 @@ def main():
     (pulse_dir / "feed.xml").write_text(render_feed(issues))
     cooking = CONTENT / "whats-cooking.json"
     if cooking.exists():
-        (SITE / "whats-cooking.html").write_text(render_cooking(json.loads(cooking.read_text())))
+        cooking_data = json.loads(cooking.read_text())
+        (SITE / "whats-cooking.html").write_text(render_cooking(cooking_data))
+        (SITE / "roadmap.html").write_text(render_roadmap(json.loads((CONTENT / "roadmap.json").read_text()), cooking_data))
     privacy = CONTENT / "privacy.html"
     if privacy.exists():
         (SITE / "privacy.html").write_text(render_page(
             "Privacy & cookies — Debbie Tan", "What this site collects, why, and how to change your cookie choices.",
             "/privacy", privacy.read_text(), "privacy"))
     (SITE / "404.html").write_text(render_404())
+    (SITE / "site-health.html").write_text(render_health())
+    shop = json.loads((CONTENT / "shop.json").read_text())
+    (SITE / "shop").mkdir(exist_ok=True)
+    for old in (SITE / "shop").glob("*.html"):
+        old.unlink()
+    (SITE / "shop.html").write_text(render_shop(shop))
+    for p in shop["products"]:
+        (SITE / "shop" / f"{p['id']}.html").write_text(render_product(shop, p))
+    (SITE / "shop" / "cart.html").write_text(render_cart())
+    (SITE / "shop" / "checkout.html").write_text(render_checkout(shop))
+    (SITE / "shop" / "order.html").write_text(render_order())
+    (SITE / "shop" / "orders.html").write_text(render_orders())
     (SITE / "sitemap.xml").write_text(render_sitemap(issues))
     (SITE / "robots.txt").write_text(f"User-agent: *\nDisallow: /admin.html\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
     print(f"Built {len(issues)} editions, homepage, feed, What's Cooking, privacy, 404, sitemap")

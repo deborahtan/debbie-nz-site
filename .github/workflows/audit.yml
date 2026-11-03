@@ -1,0 +1,35 @@
+name: Daily site audit
+
+# Lighthouse + accessibility (axe-core, keyboard, headings/landmarks) every morning NZ time.
+# Results appear on /site-health. Needs the ADMIN_TOKEN secret (same value as the Worker's).
+on:
+  schedule:
+    - cron: "0 18 * * *"   # 7am NZDT
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install audit tools
+        run: |
+          npm i --no-save --no-package-lock playwright@1 axe-core@4
+          npx playwright install --with-deps chromium
+      - name: Run audit
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: node scripts/audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-report
+          path: audit-report.json

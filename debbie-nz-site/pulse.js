@@ -89,6 +89,49 @@
     });
   }
 
+  // ---------- What's Cooking: open the product a link points at (e.g. from the Roadmap) ----------
+  function openFromHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var li = id && document.getElementById(id);
+    var d = li && li.querySelector('details[data-project]');
+    if (!d) return;
+    li.hidden = false;
+    d.open = true;
+    li.classList.add('is-linked');
+    setTimeout(function () { li.classList.remove('is-linked'); }, 2400);
+    li.scrollIntoView({ block: 'start' });
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
+  // ---------- Roadmap ----------
+  var rm = document.querySelector('.roadmap');
+  if (rm) {
+    rm.querySelectorAll('[data-rm-expand]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('data-rm-expand') === 'open';
+        rm.querySelectorAll('details.rm-sec').forEach(function (d) { d.open = open; });
+      });
+    });
+    rm.querySelectorAll('details.rm-sec').forEach(function (d) {
+      d.addEventListener('toggle', function () { dl.push({ event: 'roadmap_section_toggle', section_name: d.getAttribute('data-rm'), section_open: d.open }); });
+    });
+    // hovering a number lights up its row in the key, and the other way round
+    function hot(n, on) { rm.querySelectorAll('[data-n="' + n + '"]').forEach(function (x) { x.classList.toggle('is-hot', on); }); }
+    rm.querySelectorAll('[data-n]').forEach(function (x) {
+      var n = x.getAttribute('data-n');
+      x.addEventListener('mouseenter', function () { hot(n, true); });
+      x.addEventListener('mouseleave', function () { hot(n, false); });
+      x.addEventListener('focus', function () { hot(n, true); });
+      x.addEventListener('blur', function () { hot(n, false); });
+    });
+    rm.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="/whats-cooking#"]');
+      if (!a) return;
+      var where = a.classList.contains('rm-dot') ? 'matrix' : a.classList.contains('kb-card') ? 'kanban' : a.closest('.rm-key') ? 'matrix_key' : 'recap';
+      dl.push({ event: 'roadmap_item_click', link_location: where, item_id: a.getAttribute('href').split('#')[1] });
+    });
+  }
   // ---------- edition (homepage or /pulse/YYYY-MM) ----------
   var main = document.querySelector('[data-issue]');
   if (!main) return;
@@ -170,6 +213,34 @@
     });
   });
 
+  // ---------- Cloudflare Turnstile (invisible bot check, loaded only once someone starts a comment) ----------
+  var tsHost = form.querySelector('.turnstile'), tsToken = '', tsWidget = null, tsWaiters = [];
+  function tsResolve(t) { tsToken = t || ''; tsWaiters.splice(0).forEach(function (w) { w(tsToken); }); }
+  function tsLoad() {
+    if (tsLoad.started || !tsHost) return;
+    tsLoad.started = true;
+    window.dnTurnstileReady = function () {
+      tsWidget = window.turnstile.render(tsHost, {
+        sitekey: tsHost.getAttribute('data-sitekey'), appearance: 'interaction-only', action: 'comment',
+        callback: tsResolve, 'expired-callback': function () { tsToken = ''; }, 'error-callback': function () { tsResolve(''); }
+      });
+    };
+    var sc = document.createElement('script');
+    sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=dnTurnstileReady';
+    sc.async = true;
+    sc.onerror = function () { tsResolve(''); };
+    document.head.appendChild(sc);
+  }
+  function tsGetToken() {
+    if (tsToken) return Promise.resolve(tsToken);
+    tsLoad();
+    return new Promise(function (res) {
+      tsWaiters.push(res);
+      setTimeout(function () { res(tsToken); }, 10000);
+    });
+  }
+  form.addEventListener('focusin', tsLoad);
+
   emailEl.addEventListener('blur', function () {
     var p = emailEl.value.trim() ? emailProblem(emailEl.value) : '';
     emailEl.setAttribute('aria-invalid', p ? 'true' : 'false');
@@ -186,10 +257,13 @@
     var btn = form.querySelector('button[type=submit]');
     btn.disabled = true;
     status.className = 'form-status';
-    status.textContent = 'Posting…';
-    api('issues/' + slug + '/comments', {
-      method: 'POST',
-      body: JSON.stringify({ email: email, body: body, website: form.elements.website.value, visitor: VID })
+    status.textContent = 'Checking you’re human…';
+    tsGetToken().then(function (token) {
+      status.textContent = 'Posting…';
+      return api('issues/' + slug + '/comments', {
+        method: 'POST',
+        body: JSON.stringify({ email: email, body: body, website: form.elements.website.value, visitor: VID, turnstile: token })
+      });
     }).then(function (res) {
       form.elements.body.value = '';
       emailEl.value = ''; // not kept in the page either
@@ -200,6 +274,11 @@
     }).catch(function (err) {
       status.className = 'form-status err';
       status.textContent = err.status === 429 ? 'You’re commenting fast. Try again in a few minutes.' : (err.message || 'Something went wrong.');
-    }).then(function () { btn.disabled = false; });
+    }).then(function () {
+      btn.disabled = false;
+      tsToken = '';
+      if (tsWidget !== null && window.turnstile) window.turnstile.reset(tsWidget); // tokens are single-use
+    });
   });
+
 })();

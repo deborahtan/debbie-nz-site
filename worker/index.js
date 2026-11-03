@@ -72,6 +72,22 @@ async function ensureSchema(env) {
       created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')))`),
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_slug ON comments (slug, status, created_at)'),
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_ip ON comments (ip_hash, created_at)'),
+    // ---- site health (all aggregate or anonymous; shaped to port into BigQuery later) ----
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS csp_reports (day TEXT NOT NULL, directive TEXT NOT NULL, blocked TEXT NOT NULL,
+      page TEXT NOT NULL, count INTEGER NOT NULL DEFAULT 1, last_seen TEXT NOT NULL, PRIMARY KEY (day, directive, blocked, page))`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS client_errors (day TEXT NOT NULL, page TEXT NOT NULL, message TEXT NOT NULL,
+      file TEXT NOT NULL, line INTEGER NOT NULL, count INTEGER NOT NULL DEFAULT 1, last_seen TEXT NOT NULL,
+      PRIMARY KEY (day, page, message, file, line))`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS vitals (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL
+      DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')), page TEXT NOT NULL, metric TEXT NOT NULL, value REAL NOT NULL,
+      rating TEXT, device TEXT)`),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS vitals_metric ON vitals (metric, created_at)'),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS uptime_checks (id INTEGER PRIMARY KEY AUTOINCREMENT, checked_at TEXT NOT NULL
+      DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')), target TEXT NOT NULL, ok INTEGER NOT NULL, status INTEGER, ms INTEGER, detail TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS audits (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL
+      DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')), kind TEXT NOT NULL, page TEXT NOT NULL, data TEXT NOT NULL)`),
+    // old-school hit counter: one number per day, nothing about the visitor
+    env.DB.prepare('CREATE TABLE IF NOT EXISTS hits (day TEXT PRIMARY KEY, count INTEGER NOT NULL DEFAULT 0)'),
   ]);
   // Emails are never stored. Remove the column (and anything shown as a masked email) left by an earlier version.
   const cols = await env.DB.prepare('PRAGMA table_info(comments)').all();
@@ -98,6 +114,12 @@ async function purgeOldIpHashes(env) {
   await env.DB.batch([
     env.DB.prepare(`UPDATE comments SET ip_hash = NULL WHERE ip_hash IS NOT NULL AND created_at < ${cutoff}`),
     env.DB.prepare(`UPDATE likes SET ip_hash = NULL WHERE ip_hash IS NOT NULL AND created_at < ${cutoff}`),
+    // keep monitoring data for 13 months (enough for year-on-year), then drop it
+    env.DB.prepare("DELETE FROM vitals WHERE created_at < strftime('%Y-%m-%dT%H:%M:%SZ','now','-400 days')"),
+    env.DB.prepare("DELETE FROM uptime_checks WHERE checked_at < strftime('%Y-%m-%dT%H:%M:%SZ','now','-400 days')"),
+    env.DB.prepare("DELETE FROM csp_reports WHERE day < date('now','-400 days')"),
+    env.DB.prepare("DELETE FROM client_errors WHERE day < date('now','-400 days')"),
+    env.DB.prepare("DELETE FROM audits WHERE created_at < strftime('%Y-%m-%dT%H:%M:%SZ','now','-400 days')"),
   ]);
 }
 
@@ -109,6 +131,75 @@ async function api(request, env, url) {
 
   if (method === 'OPTIONS') return new Response(null, { status: 204 });
   if (method === 'POST' && !sameOrigin(request, url)) return json({ error: 'Forbidden' }, 403);
+
+  // GET /api/health — used by the uptime monitor. 200 when the site and database answer, 503 otherwise.
+  if (parts[0] === 'health' && method === 'GET') {
+    const t0 = Date.now();
+    try {
+      await env.DB.prepare('SELECT 1').first();
+      return json({ ok: true, db: 'ok', ms: Date.now() - t0, at: new Date().toISOString() });
+    } catch (e) {
+      return json({ ok: false, db: 'down', at: new Date().toISOString() }, 503);
+    }
+  }
+
+  // POST /api/csp-report — browsers report Content Security Policy violations here.
+  // Only the blocked host, the directive and the page path are kept (no query strings, nothing about the visitor).
+  if (parts[0] === 'csp-report' && method === 'POST') {
+    const raw = await readJson(request);
+    const reports = Array.isArray(raw) ? raw.map((r) => r && r.body).filter(Boolean) : [raw['csp-report'] || raw];
+    for (const r of reports.slice(0, 10)) {
+      const directive = clean(r.effectiveDirective || r['effective-directive'] || r['violated-directive'] || '', 60).split(' ')[0];
+      const blocked = hostOnly(r.blockedURL || r['blocked-uri'] || '');
+      const page = pathOnly(r.documentURL || r['document-uri'] || '');
+      if (!directive) continue;
+      await upsertCount(env, 'csp_reports', ['directive', 'blocked', 'page'], [directive, blocked, page]);
+    }
+    return new Response(null, { status: 204 });
+  }
+
+  // POST /api/client-error — JavaScript errors from visitors' browsers (message, file, line only)
+  if (parts[0] === 'client-error' && method === 'POST') {
+    const b = await readJson(request);
+    const message = clean(b.message, 300);
+    if (message) await upsertCount(env, 'client_errors', ['page', 'message', 'file', 'line'],
+      [pathOnly(b.page || ''), message, clean(b.file, 200), Math.max(0, Math.min(1e6, Number(b.line) || 0))]);
+    return new Response(null, { status: 204 });
+  }
+
+  // POST /api/vitals — Core Web Vitals from visitors who allowed analytics. Anonymous: page, metric, value, device type.
+  if (parts[0] === 'vitals' && method === 'POST') {
+    const b = await readJson(request);
+    const metric = String(b.metric || '');
+    const value = Number(b.value);
+    if (VITALS[metric] && Number.isFinite(value) && value >= 0 && value < VITALS[metric]) {
+      await env.DB.prepare('INSERT INTO vitals (page, metric, value, rating, device) VALUES (?, ?, ?, ?, ?)')
+        .bind(pathOnly(b.page || ''), metric, value, ['good', 'needs-improvement', 'poor'].includes(b.rating) ? b.rating : null,
+          b.device === 'mobile' ? 'mobile' : 'desktop').run();
+    }
+    return new Response(null, { status: 204 });
+  }
+
+  // GET /api/hits — total visits so far. POST /api/hits — count this visit (the browser sends it once per session).
+  if (parts[0] === 'hits' && (method === 'GET' || method === 'POST')) {
+    if (method === 'POST') {
+      await env.DB.prepare(`INSERT INTO hits (day, count) VALUES (?, 1) ON CONFLICT(day) DO UPDATE SET count = count + 1`)
+        .bind(new Date().toISOString().slice(0, 10)).run();
+    }
+    const row = await env.DB.prepare('SELECT COALESCE(SUM(count), 0) AS total FROM hits').first();
+    return json({ total: row.total });
+  }
+
+  // GET /api/me?v=visitor — the friendly nickname for this browser (same one used on comments)
+  if (parts[0] === 'me' && method === 'GET') {
+    const v = cleanVisitor(url.searchParams.get('v'));
+    return json({ name: v ? await pseudonym(v, env) : null });
+  }
+
+  // GET /api/site-health — everything the /site-health dashboard shows (aggregates only)
+  if (parts[0] === 'site-health' && method === 'GET') {
+    return json(await siteHealth(env), 200, 60);
+  }
 
   // GET /api/counts?slugs=issue-07,issue-08
   if (parts[0] === 'counts' && method === 'GET') {
@@ -162,6 +253,7 @@ async function api(request, env, url) {
     if (parts[2] === 'comments' && method === 'POST') {
       const b = await readJson(request);
       if (b.website) return json({ status: 'published' }, 201); // bot filled the honeypot: pretend success, store nothing
+      if (!(await turnstileOk(b.turnstile, env))) return json({ error: "We couldn't confirm you're human. Please try again." }, 403);
       const text = clean(b.body, 2000, true);
       if (!text) return json({ error: 'Add a comment first.' }, 400);
       const em = checkEmail(b.email);
@@ -178,9 +270,26 @@ async function api(request, env, url) {
     }
   }
 
-  // ---------- admin (moderation) ----------
+  // ---------- admin (moderation + monitoring results from GitHub Actions) ----------
   if (parts[0] === 'admin') {
     if (!(await authorised(request, env))) return json({ error: 'Unauthorised' }, 401);
+
+    // POST /api/admin/uptime  {target, ok, status, ms, detail}
+    if (parts[1] === 'uptime' && method === 'POST') {
+      const b = await readJson(request);
+      await env.DB.prepare('INSERT INTO uptime_checks (target, ok, status, ms, detail) VALUES (?, ?, ?, ?, ?)')
+        .bind(clean(b.target, 100), b.ok ? 1 : 0, Number(b.status) || 0, Number(b.ms) || 0, clean(b.detail, 300)).run();
+      return json({ ok: true });
+    }
+
+    // POST /api/admin/audit  {kind: lighthouse|accessibility, page, data}
+    if (parts[1] === 'audit' && method === 'POST') {
+      const b = await readJson(request, 300000);
+      if (!['lighthouse', 'accessibility'].includes(b.kind)) return json({ error: 'Unknown kind' }, 400);
+      await env.DB.prepare('INSERT INTO audits (kind, page, data) VALUES (?, ?, ?)')
+        .bind(b.kind, pathOnly(b.page || '/'), JSON.stringify(b.data || {}).slice(0, 250000)).run();
+      return json({ ok: true });
+    }
 
     // GET /api/admin/comments?status=pending|published|all
     if (parts[1] === 'comments' && parts.length === 2 && method === 'GET') {
@@ -206,6 +315,83 @@ async function api(request, env, url) {
   return json({ error: 'Not found' }, 404);
 }
 
+// ---------- site health helpers ----------
+// Upper bounds used to drop junk values (ms, except CLS which is unitless)
+const VITALS = { LCP: 60000, INP: 60000, CLS: 50, FCP: 60000, TTFB: 60000 };
+const GOOD = { LCP: 2500, INP: 200, CLS: 0.1, FCP: 1800, TTFB: 800 };
+const POOR = { LCP: 4000, INP: 500, CLS: 0.25, FCP: 3000, TTFB: 1800 };
+
+function hostOnly(u) {
+  if (!u) return '(none)';
+  if (/^(inline|eval|data|blob|self)$/i.test(u)) return u.toLowerCase();
+  try { return new URL(u).host || u.slice(0, 40); } catch { return String(u).slice(0, 40); }
+}
+function pathOnly(u) {
+  try { return new URL(u, 'https://x.invalid').pathname.slice(0, 120); } catch { return '/'; }
+}
+async function upsertCount(env, table, cols, vals) {
+  const day = new Date().toISOString().slice(0, 10);
+  const all = ['day', ...cols];
+  await env.DB.prepare(
+    `INSERT INTO ${table} (${all.join(', ')}, count, last_seen) VALUES (${all.map(() => '?').join(', ')}, 1, strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+     ON CONFLICT (${all.join(', ')}) DO UPDATE SET count = MIN(count + 1, 1000000), last_seen = excluded.last_seen`
+  ).bind(day, ...vals).run();
+}
+
+async function siteHealth(env) {
+  const since = (d) => `strftime('%Y-%m-%dT%H:%M:%SZ','now','-${d} days')`;
+  const [uptime, lastCheck, vitals, csp, errors, lighthouse, a11y] = await Promise.all([
+    env.DB.prepare(`SELECT target, COUNT(*) n, SUM(ok) ok, AVG(ms) ms FROM uptime_checks WHERE checked_at > ${since(7)} GROUP BY target`).all(),
+    env.DB.prepare('SELECT target, ok, status, ms, detail, checked_at FROM uptime_checks ORDER BY id DESC LIMIT 6').all(),
+    env.DB.prepare(`SELECT metric, device, value FROM vitals WHERE created_at > ${since(28)} ORDER BY metric, device, value LIMIT 20000`).all(),
+    env.DB.prepare(`SELECT directive, blocked, SUM(count) n, MAX(last_seen) last_seen FROM csp_reports WHERE day >= date('now','-7 days') GROUP BY directive, blocked ORDER BY n DESC LIMIT 15`).all(),
+    env.DB.prepare(`SELECT page, message, file, line, SUM(count) n, MAX(last_seen) last_seen FROM client_errors WHERE day >= date('now','-7 days') GROUP BY page, message, file, line ORDER BY n DESC LIMIT 15`).all(),
+    env.DB.prepare("SELECT page, data, created_at FROM audits WHERE kind='lighthouse' ORDER BY id DESC LIMIT 20").all(),
+    env.DB.prepare("SELECT page, data, created_at FROM audits WHERE kind='accessibility' ORDER BY id DESC LIMIT 20").all(),
+  ]);
+  // p75 per metric and device, as Google reports Core Web Vitals
+  const groups = {};
+  for (const r of vitals.results) (groups[r.metric + '|' + r.device] ||= []).push(r.value);
+  const field = Object.entries(groups).map(([k, vals]) => {
+    const [metric, device] = k.split('|');
+    const p75 = vals[Math.min(vals.length - 1, Math.floor(vals.length * 0.75))];
+    const rating = p75 <= GOOD[metric] ? 'good' : p75 <= POOR[metric] ? 'needs-improvement' : 'poor';
+    return { metric, device, p75, samples: vals.length, rating };
+  });
+  const latestPerPage = (rows) => {
+    const seen = new Set(); const out = [];
+    for (const r of rows) { if (seen.has(r.page)) continue; seen.add(r.page); out.push({ page: r.page, at: r.created_at, ...JSON.parse(r.data) }); }
+    return out;
+  };
+  return {
+    generated_at: new Date().toISOString(),
+    uptime: uptime.results.map((r) => ({ target: r.target, checks: r.n, uptime_pct: r.n ? Math.round((r.ok / r.n) * 10000) / 100 : null, avg_ms: Math.round(r.ms || 0) })),
+    recent_checks: lastCheck.results,
+    field_vitals: field,
+    csp_violations: csp.results,
+    client_errors: errors.results,
+    lighthouse: latestPerPage(lighthouse.results),
+    accessibility: latestPerPage(a11y.results),
+  };
+}
+
+// Cloudflare Turnstile. Until real keys are added, Cloudflare's always-pass test secret is used.
+const TURNSTILE_TEST_SECRET = '1x0000000000000000000000000000000AA';
+async function turnstileOk(token, env) {
+  if (env.TURNSTILE_DISABLED === 'true') return true; // local development only (.dev.vars)
+  if (typeof token !== 'string' || !token || token.length > 2048) return false;
+  const form = new FormData();
+  form.append('secret', env.TURNSTILE_SECRET || TURNSTILE_TEST_SECRET);
+  form.append('response', token);
+  try {
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
+    const j = await r.json();
+    return !!j.success;
+  } catch {
+    return false;
+  }
+}
+
 // ---------- helpers ----------
 function json(data, status = 200, maxAge = 0) {
   return new Response(JSON.stringify(data), {
@@ -218,9 +404,9 @@ function json(data, status = 200, maxAge = 0) {
   });
 }
 
-async function readJson(request) {
+async function readJson(request, max = 10000) {
   const len = Number(request.headers.get('Content-Length') || 0);
-  if (len > 10000) return {};
+  if (len > max) return {};
   try { return (await request.json()) || {}; } catch { return {}; }
 }
 

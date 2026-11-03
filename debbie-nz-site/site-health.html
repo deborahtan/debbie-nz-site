@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site health — Debbie Tan</title>
+<meta name="description" content="Uptime, Core Web Vitals, Lighthouse, accessibility and error monitoring for this site.">
+<link rel="canonical" href="https://debbie-nz-site.deborahtanyl.workers.dev/site-health">
+<meta property="og:site_name" content="Debbie Tan — On the Pulse">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://debbie-nz-site.deborahtanyl.workers.dev/site-health">
+<meta property="og:title" content="Site health — Debbie Tan">
+<meta property="og:description" content="Uptime, Core Web Vitals, Lighthouse, accessibility and error monitoring for this site.">
+<meta property="og:image" content="https://debbie-nz-site.deborahtanyl.workers.dev/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Site health — Debbie Tan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<script src="/consent.js"></script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
+<!-- End Google Tag Manager -->
+<link rel="preload" href="/fonts/baloo-2-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/pulse.css">
+<link rel="alternate" type="application/rss+xml" title="On the Pulse" href="/pulse/feed.xml">
+</head>
+<body class="pulse">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXPF7HTS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<a class="skip" href="#main">Skip to content</a>
+<nav>
+  <a href="/" class="wordmark">Debbie Tan</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/">on the pulse</a>
+      <a href="/whats-cooking">what's cooking</a>
+      <a href="/roadmap">roadmap</a>
+      <a href="/site-health" aria-current="page">site health</a>
+      <a href="/about.html">about</a>
+      <a href="/shop">shop <span class="test-tag">test</span></a>
+      <a href="/form-test.html">sign up <span class="test-tag">test</span></a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="site-search" placeholder="Search" autocomplete="off" aria-label="Search">
+    </div>
+  </div>
+</nav>
+<div class="ribbon" role="note">
+  <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
+  <b>🧪 Also a test bench:</b> anything marked <span class="test-tag">test</span> (the shop and sign-up) is pretend, built for testing tracking.
+  <a href="/about#this-site">How this site works</a></p>
+</div>
+
+<main id="main" class="pulse-wrap health">
+<header class="brand"><span class="badge">🩺 checked daily</span><h1>Site health</h1>
+<p>How this site is doing, measured on itself: uptime, real-visitor speed (Core Web Vitals), Lighthouse,
+accessibility, security-policy blocks and errors. Updated automatically.</p></header>
+<p class="health-updated" id="health-updated" role="status">Loading the latest numbers…</p>
+<div class="health-summary" id="health-summary"></div>
+
+<section class="sec health-sec" aria-labelledby="h-up"><h2 id="h-up">Uptime <span class="count">last 7 days · checked every 15 min</span></h2>
+<div class="health-grid" id="health-uptime"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-cwv"><h2 id="h-cwv">Core Web Vitals <span class="count">real visitors · 75th percentile · last 28 days</span></h2>
+<p class="sec-desc">From visitors who allowed analytics. Green is Google's "good" threshold: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.</p>
+<div class="health-grid" id="health-cwv"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-lh"><h2 id="h-lh">Lighthouse <span class="count">lab test · mobile · daily</span></h2>
+<div class="table-wrap" tabindex="0"><table id="health-lh"><thead><tr><th scope="col">Page</th><th scope="col">Performance</th><th scope="col">Accessibility</th><th scope="col">Best practices</th><th scope="col">SEO</th><th scope="col">LCP</th><th scope="col">CLS</th><th scope="col">Tested</th></tr></thead><tbody></tbody></table></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-a11y"><h2 id="h-a11y">Accessibility <span class="count">axe-core · keyboard · structure · daily</span></h2>
+<div class="health-grid" id="health-a11y"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-csp"><h2 id="h-csp">Security policy blocks <span class="count">last 7 days</span></h2>
+<p class="sec-desc">Things the Content Security Policy stopped from loading. A marketing tag showing up here means it needs adding to the policy.</p>
+<div id="health-csp"></div></section>
+
+<section class="sec health-sec" aria-labelledby="h-err"><h2 id="h-err">JavaScript errors <span class="count">last 7 days</span></h2>
+<p class="sec-desc">Errors marked <span class="test-tag">chaos</span> were caused on purpose by the chaos gremlin button.</p>
+<div id="health-errors"></div></section>
+
+</main>
+
+<footer>
+  <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a> · <a href="/site-health">Site health</a></span>
+  <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
+</footer>
+<script src="/site.js" defer></script>
+<script src="/tools.js" defer></script>
+<script src="/pulse.js" defer></script>
+<script src="/site-health.js" defer></script>
+</body>
+</html>

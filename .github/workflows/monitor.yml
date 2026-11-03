@@ -1,0 +1,54 @@
+name: Uptime monitor
+
+# Checks the site every 15 minutes. If it's down (or JS errors spike), it opens a GitHub issue,
+# which GitHub emails to you. When everything is healthy again, it closes the issue.
+# Settings → Secrets and variables → Actions:  secret ADMIN_TOKEN (same as the Worker), variable SITE_URL (optional)
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: uptime-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check the site
+        id: monitor
+        continue-on-error: true
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: node scripts/monitor.mjs
+      - name: Open an alert issue (emails you)
+        if: steps.monitor.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create site-alert --color D93F0B --description "Raised by the uptime monitor" 2>/dev/null || true
+          open=$(gh issue list --label site-alert --state open --json number --jq '.[0].number')
+          if [ -z "$open" ]; then
+            gh issue create --title "🚨 Site problem detected" --label site-alert --body-file monitor-report.md --assignee "${{ github.repository_owner }}"
+          else
+            gh issue comment "$open" --body-file monitor-report.md
+          fi
+      - name: Close the alert when healthy again
+        if: steps.monitor.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --label site-alert --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "✅ Recovered: all checks passing at $(date -u +%Y-%m-%dT%H:%M:%SZ)."
+          done

@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin.html
 Disallow: /api/
 
-Sitemap: https://debbie.nz/sitemap.xml
+Sitemap: https://debbie-nz-site.deborahtanyl.workers.dev/sitemap.xml
