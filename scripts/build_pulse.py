@@ -685,7 +685,7 @@ def render_roadmap(data, cooking):
     key_html = "".join(f'<div class="rm-kg q-{k}"><h4>{e(name)} <small>{e(hint)}</small></h4><ul>{"".join(keys.get(k, []))}</ul></div>'
                        for k, name, hint in groups if keys.get(k))
     out.append(f"""<details class="rm-sec" id="impact-effort" data-rm="matrix" open>
-<summary><span class="rm-no">2</span><span><b>Impact / effort matrix</b><small>Every task I do, plotted. The quick wins and time sinks are how I picked what to automate first</small></span></summary>
+<summary><span class="rm-no">2</span><span><b>Impact / effort matrix</b><small>Every task I do, plotted. The quick wins are how I picked what to automate first</small></span></summary>
 <div class="rm-matrix-wrap">
   <p class="rm-howto">Hover or tap a number to see the task, then click through to the product that handles it.</p>
   <div class="rm-legend"><span class="rm-k s-auto">#</span> Automated <span class="rm-k s-build">#</span> Automating <span class="rm-k s-rnd">#</span> Exploring</div>
@@ -695,6 +695,7 @@ def render_roadmap(data, cooking):
       <span class="rm-q rm-q-tl" aria-hidden="true">{e(q['tl']['name'])}</span><span class="rm-q rm-q-tm" aria-hidden="true">Steady earners</span><span class="rm-q rm-q-tr" aria-hidden="true">{e(q['tr']['name'])}</span>
       <span class="rm-q rm-q-bl" aria-hidden="true">{e(q['bl']['name'])}</span><span class="rm-q rm-q-br" aria-hidden="true">{e(q['br']['name'])}</span>
       {''.join(dots)}
+      {''.join(f'<span class="rm-empty rm-q-{k}" aria-hidden="true">nothing here 🎉</span>' for k in ("tl", "tr", "bl", "br") if not keys.get(k))}
     </div>
     <div class="rm-axis-x" aria-hidden="true"><span>Low effort</span><span>Medium</span><span>High effort →</span></div>
   </div>

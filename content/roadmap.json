@@ -45,12 +45,10 @@
     {
       "emoji": "🗄️",
       "stage": "Data & dashboards",
-      "what": "Building BigQuery pipelines, designing data warehouses, dashboards and reporting templates, and answering ad hoc data requests.",
-      "time": "Ad hoc pulls and reformatting data for different tools.",
+      "what": "Building BigQuery pipelines, designing data warehouses, dashboards and reporting templates.",
+      "time": "Standing a warehouse up properly the first time.",
       "products": [
-        "Personal dashboard",
-        "BigQuery agents",
-        "Data Agent Kit"
+        "Personal dashboard"
       ]
     },
     {
@@ -66,10 +64,12 @@
     {
       "emoji": "📰",
       "stage": "Stay ahead",
-      "what": "Reading release notes and the industry, and writing it up.",
-      "time": "A day of reading for every hour of writing.",
+      "what": "Reading release notes and the industry and writing it up, and trying new tooling on real data before it matters — agent front ends over BigQuery, and whatever the kit of the month turns out to be.",
+      "time": "A day of reading for every hour of writing, and the ad hoc pulls that prompt the next experiment.",
       "products": [
-        "news summary"
+        "news summary",
+        "BigQuery agents",
+        "Data Agent Kit"
       ]
     }
   ],
@@ -229,6 +229,22 @@
       "product": "Agent evaluation"
     },
     {
+      "task": "Pulling data by hand for ad hoc requests",
+      "impact": "high",
+      "effort": "high",
+      "x": 70,
+      "y": 58,
+      "product": "BigQuery agents"
+    },
+    {
+      "task": "Reformatting data for different tools",
+      "impact": "high",
+      "effort": "high",
+      "x": 84,
+      "y": 55,
+      "product": "Data Agent Kit"
+    },
+    {
       "task": "Small tweaks to existing tag configs",
       "impact": "low",
       "effort": "low",
@@ -243,22 +259,6 @@
       "x": 26,
       "y": 21,
       "product": "GTM container builder"
-    },
-    {
-      "task": "Pulling data by hand for ad hoc requests",
-      "impact": "low",
-      "effort": "high",
-      "x": 78,
-      "y": 33,
-      "product": "BigQuery agents"
-    },
-    {
-      "task": "Reformatting data for different tools",
-      "impact": "low",
-      "effort": "high",
-      "x": 90,
-      "y": 20,
-      "product": "Data Agent Kit"
     }
   ],
   "kanban": [

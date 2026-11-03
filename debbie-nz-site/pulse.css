@@ -636,3 +636,6 @@ td.health-empty { border-radius: 0; border: 0; }
   .ph-emoji { display: none; }
   .ph-body { padding: 0 16px 16px; }
 }
+.rm-empty { position: absolute; font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--fg-faint); opacity: .75; pointer-events: none; transform: translate(-50%, 50%); }
+.rm-empty.rm-q-tl, .rm-empty.rm-q-tr { bottom: 75%; } .rm-empty.rm-q-bl, .rm-empty.rm-q-br { bottom: 25%; }
+.rm-empty.rm-q-tl, .rm-empty.rm-q-bl { left: 17%; } .rm-empty.rm-q-tr, .rm-empty.rm-q-br { left: 83%; }
