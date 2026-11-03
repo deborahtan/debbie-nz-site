@@ -329,36 +329,56 @@ def render_home(issues):
 
 
 def render_cooking(data):
+    statuses = data["statuses"]
+    projects = [p for g in data["groups"] for p in g["projects"]]
     out = [head("What's Cooking — Debbie Tan", data["intro"], "/whats-cooking", "cooking")]
     out.append('<main id="main" class="pulse-wrap cooking">')
     out.append(f'<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>{e(data["title"])}</h1><p>{e(data["intro"])}</p></header>')
+
+    # status legend doubles as a filter
+    counts = {}
+    for p in projects:
+        counts[p["status"]] = counts.get(p["status"], 0) + 1
+    chips = [f'<button type="button" class="status-chip all" data-filter="all" aria-pressed="true">All <b>{len(projects)}</b></button>']
+    for key, st in statuses.items():
+        if counts.get(key):
+            chips.append(f'<button type="button" class="status-chip st-{key}" data-filter="{key}" aria-pressed="false">'
+                         f'{st["emoji"]} {e(st["label"])} <b>{counts[key]}</b></button>')
+    out.append(f'<div class="status-filter" role="group" aria-label="Filter by status">{"".join(chips)}</div>')
     out.append('<div class="dish-tools"><button type="button" data-expand="open">Open all</button>'
                '<button type="button" data-expand="close">Close all</button></div>')
-    out.append('<ul class="dishes">')
-    for p in data["projects"]:
-        tags = "".join(f"<span>{e(t)}</span>" for t in p.get("tags", []))
-        does = "".join(f"<li>{e(x)}</li>" for x in p.get("does", []))
-        bens = "".join(f"<li>{e(x)}</li>" for x in p.get("benefits", []))
-        link = f'<a class="dish-link" href="{e(p["link"]["url"])}">{e(p["link"]["label"])} →</a>' if p.get("link") else ""
-        out.append(f"""<li class="dish" id="{slugify(p['name'])}">
+
+    for g in data["groups"]:
+        out.append(f'<section class="dish-group"><h2>{e(g["heading"])}</h2><p class="group-blurb">{e(g.get("blurb", ""))}</p>')
+        out.append('<ul class="dishes">')
+        for p in g["projects"]:
+            st = statuses[p["status"]]
+            tags = "".join(f"<span>{e(t)}</span>" for t in p.get("tags", []))
+            does = "".join(f"<li>{e(x)}</li>" for x in p.get("does", []))
+            bens = "".join(f"<li>{e(x)}</li>" for x in p.get("benefits", []))
+            nxt = f'<p class="dish-next"><b>Next:</b> {e(p["next"])}</p>' if p.get("next") else ""
+            link = f'<a class="dish-link" href="{e(p["link"]["url"])}">{e(p["link"]["label"])} →</a>' if p.get("link") else ""
+            out.append(f"""<li class="dish" id="{slugify(p['name'])}" data-status="{p['status']}">
   <details data-project="{slugify(p['name'])}">
     <summary>
       <span class="dish-emoji" aria-hidden="true">{e(p.get('emoji', '🍳'))}</span>
       <span class="dish-head">
-        <span class="dish-tags">{tags}</span>
+        <span class="status-bubble st-{p['status']}">{st['emoji']} {e(st['label'])}</span>
         <span class="dish-name">{e(p['name'])}</span>
         <span class="dish-sum">{e(p['summary'])}</span>
+        <span class="dish-tags">{tags}</span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
+      {nxt}
       <div class="dish-col"><h3>What it does</h3><ul>{does}</ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul>{bens}</ul></div>
       {link}
     </div>
   </details>
 </li>""")
-    out.append("</ul>")
+        out.append("</ul></section>")
     if data.get("outro"):
         out.append(f'<p class="note">{e(data["outro"])}</p>')
     out.append("</main>")

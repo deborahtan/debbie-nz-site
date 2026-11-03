@@ -271,3 +271,45 @@ details[open] .dish-toggle::after { transform: translate(-50%, -50%) rotate(0deg
   .like-btn.pop svg { animation: none; }
   .arch-row, .dish details, .like-btn, .share-btn, .comment-jump { transition: none; }
 }
+
+/* ---------- What's Cooking: status bubbles + filter ---------- */
+.status-bubble, .status-chip {
+  display: inline-flex; align-items: center; gap: 5px; width: fit-content;
+  font-family: var(--display); font-weight: 700; font-size: 13.5px; line-height: 1.6;
+  border-radius: 999px; padding: 1px 12px; border: 1.5px solid transparent;
+}
+.st-done     { background: color-mix(in srgb, var(--herb) 22%, var(--card)); color: var(--herb-ink); border-color: color-mix(in srgb, var(--herb) 55%, transparent); }
+.st-idle     { background: var(--card); color: var(--herb-ink); border-color: color-mix(in srgb, var(--herb) 60%, transparent); border-style: dashed; }
+.st-gemini   { background: color-mix(in srgb, #5B8DEF 16%, var(--card)); color: #2F5DB8; border-color: color-mix(in srgb, #5B8DEF 45%, transparent); }
+.st-drafted  { background: color-mix(in srgb, var(--marigold) 22%, var(--card)); color: var(--marigold-ink); border-color: color-mix(in srgb, var(--marigold) 55%, transparent); }
+.st-blocked  { background: var(--tint); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.st-rnd      { background: color-mix(in srgb, #9B7BD4 15%, var(--card)); color: #6A479E; border-color: color-mix(in srgb, #9B7BD4 45%, transparent); }
+.st-testing  { background: var(--card); color: var(--marigold-ink); border-color: color-mix(in srgb, var(--marigold) 60%, transparent); border-style: dashed; }
+.st-progress { background: color-mix(in srgb, var(--pink) 12%, var(--card)); color: var(--accent); border-color: color-mix(in srgb, var(--pink) 40%, transparent); border-style: dashed; }
+.st-exploring{ background: var(--card); color: #6A479E; border-color: color-mix(in srgb, #9B7BD4 55%, transparent); border-style: dashed; }
+@media (prefers-color-scheme: dark) {
+  .st-gemini { color: #A9C4FF; }
+  .st-rnd, .st-exploring { color: #CDB6F2; }
+}
+
+.status-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 14px; }
+.status-chip { cursor: pointer; min-height: 38px; padding: 4px 14px; font-size: 14px; }
+.status-chip b { font-weight: 800; opacity: .8; }
+.status-chip.all { background: var(--card); color: var(--fg); border-color: var(--line-strong); }
+.status-chip[aria-pressed="true"] { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent); }
+.status-chip:hover { filter: brightness(1.04); transform: translateY(-1px); }
+
+.dish-group { margin-top: 30px; }
+.dish-group h2 { font-family: var(--display); font-weight: 700; font-size: 26px; display: flex; gap: 10px; align-items: baseline; }
+.dish-group h2::before { content: "✦"; color: var(--pink); font-size: 18px; }
+.group-blurb { color: var(--fg-soft); font-size: 16px; margin: 0 0 14px; }
+.dish[hidden] { display: none; }
+.dish-group:has(.dish:not([hidden])) { display: block; }
+.dish-group:not(:has(.dish:not([hidden]))) { display: none; }
+.dish-head .dish-tags { margin-top: 2px; }
+.dish-next {
+  grid-column: 1 / -1; margin: 0; font-size: 15.5px; color: var(--fg);
+  background: color-mix(in srgb, var(--marigold) 12%, var(--card)); border: 1.5px dashed color-mix(in srgb, var(--marigold) 50%, transparent);
+  border-radius: 12px; padding: 8px 14px;
+}
+.dish-next b { color: var(--marigold-ink); }

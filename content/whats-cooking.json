@@ -1,178 +1,382 @@
 {
   "title": "What's cooking 🍳",
-  "intro": "The tools I'm building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it's worth having.",
-  "projects": [
+  "intro": "The automations I'm building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.",
+  "statuses": {
+    "done": {
+      "label": "Done · in use",
+      "emoji": "✅"
+    },
+    "idle": {
+      "label": "Done · not in use yet",
+      "emoji": "🧺"
+    },
+    "gemini": {
+      "label": "Built for Gemini",
+      "emoji": "♊"
+    },
+    "drafted": {
+      "label": "Drafted",
+      "emoji": "✏️"
+    },
+    "blocked": {
+      "label": "Blocked",
+      "emoji": "🚧"
+    },
+    "rnd": {
+      "label": "Not started · R&D",
+      "emoji": "🔬"
+    },
+    "testing": {
+      "label": "Testing",
+      "emoji": "🧪"
+    },
+    "progress": {
+      "label": "In progress",
+      "emoji": "🛠️"
+    },
+    "exploring": {
+      "label": "Exploring",
+      "emoji": "🧭"
+    }
+  },
+  "groups": [
     {
-      "emoji": "🔍",
-      "name": "GA4 audit",
-      "tags": [
-        "Audit",
-        "GA4"
-      ],
-      "summary": "An automated health check of a Google Analytics 4 property that gives the same answer every time it runs.",
-      "does": [
-        "Reads the property's set-up through Google's APIs: data streams, events, key events, custom definitions, data retention, consent and links like BigQuery and Google Ads",
-        "Checks each one against a fixed set of rules, so the result is deterministic rather than an opinion",
-        "Never touches personal data: it audits configuration, not people",
-        "Produces a scored report with what's wrong, why it matters and how to fix it"
-      ],
-      "benefits": [
-        "Hours of clicking through admin screens becomes a few minutes",
-        "Re-run it after changes and compare like with like",
-        "Catches gaps (missing key events, short retention, broken links) before they quietly cost months of data"
+      "heading": "The measurement pipeline",
+      "blurb": "Eleven pieces that take a client from brief to trustworthy data, in the order they run.",
+      "projects": [
+        {
+          "emoji": "🗺️",
+          "name": "Measurement plan, event spec and data dictionary",
+          "status": "drafted",
+          "next": "Refining it, and customising it to each client's needs.",
+          "tags": [
+            "Planning",
+            "GA4"
+          ],
+          "summary": "Turns a client brief and a site audit into a measurement plan, an event spec and a data dictionary.",
+          "does": [
+            "Reads the client brief and the site audit",
+            "Maps business goals to KPIs, then to the events and parameters that measure them",
+            "Writes the event spec and a data dictionary with consistent naming",
+            "Becomes the single source of truth that every later step builds from"
+          ],
+          "benefits": [
+            "Days of planning becomes hours",
+            "The same naming rules across every client",
+            "Everything downstream (GTM, dev briefs, tests) traces back to one approved plan"
+          ]
+        },
+        {
+          "emoji": "🏷️",
+          "name": "GTM container builder",
+          "status": "drafted",
+          "next": "Refining.",
+          "tags": [
+            "GTM",
+            "Tracking"
+          ],
+          "summary": "Builds the Tag Manager container (tags, triggers and variables) straight from the approved tracking plan.",
+          "does": [
+            "Reads the approved tracking plan",
+            "Creates the tags, triggers and variables to match it exactly",
+            "Sets consent requirements on every tag",
+            "Outputs a container that imports in one step"
+          ],
+          "benefits": [
+            "No more hand-building tags one by one",
+            "The container always matches the spec",
+            "Easy to rebuild when the plan changes"
+          ]
+        },
+        {
+          "emoji": "🔍",
+          "name": "GA4 + GTM audit",
+          "status": "done",
+          "tags": [
+            "Audit",
+            "GA4",
+            "GTM",
+            "Apps Script"
+          ],
+          "summary": "Checks existing Tag Manager containers and GA4 set-up, built in Apps Script and in use today.",
+          "does": [
+            "Reviews GTM containers: tags, triggers, variables, naming, duplicates, unused items and consent settings",
+            "Reviews the GA4 property: data streams, events, key events, custom definitions, retention and product links",
+            "Checks everything against a fixed rule set, so the result is deterministic",
+            "Looks at configuration only, never personal data"
+          ],
+          "benefits": [
+            "Hours of clicking through admin screens becomes minutes",
+            "Re-run it after changes and compare like with like",
+            "Catches gaps before they quietly cost months of data"
+          ]
+        },
+        {
+          "emoji": "🎫",
+          "name": "Developer briefs and ticketing",
+          "status": "blocked",
+          "next": "Waiting on build time. Next up: generating the briefs, then exploring Jira and Confluence.",
+          "tags": [
+            "Dev handoff",
+            "Jira",
+            "Confluence"
+          ],
+          "summary": "Turns an approved tracking plan into a ready-to-brief spec for developers.",
+          "does": [
+            "Writes a developer brief per event: the dataLayer code to add, where it fires and what each value should be",
+            "Adds acceptance criteria and test steps so 'done' is clear",
+            "Exploring: creating Jira tickets and Confluence pages automatically, linked back to the plan"
+          ],
+          "benefits": [
+            "Developers get exactly what they need, first time",
+            "Every ticket traces back to an approved line in the plan",
+            "Far less back-and-forth between analysts and developers"
+          ]
+        },
+        {
+          "emoji": "🎭",
+          "name": "Automated website overview, audit and testing",
+          "status": "drafted",
+          "next": "Refining.",
+          "tags": [
+            "QA",
+            "Playwright",
+            "Audit"
+          ],
+          "summary": "A robot browser that runs through a site to check the dataLayer and tracking fire correctly. It also works as a standalone audit tool.",
+          "does": [
+            "Opens pages and runs key journeys (page views, clicks, forms, checkout) like a real visitor",
+            "Watches network requests to see which tags fired and what they sent",
+            "Checks the dataLayer at each step against the spec",
+            "Reads the site's Content Security Policy and flags any vendor it would block",
+            "Works in Tag Manager preview before release, and on the live site to diagnose problems"
+          ],
+          "benefits": [
+            "Tests changes before they go live",
+            "Diagnoses production issues in minutes",
+            "Catches silent breakages, like a release that kills a conversion tag"
+          ]
+        },
+        {
+          "emoji": "💬",
+          "name": "Conversational analytics: event health",
+          "status": "done",
+          "tags": [
+            "AI agents",
+            "BigQuery"
+          ],
+          "summary": "Ask plain-English questions about event health and get validated answers back. Done and in use.",
+          "does": [
+            "Runs on Google's Conversational Analytics API over BigQuery, with no Looker licence needed",
+            "Answers questions like 'which events dropped this week?' or 'is purchase missing currency?'",
+            "Validates its answers before showing them"
+          ],
+          "benefits": [
+            "Event health without writing SQL",
+            "Answers you can trust, because they're checked",
+            "Much cheaper than an enterprise BI licence"
+          ]
+        },
+        {
+          "emoji": "🚨",
+          "name": "Event-health monitoring and alerts",
+          "status": "gemini",
+          "tags": [
+            "Monitoring",
+            "Gemini",
+            "BigQuery"
+          ],
+          "summary": "Checks event health on demand and flags issues. Built on Gemini.",
+          "does": [
+            "Runs health checks across key events when prompted",
+            "Flags drops, spikes, missing parameters and broken values",
+            "Runs on request rather than always-on, to keep costs under control"
+          ],
+          "benefits": [
+            "Problems surface before a report goes out wrong",
+            "Cost stays predictable",
+            "Pairs with the conversational analytics agent for follow-up questions"
+          ]
+        },
+        {
+          "emoji": "🧪",
+          "name": "Agent evaluation + Cloud Run AI harness",
+          "status": "drafted",
+          "next": "Refining.",
+          "tags": [
+            "AI agents",
+            "Cloud Run",
+            "Testing"
+          ],
+          "summary": "Runs the agents at scale in the cloud instead of on a laptop, and scores how well they answer.",
+          "does": [
+            "Runs batches of test questions against an agent on Cloud Run",
+            "Scores the answers and flags made-up ones",
+            "Tracks the Google Cloud cost of each agent and each run"
+          ],
+          "benefits": [
+            "Find weak spots before people rely on an agent",
+            "Scale testing without tying up anyone's machine",
+            "Costs are visible, not a surprise on the bill"
+          ]
+        },
+        {
+          "emoji": "⚙️",
+          "name": "GA4 config updates on approval",
+          "status": "idle",
+          "next": "Refining before first live use.",
+          "tags": [
+            "GA4",
+            "Automation"
+          ],
+          "summary": "Pushes approved GA4 configuration changes live in a property automatically.",
+          "does": [
+            "Takes a set of approved changes (events, key events, custom definitions, settings)",
+            "Applies them to the GA4 property only after sign-off",
+            "Keeps a record of what changed and when"
+          ],
+          "benefits": [
+            "No manual clicking through GA4 admin",
+            "Changes match exactly what was approved",
+            "A clear audit trail of every change"
+          ]
+        },
+        {
+          "emoji": "🕸️",
+          "name": "Enterprise BigQuery set-up + knowledge graph",
+          "status": "rnd",
+          "next": "Client-requested. Researching what can be automated.",
+          "tags": [
+            "BigQuery",
+            "Data engineering",
+            "GCP"
+          ],
+          "summary": "Stands up the BigQuery structure and a knowledge graph in Google Cloud directly from a client's tracking definitions.",
+          "does": [
+            "Reads the tracking definitions from the data dictionary",
+            "Creates the BigQuery datasets, tables and data-engineering fields to match",
+            "Builds a knowledge graph so business terms, events and tables are linked"
+          ],
+          "benefits": [
+            "Warehouse and tracking stay in sync by design",
+            "Agents and analysts share the same definitions",
+            "Weeks of set-up shrinks once it's automated"
+          ]
+        },
+        {
+          "emoji": "📰",
+          "name": "Client-specific GA4 / GMP / GCP news summary",
+          "status": "drafted",
+          "next": "Customising per client.",
+          "tags": [
+            "Research",
+            "AI"
+          ],
+          "summary": "Pulls the latest GA4, Google Marketing Platform and Google Cloud news into a client-ready summary.",
+          "does": [
+            "Searches a fixed window across Google release notes, practitioners and trusted publications",
+            "Keeps only what changed, with every item dated and sourced",
+            "Explains what it means for that client and what to do about it"
+          ],
+          "benefits": [
+            "Clients hear about changes from you first",
+            "Staying current takes a read, not a day of searching",
+            "The same engine behind On the Pulse"
+          ],
+          "link": {
+            "label": "Read the latest On the Pulse",
+            "url": "/"
+          }
+        }
       ]
     },
     {
-      "emoji": "🏷️",
-      "name": "GTM audit + dataLayer generator, end to end",
-      "tags": [
-        "Audit",
-        "GTM",
-        "Tracking"
-      ],
-      "summary": "From 'what should we track?' to a tested Tag Manager container, with one source of truth the whole way through.",
-      "does": [
-        "Audits an existing GTM container: tags, triggers, variables, naming, duplicates, unused items and consent settings",
-        "Turns a measurement plan into a dataLayer spec and ready-to-paste developer snippets",
-        "Generates an importable GTM container and a data dictionary that match the spec exactly",
-        "Keeps personal data out by design: hashing where it's needed, nothing raw in the dataLayer"
-      ],
-      "benefits": [
-        "Developers, analysts and marketers all work from the same spec",
-        "Days of hand-building tags drops to an import and a check",
-        "New tracking always traces back to a documented line, so audits stay easy"
+      "heading": "Side experiments",
+      "blurb": "Things I'm trying on my own time.",
+      "projects": [
+        {
+          "emoji": "🖥️",
+          "name": "BigQuery agents with a custom front end",
+          "status": "progress",
+          "tags": [
+            "AI agents",
+            "Product"
+          ],
+          "summary": "Turning the conversational analytics agents into a proper product, not just a chat window.",
+          "does": [
+            "A custom interface with filters, and an intent agent that works out what you're really asking",
+            "A semantic layer so business terms mean one thing",
+            "Purpose-built agents, like segmentation, health checks and explaining BigQuery billing spikes"
+          ],
+          "benefits": [
+            "Self-serve answers for people who don't write SQL",
+            "The same patterns I teach in my BigQuery agents workshops"
+          ]
+        },
+        {
+          "emoji": "🔗",
+          "name": "UTM naming checker",
+          "status": "testing",
+          "tags": [
+            "Audit",
+            "BigQuery",
+            "Campaigns"
+          ],
+          "summary": "Catches messy campaign tags before they split reporting into a hundred versions of 'Facebook'.",
+          "does": [
+            "Reads naming rules from a Google Sheet marketers can update",
+            "Checks every UTM combination in the GA4 BigQuery export with SQL",
+            "Flags typos, wrong case and unknown values, with the traffic each affects",
+            "Answers follow-up questions through BigQuery's built-in Gemini agent"
+          ],
+          "benefits": [
+            "Clean channel reporting without monthly clean-up",
+            "Marketers own the rules; no code edits",
+            "Shows the cost of bad tagging, so fixes get prioritised"
+          ]
+        },
+        {
+          "emoji": "🤖",
+          "name": "Data Agent Kit experiments",
+          "status": "exploring",
+          "tags": [
+            "AI agents",
+            "BigQuery"
+          ],
+          "summary": "Testing Google's new Data Agent Kit, which lets coding agents query, build pipelines and do data science on BigQuery.",
+          "does": [
+            "Connects a coding agent to BigQuery with Google's own skills and tools",
+            "Puts guardrails in first: an IAM policy blocking write actions"
+          ],
+          "benefits": [
+            "Finds out what's useful versus demo-only",
+            "Compares Google with Snowflake, Databricks and Microsoft"
+          ],
+          "link": {
+            "label": "Read the October edition",
+            "url": "/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-h"
+          }
+        },
+        {
+          "emoji": "📊",
+          "name": "Personal dashboard + automated data warehouse",
+          "status": "progress",
+          "tags": [
+            "BigQuery",
+            "Dashboards"
+          ],
+          "summary": "My own data flowing into BigQuery on a schedule, with a dashboard that's always up to date.",
+          "does": [
+            "Pulls data into BigQuery automatically",
+            "Models it with version-controlled SQL",
+            "Feeds a dashboard that refreshes itself"
+          ],
+          "benefits": [
+            "No copy-paste reporting",
+            "A sandbox for testing new tools on real data"
+          ]
+        }
       ]
-    },
-    {
-      "emoji": "📊",
-      "name": "Personal dashboard + automated data warehouse",
-      "tags": [
-        "BigQuery",
-        "Dashboards"
-      ],
-      "summary": "My own data flowing into BigQuery on a schedule, with a dashboard that's always up to date.",
-      "does": [
-        "Pulls data from the sources I use into BigQuery automatically",
-        "Cleans and models it with version-controlled SQL, so every number has a known definition",
-        "Feeds a dashboard that refreshes itself, with no manual exports"
-      ],
-      "benefits": [
-        "A working reference build for the same pattern at any scale",
-        "No more copy-paste reporting or stale screenshots",
-        "A safe sandbox for trying new tools (like the ones below) on real data"
-      ]
-    },
-    {
-      "emoji": "🤖",
-      "name": "Data Agent Kit experiments",
-      "tags": [
-        "AI agents",
-        "BigQuery"
-      ],
-      "summary": "Testing Google's new Data Agent Kit: coding agents that can query, build pipelines and do data science on BigQuery.",
-      "does": [
-        "Connects a coding agent to BigQuery and other Google Cloud data services with Google's own skills and tools",
-        "Lets the agent write and tune SQL, build and fix pipelines, and run analysis from a plain-English request",
-        "Puts real guardrails in place first: an IAM policy that blocks write actions, rather than trusting the agent's 'ask before deleting' instruction"
-      ],
-      "benefits": [
-        "Finds out what's genuinely useful versus what's demo-only, before anyone relies on it",
-        "Builds a safe set-up pattern others can copy",
-        "Compares Google's approach with Snowflake, Databricks and Microsoft (see the October edition)"
-      ],
-      "link": {
-        "label": "Read the October edition",
-        "url": "/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one"
-      }
-    },
-    {
-      "emoji": "💬",
-      "name": "BigQuery agents + conversational analytics, with a custom front end",
-      "tags": [
-        "AI agents",
-        "BigQuery",
-        "Product"
-      ],
-      "summary": "Ask your data a question in plain English and get an answer you can trust, through a proper interface rather than a raw API.",
-      "does": [
-        "Runs on Google's Conversational Analytics API over BigQuery, with no Looker licence needed",
-        "Wraps it in a custom front end with filters and an intent agent that works out what you're really asking",
-        "Checks its own answers before showing them, and runs batches of test questions to catch made-up answers at scale",
-        "Tracks the Google Cloud cost of every agent, with a semantic layer and knowledge graph so business terms mean one thing",
-        "Includes purpose-built agents, like one that segments audiences, one that runs health and anomaly checks, and one that explains BigQuery billing spikes"
-      ],
-      "benefits": [
-        "Puts self-serve answers in front of people who don't write SQL",
-        "Far cheaper than an enterprise BI licence for most teams",
-        "Answers are tested and costs are visible before anyone relies on them",
-        "The same patterns are taught in my BigQuery agents workshops"
-      ]
-    },
-    {
-      "emoji": "🔗",
-      "name": "UTM naming checker",
-      "tags": [
-        "Audit",
-        "BigQuery",
-        "Campaigns"
-      ],
-      "summary": "Catches messy campaign tags (utm_source, utm_medium and friends) before they split your reporting into a hundred versions of 'Facebook'.",
-      "does": [
-        "Reads the naming rules from a simple Google Sheet that marketers can update themselves",
-        "Checks every UTM combination in the GA4 BigQuery export against those rules with SQL",
-        "Flags typos, wrong case, unknown sources and missing values, with the traffic each one affects",
-        "Lets people ask follow-up questions through BigQuery's built-in Gemini agent"
-      ],
-      "benefits": [
-        "Clean channel reporting without manual clean-up every month",
-        "Marketers own the rules; nobody has to edit code",
-        "Shows the cost of bad tagging in sessions and conversions, so fixes get prioritised"
-      ]
-    },
-    {
-      "emoji": "🎭",
-      "name": "Playwright tracking tests",
-      "tags": [
-        "QA",
-        "GTM",
-        "Automation"
-      ],
-      "summary": "A robot browser that clicks through a site and checks the tracking actually fired, in preview and in production.",
-      "does": [
-        "Opens pages and runs the key journeys (page views, clicks, forms) like a real visitor",
-        "Watches network requests to see exactly which tags fired and what they sent",
-        "Inspects the dataLayer at each step against the spec",
-        "Reads the site's Content Security Policy and flags any vendor (Meta, Google Ads and others) it would block"
-      ],
-      "benefits": [
-        "Tests GTM changes in preview before they go live",
-        "Diagnoses production issues in minutes instead of guesswork",
-        "Catches silent breakages, like a site release that quietly kills a conversion tag"
-      ]
-    },
-    {
-      "emoji": "📰",
-      "name": "Environmental scan automation",
-      "tags": [
-        "Research",
-        "AI"
-      ],
-      "summary": "A monthly sweep of what changed in measurement, privacy and AI, with every item dated and linked to its source.",
-      "does": [
-        "Searches a fixed window (the last month) across platforms, regulators, standards bodies and trusted practitioners",
-        "Filters out recycled stats and vendor fluff, keeping only what actually changed",
-        "Writes each item as what happened, why it matters and what to do about it",
-        "Publishes as a readable briefing, like On the Pulse"
-      ],
-      "benefits": [
-        "Staying current takes a read, not a day of searching",
-        "Every claim can be checked against its source",
-        "Turns news into a short list of actions"
-      ],
-      "link": {
-        "label": "Read the latest edition",
-        "url": "/"
-      }
     }
   ],
   "outro": "Got a tool you'd like to see here, or want to compare notes? Leave a comment on the latest edition."

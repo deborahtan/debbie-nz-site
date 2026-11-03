@@ -20,6 +20,7 @@ to a line here.
 | `comment_submit` | Custom | Comment successfully submitted | New |
 | `share` | GA4 recommended | Share button (native share or copy link) | New |
 | `project_expand` | Custom | A tool card opened on What's Cooking | New |
+| `project_filter` | Custom | Status filter used on What's Cooking (`filter_status`) | New |
 | `consent_update` | Custom | Visitor makes or reloads a cookie choice (`consent_analytics`, `consent_marketing`, `consent_source`) | New |
 | `page_view` | GA4 automatic | Every page load | Live (automatic) |
 

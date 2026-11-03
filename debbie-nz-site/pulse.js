@@ -51,7 +51,18 @@
   document.querySelectorAll('[data-expand]').forEach(function (b) {
     b.addEventListener('click', function () {
       var open = b.getAttribute('data-expand') === 'open';
-      document.querySelectorAll('.dish details').forEach(function (d) { d.open = open; });
+      document.querySelectorAll('.dish:not([hidden]) details').forEach(function (d) { d.open = open; });
+    });
+  });
+  var chips = document.querySelectorAll('[data-filter]');
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var f = c.getAttribute('data-filter');
+      chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+      document.querySelectorAll('.dish').forEach(function (d) {
+        d.hidden = f !== 'all' && d.getAttribute('data-status') !== f;
+      });
+      dl.push({ event: 'project_filter', filter_status: f });
     });
   });
   document.querySelectorAll('details[data-project]').forEach(function (d) {

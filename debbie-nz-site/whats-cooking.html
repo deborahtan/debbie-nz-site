@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What&#x27;s Cooking — Debbie Tan</title>
-<meta name="description" content="The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.">
+<meta name="description" content="The automations I&#x27;m building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.">
 <link rel="canonical" href="https://debbie.nz/whats-cooking">
 <meta property="og:title" content="What&#x27;s Cooking — Debbie Tan">
-<meta property="og:description" content="The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.">
+<meta property="og:description" content="The automations I&#x27;m building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.">
 <meta name="color-scheme" content="light dark">
 <script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,154 +51,315 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 
 <main id="main" class="pulse-wrap cooking">
-<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>What&#x27;s cooking 🍳</h1><p>The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.</p></header>
+<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>What&#x27;s cooking 🍳</h1><p>The automations I&#x27;m building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.</p></header>
+<div class="status-filter" role="group" aria-label="Filter by status"><button type="button" class="status-chip all" data-filter="all" aria-pressed="true">All <b>15</b></button><button type="button" class="status-chip st-done" data-filter="done" aria-pressed="false">✅ Done · in use <b>2</b></button><button type="button" class="status-chip st-idle" data-filter="idle" aria-pressed="false">🧺 Done · not in use yet <b>1</b></button><button type="button" class="status-chip st-gemini" data-filter="gemini" aria-pressed="false">♊ Built for Gemini <b>1</b></button><button type="button" class="status-chip st-drafted" data-filter="drafted" aria-pressed="false">✏️ Drafted <b>5</b></button><button type="button" class="status-chip st-blocked" data-filter="blocked" aria-pressed="false">🚧 Blocked <b>1</b></button><button type="button" class="status-chip st-rnd" data-filter="rnd" aria-pressed="false">🔬 Not started · R&amp;D <b>1</b></button><button type="button" class="status-chip st-testing" data-filter="testing" aria-pressed="false">🧪 Testing <b>1</b></button><button type="button" class="status-chip st-progress" data-filter="progress" aria-pressed="false">🛠️ In progress <b>2</b></button><button type="button" class="status-chip st-exploring" data-filter="exploring" aria-pressed="false">🧭 Exploring <b>1</b></button></div>
 <div class="dish-tools"><button type="button" data-expand="open">Open all</button><button type="button" data-expand="close">Close all</button></div>
+<section class="dish-group"><h2>The measurement pipeline</h2><p class="group-blurb">Eleven pieces that take a client from brief to trustworthy data, in the order they run.</p>
 <ul class="dishes">
-<li class="dish" id="ga4-audit">
-  <details data-project="ga4-audit">
+<li class="dish" id="measurement-plan-event-spec-and-data-dictionary" data-status="drafted">
+  <details data-project="measurement-plan-event-spec-and-data-dictionary">
     <summary>
-      <span class="dish-emoji" aria-hidden="true">🔍</span>
+      <span class="dish-emoji" aria-hidden="true">🗺️</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>Audit</span><span>GA4</span></span>
-        <span class="dish-name">GA4 audit</span>
-        <span class="dish-sum">An automated health check of a Google Analytics 4 property that gives the same answer every time it runs.</span>
+        <span class="status-bubble st-drafted">✏️ Drafted</span>
+        <span class="dish-name">Measurement plan, event spec and data dictionary</span>
+        <span class="dish-sum">Turns a client brief and a site audit into a measurement plan, an event spec and a data dictionary.</span>
+        <span class="dish-tags"><span>Planning</span><span>GA4</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the property&#x27;s set-up through Google&#x27;s APIs: data streams, events, key events, custom definitions, data retention, consent and links like BigQuery and Google Ads</li><li>Checks each one against a fixed set of rules, so the result is deterministic rather than an opinion</li><li>Never touches personal data: it audits configuration, not people</li><li>Produces a scored report with what&#x27;s wrong, why it matters and how to fix it</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Hours of clicking through admin screens becomes a few minutes</li><li>Re-run it after changes and compare like with like</li><li>Catches gaps (missing key events, short retention, broken links) before they quietly cost months of data</li></ul></div>
+      <p class="dish-next"><b>Next:</b> Refining it, and customising it to each client&#x27;s needs.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the client brief and the site audit</li><li>Maps business goals to KPIs, then to the events and parameters that measure them</li><li>Writes the event spec and a data dictionary with consistent naming</li><li>Becomes the single source of truth that every later step builds from</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Days of planning becomes hours</li><li>The same naming rules across every client</li><li>Everything downstream (GTM, dev briefs, tests) traces back to one approved plan</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="gtm-audit-datalayer-generator-end-to-end">
-  <details data-project="gtm-audit-datalayer-generator-end-to-end">
+<li class="dish" id="gtm-container-builder" data-status="drafted">
+  <details data-project="gtm-container-builder">
     <summary>
       <span class="dish-emoji" aria-hidden="true">🏷️</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>Audit</span><span>GTM</span><span>Tracking</span></span>
-        <span class="dish-name">GTM audit + dataLayer generator, end to end</span>
-        <span class="dish-sum">From &#x27;what should we track?&#x27; to a tested Tag Manager container, with one source of truth the whole way through.</span>
+        <span class="status-bubble st-drafted">✏️ Drafted</span>
+        <span class="dish-name">GTM container builder</span>
+        <span class="dish-sum">Builds the Tag Manager container (tags, triggers and variables) straight from the approved tracking plan.</span>
+        <span class="dish-tags"><span>GTM</span><span>Tracking</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Audits an existing GTM container: tags, triggers, variables, naming, duplicates, unused items and consent settings</li><li>Turns a measurement plan into a dataLayer spec and ready-to-paste developer snippets</li><li>Generates an importable GTM container and a data dictionary that match the spec exactly</li><li>Keeps personal data out by design: hashing where it&#x27;s needed, nothing raw in the dataLayer</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Developers, analysts and marketers all work from the same spec</li><li>Days of hand-building tags drops to an import and a check</li><li>New tracking always traces back to a documented line, so audits stay easy</li></ul></div>
+      <p class="dish-next"><b>Next:</b> Refining.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the approved tracking plan</li><li>Creates the tags, triggers and variables to match it exactly</li><li>Sets consent requirements on every tag</li><li>Outputs a container that imports in one step</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>No more hand-building tags one by one</li><li>The container always matches the spec</li><li>Easy to rebuild when the plan changes</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="personal-dashboard-automated-data-warehouse">
-  <details data-project="personal-dashboard-automated-data-warehouse">
+<li class="dish" id="ga4-gtm-audit" data-status="done">
+  <details data-project="ga4-gtm-audit">
     <summary>
-      <span class="dish-emoji" aria-hidden="true">📊</span>
+      <span class="dish-emoji" aria-hidden="true">🔍</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>BigQuery</span><span>Dashboards</span></span>
-        <span class="dish-name">Personal dashboard + automated data warehouse</span>
-        <span class="dish-sum">My own data flowing into BigQuery on a schedule, with a dashboard that&#x27;s always up to date.</span>
+        <span class="status-bubble st-done">✅ Done · in use</span>
+        <span class="dish-name">GA4 + GTM audit</span>
+        <span class="dish-sum">Checks existing Tag Manager containers and GA4 set-up, built in Apps Script and in use today.</span>
+        <span class="dish-tags"><span>Audit</span><span>GA4</span><span>GTM</span><span>Apps Script</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Pulls data from the sources I use into BigQuery automatically</li><li>Cleans and models it with version-controlled SQL, so every number has a known definition</li><li>Feeds a dashboard that refreshes itself, with no manual exports</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>A working reference build for the same pattern at any scale</li><li>No more copy-paste reporting or stale screenshots</li><li>A safe sandbox for trying new tools (like the ones below) on real data</li></ul></div>
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reviews GTM containers: tags, triggers, variables, naming, duplicates, unused items and consent settings</li><li>Reviews the GA4 property: data streams, events, key events, custom definitions, retention and product links</li><li>Checks everything against a fixed rule set, so the result is deterministic</li><li>Looks at configuration only, never personal data</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Hours of clicking through admin screens becomes minutes</li><li>Re-run it after changes and compare like with like</li><li>Catches gaps before they quietly cost months of data</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="data-agent-kit-experiments">
-  <details data-project="data-agent-kit-experiments">
+<li class="dish" id="developer-briefs-and-ticketing" data-status="blocked">
+  <details data-project="developer-briefs-and-ticketing">
     <summary>
-      <span class="dish-emoji" aria-hidden="true">🤖</span>
+      <span class="dish-emoji" aria-hidden="true">🎫</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span></span>
-        <span class="dish-name">Data Agent Kit experiments</span>
-        <span class="dish-sum">Testing Google&#x27;s new Data Agent Kit: coding agents that can query, build pipelines and do data science on BigQuery.</span>
+        <span class="status-bubble st-blocked">🚧 Blocked</span>
+        <span class="dish-name">Developer briefs and ticketing</span>
+        <span class="dish-sum">Turns an approved tracking plan into a ready-to-brief spec for developers.</span>
+        <span class="dish-tags"><span>Dev handoff</span><span>Jira</span><span>Confluence</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Connects a coding agent to BigQuery and other Google Cloud data services with Google&#x27;s own skills and tools</li><li>Lets the agent write and tune SQL, build and fix pipelines, and run analysis from a plain-English request</li><li>Puts real guardrails in place first: an IAM policy that blocks write actions, rather than trusting the agent&#x27;s &#x27;ask before deleting&#x27; instruction</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Finds out what&#x27;s genuinely useful versus what&#x27;s demo-only, before anyone relies on it</li><li>Builds a safe set-up pattern others can copy</li><li>Compares Google&#x27;s approach with Snowflake, Databricks and Microsoft (see the October edition)</li></ul></div>
-      <a class="dish-link" href="/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one">Read the October edition →</a>
+      <p class="dish-next"><b>Next:</b> Waiting on build time. Next up: generating the briefs, then exploring Jira and Confluence.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Writes a developer brief per event: the dataLayer code to add, where it fires and what each value should be</li><li>Adds acceptance criteria and test steps so &#x27;done&#x27; is clear</li><li>Exploring: creating Jira tickets and Confluence pages automatically, linked back to the plan</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Developers get exactly what they need, first time</li><li>Every ticket traces back to an approved line in the plan</li><li>Far less back-and-forth between analysts and developers</li></ul></div>
+      
     </div>
   </details>
 </li>
-<li class="dish" id="bigquery-agents-conversational-analytics-with-a-custom-front">
-  <details data-project="bigquery-agents-conversational-analytics-with-a-custom-front">
+<li class="dish" id="automated-website-overview-audit-and-testing" data-status="drafted">
+  <details data-project="automated-website-overview-audit-and-testing">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🎭</span>
+      <span class="dish-head">
+        <span class="status-bubble st-drafted">✏️ Drafted</span>
+        <span class="dish-name">Automated website overview, audit and testing</span>
+        <span class="dish-sum">A robot browser that runs through a site to check the dataLayer and tracking fire correctly. It also works as a standalone audit tool.</span>
+        <span class="dish-tags"><span>QA</span><span>Playwright</span><span>Audit</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <p class="dish-next"><b>Next:</b> Refining.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Opens pages and runs key journeys (page views, clicks, forms, checkout) like a real visitor</li><li>Watches network requests to see which tags fired and what they sent</li><li>Checks the dataLayer at each step against the spec</li><li>Reads the site&#x27;s Content Security Policy and flags any vendor it would block</li><li>Works in Tag Manager preview before release, and on the live site to diagnose problems</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Tests changes before they go live</li><li>Diagnoses production issues in minutes</li><li>Catches silent breakages, like a release that kills a conversion tag</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="conversational-analytics-event-health" data-status="done">
+  <details data-project="conversational-analytics-event-health">
     <summary>
       <span class="dish-emoji" aria-hidden="true">💬</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span><span>Product</span></span>
-        <span class="dish-name">BigQuery agents + conversational analytics, with a custom front end</span>
-        <span class="dish-sum">Ask your data a question in plain English and get an answer you can trust, through a proper interface rather than a raw API.</span>
+        <span class="status-bubble st-done">✅ Done · in use</span>
+        <span class="dish-name">Conversational analytics: event health</span>
+        <span class="dish-sum">Ask plain-English questions about event health and get validated answers back. Done and in use.</span>
+        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Runs on Google&#x27;s Conversational Analytics API over BigQuery, with no Looker licence needed</li><li>Wraps it in a custom front end with filters and an intent agent that works out what you&#x27;re really asking</li><li>Checks its own answers before showing them, and runs batches of test questions to catch made-up answers at scale</li><li>Tracks the Google Cloud cost of every agent, with a semantic layer and knowledge graph so business terms mean one thing</li><li>Includes purpose-built agents, like one that segments audiences, one that runs health and anomaly checks, and one that explains BigQuery billing spikes</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Puts self-serve answers in front of people who don&#x27;t write SQL</li><li>Far cheaper than an enterprise BI licence for most teams</li><li>Answers are tested and costs are visible before anyone relies on them</li><li>The same patterns are taught in my BigQuery agents workshops</li></ul></div>
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Runs on Google&#x27;s Conversational Analytics API over BigQuery, with no Looker licence needed</li><li>Answers questions like &#x27;which events dropped this week?&#x27; or &#x27;is purchase missing currency?&#x27;</li><li>Validates its answers before showing them</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Event health without writing SQL</li><li>Answers you can trust, because they&#x27;re checked</li><li>Much cheaper than an enterprise BI licence</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="utm-naming-checker">
+<li class="dish" id="event-health-monitoring-and-alerts" data-status="gemini">
+  <details data-project="event-health-monitoring-and-alerts">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🚨</span>
+      <span class="dish-head">
+        <span class="status-bubble st-gemini">♊ Built for Gemini</span>
+        <span class="dish-name">Event-health monitoring and alerts</span>
+        <span class="dish-sum">Checks event health on demand and flags issues. Built on Gemini.</span>
+        <span class="dish-tags"><span>Monitoring</span><span>Gemini</span><span>BigQuery</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Runs health checks across key events when prompted</li><li>Flags drops, spikes, missing parameters and broken values</li><li>Runs on request rather than always-on, to keep costs under control</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Problems surface before a report goes out wrong</li><li>Cost stays predictable</li><li>Pairs with the conversational analytics agent for follow-up questions</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="agent-evaluation-cloud-run-ai-harness" data-status="drafted">
+  <details data-project="agent-evaluation-cloud-run-ai-harness">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🧪</span>
+      <span class="dish-head">
+        <span class="status-bubble st-drafted">✏️ Drafted</span>
+        <span class="dish-name">Agent evaluation + Cloud Run AI harness</span>
+        <span class="dish-sum">Runs the agents at scale in the cloud instead of on a laptop, and scores how well they answer.</span>
+        <span class="dish-tags"><span>AI agents</span><span>Cloud Run</span><span>Testing</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <p class="dish-next"><b>Next:</b> Refining.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Runs batches of test questions against an agent on Cloud Run</li><li>Scores the answers and flags made-up ones</li><li>Tracks the Google Cloud cost of each agent and each run</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Find weak spots before people rely on an agent</li><li>Scale testing without tying up anyone&#x27;s machine</li><li>Costs are visible, not a surprise on the bill</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="ga4-config-updates-on-approval" data-status="idle">
+  <details data-project="ga4-config-updates-on-approval">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">⚙️</span>
+      <span class="dish-head">
+        <span class="status-bubble st-idle">🧺 Done · not in use yet</span>
+        <span class="dish-name">GA4 config updates on approval</span>
+        <span class="dish-sum">Pushes approved GA4 configuration changes live in a property automatically.</span>
+        <span class="dish-tags"><span>GA4</span><span>Automation</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <p class="dish-next"><b>Next:</b> Refining before first live use.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Takes a set of approved changes (events, key events, custom definitions, settings)</li><li>Applies them to the GA4 property only after sign-off</li><li>Keeps a record of what changed and when</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>No manual clicking through GA4 admin</li><li>Changes match exactly what was approved</li><li>A clear audit trail of every change</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="enterprise-bigquery-set-up-knowledge-graph" data-status="rnd">
+  <details data-project="enterprise-bigquery-set-up-knowledge-graph">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🕸️</span>
+      <span class="dish-head">
+        <span class="status-bubble st-rnd">🔬 Not started · R&amp;D</span>
+        <span class="dish-name">Enterprise BigQuery set-up + knowledge graph</span>
+        <span class="dish-sum">Stands up the BigQuery structure and a knowledge graph in Google Cloud directly from a client&#x27;s tracking definitions.</span>
+        <span class="dish-tags"><span>BigQuery</span><span>Data engineering</span><span>GCP</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <p class="dish-next"><b>Next:</b> Client-requested. Researching what can be automated.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the tracking definitions from the data dictionary</li><li>Creates the BigQuery datasets, tables and data-engineering fields to match</li><li>Builds a knowledge graph so business terms, events and tables are linked</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Warehouse and tracking stay in sync by design</li><li>Agents and analysts share the same definitions</li><li>Weeks of set-up shrinks once it&#x27;s automated</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="client-specific-ga4-gmp-gcp-news-summary" data-status="drafted">
+  <details data-project="client-specific-ga4-gmp-gcp-news-summary">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">📰</span>
+      <span class="dish-head">
+        <span class="status-bubble st-drafted">✏️ Drafted</span>
+        <span class="dish-name">Client-specific GA4 / GMP / GCP news summary</span>
+        <span class="dish-sum">Pulls the latest GA4, Google Marketing Platform and Google Cloud news into a client-ready summary.</span>
+        <span class="dish-tags"><span>Research</span><span>AI</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <p class="dish-next"><b>Next:</b> Customising per client.</p>
+      <div class="dish-col"><h3>What it does</h3><ul><li>Searches a fixed window across Google release notes, practitioners and trusted publications</li><li>Keeps only what changed, with every item dated and sourced</li><li>Explains what it means for that client and what to do about it</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Clients hear about changes from you first</li><li>Staying current takes a read, not a day of searching</li><li>The same engine behind On the Pulse</li></ul></div>
+      <a class="dish-link" href="/">Read the latest On the Pulse →</a>
+    </div>
+  </details>
+</li>
+</ul></section>
+<section class="dish-group"><h2>Side experiments</h2><p class="group-blurb">Things I&#x27;m trying on my own time.</p>
+<ul class="dishes">
+<li class="dish" id="bigquery-agents-with-a-custom-front-end" data-status="progress">
+  <details data-project="bigquery-agents-with-a-custom-front-end">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🖥️</span>
+      <span class="dish-head">
+        <span class="status-bubble st-progress">🛠️ In progress</span>
+        <span class="dish-name">BigQuery agents with a custom front end</span>
+        <span class="dish-sum">Turning the conversational analytics agents into a proper product, not just a chat window.</span>
+        <span class="dish-tags"><span>AI agents</span><span>Product</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>A custom interface with filters, and an intent agent that works out what you&#x27;re really asking</li><li>A semantic layer so business terms mean one thing</li><li>Purpose-built agents, like segmentation, health checks and explaining BigQuery billing spikes</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Self-serve answers for people who don&#x27;t write SQL</li><li>The same patterns I teach in my BigQuery agents workshops</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="utm-naming-checker" data-status="testing">
   <details data-project="utm-naming-checker">
     <summary>
       <span class="dish-emoji" aria-hidden="true">🔗</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>Audit</span><span>BigQuery</span><span>Campaigns</span></span>
+        <span class="status-bubble st-testing">🧪 Testing</span>
         <span class="dish-name">UTM naming checker</span>
-        <span class="dish-sum">Catches messy campaign tags (utm_source, utm_medium and friends) before they split your reporting into a hundred versions of &#x27;Facebook&#x27;.</span>
+        <span class="dish-sum">Catches messy campaign tags before they split reporting into a hundred versions of &#x27;Facebook&#x27;.</span>
+        <span class="dish-tags"><span>Audit</span><span>BigQuery</span><span>Campaigns</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the naming rules from a simple Google Sheet that marketers can update themselves</li><li>Checks every UTM combination in the GA4 BigQuery export against those rules with SQL</li><li>Flags typos, wrong case, unknown sources and missing values, with the traffic each one affects</li><li>Lets people ask follow-up questions through BigQuery&#x27;s built-in Gemini agent</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Clean channel reporting without manual clean-up every month</li><li>Marketers own the rules; nobody has to edit code</li><li>Shows the cost of bad tagging in sessions and conversions, so fixes get prioritised</li></ul></div>
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads naming rules from a Google Sheet marketers can update</li><li>Checks every UTM combination in the GA4 BigQuery export with SQL</li><li>Flags typos, wrong case and unknown values, with the traffic each affects</li><li>Answers follow-up questions through BigQuery&#x27;s built-in Gemini agent</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Clean channel reporting without monthly clean-up</li><li>Marketers own the rules; no code edits</li><li>Shows the cost of bad tagging, so fixes get prioritised</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="playwright-tracking-tests">
-  <details data-project="playwright-tracking-tests">
+<li class="dish" id="data-agent-kit-experiments" data-status="exploring">
+  <details data-project="data-agent-kit-experiments">
     <summary>
-      <span class="dish-emoji" aria-hidden="true">🎭</span>
+      <span class="dish-emoji" aria-hidden="true">🤖</span>
       <span class="dish-head">
-        <span class="dish-tags"><span>QA</span><span>GTM</span><span>Automation</span></span>
-        <span class="dish-name">Playwright tracking tests</span>
-        <span class="dish-sum">A robot browser that clicks through a site and checks the tracking actually fired, in preview and in production.</span>
+        <span class="status-bubble st-exploring">🧭 Exploring</span>
+        <span class="dish-name">Data Agent Kit experiments</span>
+        <span class="dish-sum">Testing Google&#x27;s new Data Agent Kit, which lets coding agents query, build pipelines and do data science on BigQuery.</span>
+        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span></span>
       </span>
       <span class="dish-toggle" aria-hidden="true"></span>
     </summary>
     <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Opens pages and runs the key journeys (page views, clicks, forms) like a real visitor</li><li>Watches network requests to see exactly which tags fired and what they sent</li><li>Inspects the dataLayer at each step against the spec</li><li>Reads the site&#x27;s Content Security Policy and flags any vendor (Meta, Google Ads and others) it would block</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Tests GTM changes in preview before they go live</li><li>Diagnoses production issues in minutes instead of guesswork</li><li>Catches silent breakages, like a site release that quietly kills a conversion tag</li></ul></div>
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Connects a coding agent to BigQuery with Google&#x27;s own skills and tools</li><li>Puts guardrails in first: an IAM policy blocking write actions</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Finds out what&#x27;s useful versus demo-only</li><li>Compares Google with Snowflake, Databricks and Microsoft</li></ul></div>
+      <a class="dish-link" href="/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-h">Read the October edition →</a>
+    </div>
+  </details>
+</li>
+<li class="dish" id="personal-dashboard-automated-data-warehouse" data-status="progress">
+  <details data-project="personal-dashboard-automated-data-warehouse">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">📊</span>
+      <span class="dish-head">
+        <span class="status-bubble st-progress">🛠️ In progress</span>
+        <span class="dish-name">Personal dashboard + automated data warehouse</span>
+        <span class="dish-sum">My own data flowing into BigQuery on a schedule, with a dashboard that&#x27;s always up to date.</span>
+        <span class="dish-tags"><span>BigQuery</span><span>Dashboards</span></span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      
+      <div class="dish-col"><h3>What it does</h3><ul><li>Pulls data into BigQuery automatically</li><li>Models it with version-controlled SQL</li><li>Feeds a dashboard that refreshes itself</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>No copy-paste reporting</li><li>A sandbox for testing new tools on real data</li></ul></div>
       
     </div>
   </details>
 </li>
-<li class="dish" id="environmental-scan-automation">
-  <details data-project="environmental-scan-automation">
-    <summary>
-      <span class="dish-emoji" aria-hidden="true">📰</span>
-      <span class="dish-head">
-        <span class="dish-tags"><span>Research</span><span>AI</span></span>
-        <span class="dish-name">Environmental scan automation</span>
-        <span class="dish-sum">A monthly sweep of what changed in measurement, privacy and AI, with every item dated and linked to its source.</span>
-      </span>
-      <span class="dish-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="dish-body">
-      <div class="dish-col"><h3>What it does</h3><ul><li>Searches a fixed window (the last month) across platforms, regulators, standards bodies and trusted practitioners</li><li>Filters out recycled stats and vendor fluff, keeping only what actually changed</li><li>Writes each item as what happened, why it matters and what to do about it</li><li>Publishes as a readable briefing, like On the Pulse</li></ul></div>
-      <div class="dish-col"><h3>Why it helps</h3><ul><li>Staying current takes a read, not a day of searching</li><li>Every claim can be checked against its source</li><li>Turns news into a short list of actions</li></ul></div>
-      <a class="dish-link" href="/">Read the latest edition →</a>
-    </div>
-  </details>
-</li>
-</ul>
+</ul></section>
 <p class="note">Got a tool you&#x27;d like to see here, or want to compare notes? Leave a comment on the latest edition.</p>
 </main>
 
