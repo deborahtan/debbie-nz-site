@@ -83,6 +83,7 @@ def head(title, description, path, current):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(description)}">
 <meta name="color-scheme" content="light dark">
+<script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
 new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -126,6 +127,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 FOOT = """
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
   <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
 </footer>
 
@@ -214,7 +216,7 @@ def comments_block(slug):
     <h3>Join the conversation</h3>
     <label for="c-email">Your email</label>
     <input id="c-email" name="email" type="email" required maxlength="120" autocomplete="email" inputmode="email" placeholder="you@gmail.com">
-    <p class="hint">Use a real address from a mainstream provider (Gmail, Outlook, iCloud, Yahoo, Proton, Xtra…). Only a masked version like <b>de•••@gmail.com</b> is shown.</p>
+    <p class="hint">We only use your email to check you're a real person: it needs to be from a mainstream provider (Gmail, Outlook, iCloud, Yahoo, Proton, Xtra…). It's <b>never stored, shown or shared</b>. Your comment appears under a friendly nickname like <b>Sunny Kererū</b>. <a href="/privacy#comments">How comments work</a></p>
     <label for="c-body">Comment</label>
     <textarea id="c-body" name="body" required maxlength="2000" rows="5"></textarea>
     <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
@@ -364,6 +366,22 @@ def render_cooking(data):
     return "\n".join(out)
 
 
+def render_page(title, desc, path, body_html, extra_class=""):
+    return "\n".join([head(title, desc, path, ""), f'<main id="main" class="pulse-wrap {extra_class}">', body_html, "</main>", FOOT])
+
+
+def render_404():
+    body = """<header class="brand"><span class="badge">🍜 oops</span><h1>This page wandered off</h1>
+<p>It might have moved, or never existed. Try the <a href="/">latest edition of On the Pulse</a> or see <a href="/whats-cooking">what's cooking</a>.</p></header>"""
+    return render_page("Page not found — Debbie Tan", "Page not found", "/404", body)
+
+
+def render_sitemap(issues):
+    urls = ["/", "/whats-cooking", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
+    rows = "".join(f"<url><loc>{SITE_URL}{u}</loc></url>" for u in urls)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
+
+
 def render_feed(issues):
     items = []
     for i in issues:
@@ -393,7 +411,15 @@ def main():
     cooking = CONTENT / "whats-cooking.json"
     if cooking.exists():
         (SITE / "whats-cooking.html").write_text(render_cooking(json.loads(cooking.read_text())))
-    print(f"Built {len(issues)} editions, homepage, feed and What's Cooking")
+    privacy = CONTENT / "privacy.html"
+    if privacy.exists():
+        (SITE / "privacy.html").write_text(render_page(
+            "Privacy & cookies — Debbie Tan", "What this site collects, why, and how to change your cookie choices.",
+            "/privacy", privacy.read_text(), "privacy"))
+    (SITE / "404.html").write_text(render_404())
+    (SITE / "sitemap.xml").write_text(render_sitemap(issues))
+    (SITE / "robots.txt").write_text(f"User-agent: *\nDisallow: /admin.html\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+    print(f"Built {len(issues)} editions, homepage, feed, What's Cooking, privacy, 404, sitemap")
 
 
 if __name__ == "__main__":

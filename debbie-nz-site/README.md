@@ -24,10 +24,10 @@ likes/comments API.
    `HASH_SALT`. (Or `npx wrangler secret put <NAME>`.) Without `HASH_SALT`
    nothing about IPs is stored and rate limiting is off.
 3. Comments publish instantly and need an email from a mainstream provider
-   (list in `worker/index.js`); only a masked version is shown. Delete any
+   (list in `worker/index.js`); the email is checked, never stored. Delete any
    comment at `/admin.html` with the ADMIN_TOKEN.
 
-Privacy: no accounts; commenter emails are stored but only ever shown masked, and never sent to analytics. IPs are salted + hashed (never stored raw) and
+Privacy: no accounts. Commenter emails are only checked (real address, mainstream provider) and never stored; comments show a nickname. Scrambled IPs are deleted after 30 days. `/consent.js` must load before GTM on every page; the policy is `/privacy` (source: `content/privacy.html`). IPs are salted + hashed (never stored raw) and
 only used for rate limiting. Local dev: `npm run dev` (uses `.dev.vars`).
 
 ## Deploy (Cloudflare Pages)

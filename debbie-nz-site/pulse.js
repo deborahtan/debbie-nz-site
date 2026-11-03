@@ -181,9 +181,10 @@
       body: JSON.stringify({ email: email, body: body, website: form.elements.website.value, visitor: VID })
     }).then(function (res) {
       form.elements.body.value = '';
+      emailEl.value = ''; // not kept in the page either
       // Never send the email or comment text to analytics
       dl.push({ event: 'comment_submit', item_id: slug, comment_status: res.status });
-      status.textContent = 'Posted — thank you! 💛';
+      status.textContent = res.name ? 'Posted as ' + res.name + ' — thank you! 💛' : 'Posted — thank you! 💛';
       return loadIssue();
     }).catch(function (err) {
       status.className = 'form-status err';

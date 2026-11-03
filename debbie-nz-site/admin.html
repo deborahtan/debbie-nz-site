@@ -71,7 +71,7 @@
         top.children[0].textContent = c.slug;
         top.children[1].textContent = c.status;
         top.children[2].textContent = new Date(c.created_at).toLocaleString('en-NZ');
-        var who = document.createElement('div'); who.className = 'who'; who.textContent = (c.email || c.name) + (c.email ? '  (shown as ' + c.name + ')' : '');
+        var who = document.createElement('div'); who.className = 'who'; who.textContent = c.name;
         var p = document.createElement('p'); p.textContent = c.body;
         var actions = document.createElement('div'); actions.className = 'actions';
         [c.status === 'pending' ? ['approve', 'Approve', 'primary'] : ['hide', 'Unpublish', ''], ['delete', 'Delete', 'danger']].forEach(function (a) {

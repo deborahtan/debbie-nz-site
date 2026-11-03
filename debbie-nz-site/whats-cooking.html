@@ -9,6 +9,7 @@
 <meta property="og:title" content="What&#x27;s Cooking — Debbie Tan">
 <meta property="og:description" content="The tools I&#x27;m building and testing to take the grunt work out of analytics. Tap any one to see what it does and why it&#x27;s worth having.">
 <meta name="color-scheme" content="light dark">
+<script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -125,6 +126,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </details>
 </li>
+<li class="dish" id="bigquery-agents-conversational-analytics-with-a-custom-front">
+  <details data-project="bigquery-agents-conversational-analytics-with-a-custom-front">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">💬</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>AI agents</span><span>BigQuery</span><span>Product</span></span>
+        <span class="dish-name">BigQuery agents + conversational analytics, with a custom front end</span>
+        <span class="dish-sum">Ask your data a question in plain English and get an answer you can trust, through a proper interface rather than a raw API.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Runs on Google&#x27;s Conversational Analytics API over BigQuery, with no Looker licence needed</li><li>Wraps it in a custom front end with filters and an intent agent that works out what you&#x27;re really asking</li><li>Checks its own answers before showing them, and runs batches of test questions to catch made-up answers at scale</li><li>Tracks the Google Cloud cost of every agent, with a semantic layer and knowledge graph so business terms mean one thing</li><li>Includes purpose-built agents, like one that segments audiences, one that runs health and anomaly checks, and one that explains BigQuery billing spikes</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Puts self-serve answers in front of people who don&#x27;t write SQL</li><li>Far cheaper than an enterprise BI licence for most teams</li><li>Answers are tested and costs are visible before anyone relies on them</li><li>The same patterns are taught in my BigQuery agents workshops</li></ul></div>
+      
+    </div>
+  </details>
+</li>
+<li class="dish" id="utm-naming-checker">
+  <details data-project="utm-naming-checker">
+    <summary>
+      <span class="dish-emoji" aria-hidden="true">🔗</span>
+      <span class="dish-head">
+        <span class="dish-tags"><span>Audit</span><span>BigQuery</span><span>Campaigns</span></span>
+        <span class="dish-name">UTM naming checker</span>
+        <span class="dish-sum">Catches messy campaign tags (utm_source, utm_medium and friends) before they split your reporting into a hundred versions of &#x27;Facebook&#x27;.</span>
+      </span>
+      <span class="dish-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="dish-body">
+      <div class="dish-col"><h3>What it does</h3><ul><li>Reads the naming rules from a simple Google Sheet that marketers can update themselves</li><li>Checks every UTM combination in the GA4 BigQuery export against those rules with SQL</li><li>Flags typos, wrong case, unknown sources and missing values, with the traffic each one affects</li><li>Lets people ask follow-up questions through BigQuery&#x27;s built-in Gemini agent</li></ul></div>
+      <div class="dish-col"><h3>Why it helps</h3><ul><li>Clean channel reporting without manual clean-up every month</li><li>Marketers own the rules; nobody has to edit code</li><li>Shows the cost of bad tagging in sessions and conversions, so fixes get prioritised</li></ul></div>
+      
+    </div>
+  </details>
+</li>
 <li class="dish" id="playwright-tracking-tests">
   <details data-project="playwright-tracking-tests">
     <summary>
@@ -167,6 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
   <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
 </footer>
 

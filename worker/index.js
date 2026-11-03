@@ -1,9 +1,9 @@
 /**
  * debbie.nz Worker — serves the static site and the On the Pulse likes/comments API.
  *
- * Privacy: raw IP addresses are never stored or logged. Each request's IP is
+ * Privacy: commenter emails are checked then discarded (never stored). Raw IP addresses are never stored or logged. Each request's IP is
  * salted (HASH_SALT secret) and SHA-256 hashed, then truncated, and used only for
- * rate limiting and blocking spam. Commenters give a display name, nothing else.
+ * rate limiting and blocking spam.
  *
  * Bindings (wrangler.jsonc): ASSETS, DB (D1), vars COMMENTS_MODERATED
  * Secrets: ADMIN_TOKEN, HASH_SALT   (npx wrangler secret put <NAME>)
@@ -28,10 +28,15 @@ function checkEmail(raw) {
   return { email: v, local: m[1], domain: m[2] };
 }
 
-// What's shown publicly: first two characters + domain, e.g. de•••@gmail.com
-function maskEmail({ local, domain }) {
-  const keep = local.length > 3 ? 2 : 1;
-  return local.slice(0, keep) + '•••@' + domain;
+// The email is only checked (format, mainstream provider, not a throwaway) and then discarded.
+// Nothing from it is stored. Commenters appear under a friendly pseudonym derived from the
+// random per-browser id, so the same browser keeps the same name across comments.
+const ADJ = ['Sunny','Curious','Cosy','Bubbly','Brave','Gentle','Cheeky','Clever','Dreamy','Plucky','Merry','Zesty','Snug','Witty','Breezy','Kind'];
+const NOUN = ['Kererū','Tūī','Kiwi','Pīwakawaka','Dumpling','Noodle','Bao','Pavlova','Lamington','Kūmara','Mochi','Ruru','Tīeke','Hokey Pokey','Kawakawa','Pōhutukawa'];
+async function pseudonym(visitor, env) {
+  const seed = (env.HASH_SALT || 'on-the-pulse') + '|' + (visitor || crypto.randomUUID());
+  const h = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(seed)));
+  return ADJ[h[0] % ADJ.length] + ' ' + NOUN[h[1] % NOUN.length];
 }
 const LIMITS = {
   comment: { max: 3, minutes: 10 },
@@ -68,20 +73,37 @@ async function ensureSchema(env) {
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_slug ON comments (slug, status, created_at)'),
     env.DB.prepare('CREATE INDEX IF NOT EXISTS comments_ip ON comments (ip_hash, created_at)'),
   ]);
+  // Emails are never stored. Remove the column (and anything shown as a masked email) left by an earlier version.
   const cols = await env.DB.prepare('PRAGMA table_info(comments)').all();
-  if (!cols.results.some((c) => c.name === 'email')) {
-    await env.DB.prepare('ALTER TABLE comments ADD COLUMN email TEXT').run();
+  if (cols.results.some((c) => c.name === 'email')) {
+    await env.DB.prepare('UPDATE comments SET email = NULL').run();
+    await env.DB.prepare('ALTER TABLE comments DROP COLUMN email').run();
   }
+  await env.DB.prepare("UPDATE comments SET name = 'A reader' WHERE name LIKE '%@%'").run();
   // Clear pre-launch test likes/comments from the old issue-XX slugs (one-off, harmless afterwards)
   await env.DB.batch([
     env.DB.prepare("DELETE FROM comments WHERE slug LIKE 'issue-%'"),
     env.DB.prepare("DELETE FROM likes WHERE slug LIKE 'issue-%'"),
   ]);
+  await purgeOldIpHashes(env);
   schemaReady = true;
+}
+
+// Scrambled IPs are only needed for short-term spam limits: drop them after 30 days (runs at most hourly).
+let lastPurge = 0;
+async function purgeOldIpHashes(env) {
+  if (Date.now() - lastPurge < 3600e3) return;
+  lastPurge = Date.now();
+  const cutoff = "strftime('%Y-%m-%dT%H:%M:%SZ','now','-30 days')";
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE comments SET ip_hash = NULL WHERE ip_hash IS NOT NULL AND created_at < ${cutoff}`),
+    env.DB.prepare(`UPDATE likes SET ip_hash = NULL WHERE ip_hash IS NOT NULL AND created_at < ${cutoff}`),
+  ]);
 }
 
 async function api(request, env, url) {
   await ensureSchema(env);
+  await purgeOldIpHashes(env);
   const parts = url.pathname.replace(/^\/api\//, '').split('/').filter(Boolean);
   const method = request.method;
 
@@ -148,10 +170,11 @@ async function api(request, env, url) {
       const ipHash = await hashIp(request, env);
       if (await overLimit(env, 'comments', ipHash, LIMITS.comment)) return json({ error: 'Too many comments — try again shortly.' }, 429);
       const status = env.COMMENTS_MODERATED === 'true' ? 'pending' : 'published';
-      // name = the masked address shown publicly; email = full address, only visible on the admin page
-      await env.DB.prepare('INSERT INTO comments (slug, name, email, body, status, ip_hash) VALUES (?, ?, ?, ?, ?, ?)')
-        .bind(slug, maskEmail(em), em.email, text, status, ipHash).run();
-      return json({ status }, 201);
+      // The email has done its job (proving a real address) and is not stored or logged.
+      const name = await pseudonym(cleanVisitor(b.visitor), env);
+      await env.DB.prepare('INSERT INTO comments (slug, name, body, status, ip_hash) VALUES (?, ?, ?, ?, ?)')
+        .bind(slug, name, text, status, ipHash).run();
+      return json({ status, name }, 201);
     }
   }
 
@@ -163,8 +186,8 @@ async function api(request, env, url) {
     if (parts[1] === 'comments' && parts.length === 2 && method === 'GET') {
       const st = url.searchParams.get('status') || 'pending';
       const q = st === 'all'
-        ? env.DB.prepare('SELECT id, slug, name, email, body, status, created_at FROM comments ORDER BY created_at DESC LIMIT 300')
-        : env.DB.prepare('SELECT id, slug, name, email, body, status, created_at FROM comments WHERE status=? ORDER BY created_at DESC LIMIT 300').bind(st);
+        ? env.DB.prepare('SELECT id, slug, name, body, status, created_at FROM comments ORDER BY created_at DESC LIMIT 300')
+        : env.DB.prepare('SELECT id, slug, name, body, status, created_at FROM comments WHERE status=? ORDER BY created_at DESC LIMIT 300').bind(st);
       return json({ comments: (await q.all()).results });
     }
 

@@ -1,4 +1,5 @@
--- On the Pulse likes + comments. ip_hash = truncated salted SHA-256; raw IPs are never stored.
+-- On the Pulse likes + comments. Commenter emails are checked then discarded, never stored.
+-- ip_hash = truncated salted SHA-256; raw IPs are never stored.
 CREATE TABLE IF NOT EXISTS likes (
   slug        TEXT NOT NULL,
   visitor     TEXT NOT NULL,
@@ -13,7 +14,6 @@ CREATE TABLE IF NOT EXISTS comments (
   slug        TEXT NOT NULL,
   name        TEXT NOT NULL,
   body        TEXT NOT NULL,
-  email       TEXT,           -- full address, admin-only; `name` holds the masked version shown publicly
   status      TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','published')),
   ip_hash     TEXT,
   created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))

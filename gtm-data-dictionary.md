@@ -20,6 +20,7 @@ to a line here.
 | `comment_submit` | Custom | Comment successfully submitted | New |
 | `share` | GA4 recommended | Share button (native share or copy link) | New |
 | `project_expand` | Custom | A tool card opened on What's Cooking | New |
+| `consent_update` | Custom | Visitor makes or reloads a cookie choice (`consent_analytics`, `consent_marketing`, `consent_source`) | New |
 | `page_view` | GA4 automatic | Every page load | Live (automatic) |
 
 ## Parameters
@@ -65,6 +66,7 @@ doing once:
 ## Change log
 
 - **v2** — On the Pulse homepage: `newsletter_like`, `comment_submit`, `share`; `post_click` gains `content_group: newsletter`. Never send comment text or emails to the dataLayer.
+- **v4** — Consent Mode v2 via `/consent.js` (loaded before GTM): everything optional defaults to denied; GPC keeps marketing off.
 - **v3** — editions keyed by month (`2026-10`); `project_expand` on What's Cooking.
 
 - **v1** — initial dictionary, mission scoring via GTM Lookup Table

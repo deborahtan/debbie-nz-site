@@ -197,3 +197,61 @@ footer span:first-child::after { content: " 🍜"; }
   .article { padding: 32px 16px 56px; }
   footer { padding: 24px 16px 32px; flex-direction: column; }
 }
+
+/* ---------- FOOTER LINKS ---------- */
+.foot-links a { color: var(--fg-soft); font-weight: 700; }
+.foot-links a:hover { color: var(--accent); }
+
+/* ---------- CONSENT BANNER ---------- */
+.consent {
+  position: fixed; left: 16px; bottom: 16px; z-index: 50;
+  width: min(380px, calc(100vw - 32px));
+  background: var(--card); color: var(--fg);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 20px;
+  padding: 18px 20px 16px; box-shadow: 0 20px 40px -18px var(--shadow), 0 4px 12px -4px var(--shadow);
+  font-size: 15.5px; line-height: 1.55; transform: rotate(-1deg);
+  animation: consent-in .35s ease;
+}
+@keyframes consent-in { from { opacity: 0; transform: translateY(12px) rotate(-1deg); } }
+.consent-title { font-family: var(--display); font-weight: 700; font-size: 19px; margin-bottom: 4px; }
+.consent a { font-weight: 700; }
+.consent-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.consent-actions button {
+  min-height: 44px; font-family: var(--display); font-weight: 700; font-size: 16px; border-radius: 999px; padding: 8px 18px; cursor: pointer;
+}
+.consent-yes { background: var(--accent); color: var(--accent-ink); border: 0; }
+.consent-no { background: var(--card); color: var(--fg); border: 1.5px solid var(--line-strong); }
+.consent-actions button:hover { filter: brightness(1.06); }
+@media (prefers-reduced-motion: reduce) { .consent { animation: none; } }
+@media (max-width: 680px) { .consent { left: 12px; right: 12px; bottom: 12px; width: auto; transform: none; } }
+
+/* ---------- PRIVACY PAGE ---------- */
+.policy p, .policy li { font-size: 17px; }
+.policy h3 { font-family: var(--display); font-weight: 700; font-size: 19px; margin: 18px 0 4px; }
+.policy ul { padding-left: 22px; }
+.policy li { margin-bottom: 8px; }
+.policy li::marker { color: var(--pink); }
+.ticks { list-style: none; padding-left: 0 !important; }
+.ticks li { padding-left: 30px; position: relative; }
+.ticks li::before { content: "💗"; position: absolute; left: 0; font-size: 15px; top: 2px; }
+.consent-panel {
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 6px 20px 16px; margin: 16px 0 8px;
+  box-shadow: 0 12px 24px -18px var(--shadow);
+}
+.consent-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1.5px dashed var(--line); cursor: pointer; }
+.consent-row:first-child { cursor: default; }
+.consent-row h3 { margin: 0 0 2px; }
+.consent-row p { font-size: 15.5px; color: var(--fg-soft); margin: 0; }
+.consent-row .gpc { color: var(--herb-ink); font-weight: 700; margin-top: 4px; }
+.pill-on { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--herb-ink); background: color-mix(in srgb, var(--herb) 18%, transparent); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+.switch {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0; cursor: pointer;
+  width: 52px; height: 30px; border-radius: 999px; background: var(--line-strong); position: relative; transition: background .15s;
+}
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px var(--shadow); transition: transform .15s; }
+.switch:checked { background: var(--accent); }
+.switch:checked::after { transform: translateX(22px); }
+.switch:disabled { opacity: .45; cursor: not-allowed; }
+.consent-save { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 14px; }
+.consent-save button { min-height: 44px; font-family: var(--display); font-weight: 700; font-size: 16px; background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 8px 22px; cursor: pointer; }
+#consent-status { font-size: 15px; color: var(--herb-ink); font-weight: 700; }

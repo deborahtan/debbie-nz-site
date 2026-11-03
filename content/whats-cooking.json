@@ -5,7 +5,10 @@
     {
       "emoji": "🔍",
       "name": "GA4 audit",
-      "tags": ["Audit", "GA4"],
+      "tags": [
+        "Audit",
+        "GA4"
+      ],
       "summary": "An automated health check of a Google Analytics 4 property that gives the same answer every time it runs.",
       "does": [
         "Reads the property's set-up through Google's APIs: data streams, events, key events, custom definitions, data retention, consent and links like BigQuery and Google Ads",
@@ -22,7 +25,11 @@
     {
       "emoji": "🏷️",
       "name": "GTM audit + dataLayer generator, end to end",
-      "tags": ["Audit", "GTM", "Tracking"],
+      "tags": [
+        "Audit",
+        "GTM",
+        "Tracking"
+      ],
       "summary": "From 'what should we track?' to a tested Tag Manager container, with one source of truth the whole way through.",
       "does": [
         "Audits an existing GTM container: tags, triggers, variables, naming, duplicates, unused items and consent settings",
@@ -39,7 +46,10 @@
     {
       "emoji": "📊",
       "name": "Personal dashboard + automated data warehouse",
-      "tags": ["BigQuery", "Dashboards"],
+      "tags": [
+        "BigQuery",
+        "Dashboards"
+      ],
       "summary": "My own data flowing into BigQuery on a schedule, with a dashboard that's always up to date.",
       "does": [
         "Pulls data from the sources I use into BigQuery automatically",
@@ -55,7 +65,10 @@
     {
       "emoji": "🤖",
       "name": "Data Agent Kit experiments",
-      "tags": ["AI agents", "BigQuery"],
+      "tags": [
+        "AI agents",
+        "BigQuery"
+      ],
       "summary": "Testing Google's new Data Agent Kit: coding agents that can query, build pipelines and do data science on BigQuery.",
       "does": [
         "Connects a coding agent to BigQuery and other Google Cloud data services with Google's own skills and tools",
@@ -67,12 +80,63 @@
         "Builds a safe set-up pattern others can copy",
         "Compares Google's approach with Snowflake, Databricks and Microsoft (see the October edition)"
       ],
-      "link": { "label": "Read the October edition", "url": "/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one" }
+      "link": {
+        "label": "Read the October edition",
+        "url": "/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-has-one"
+      }
+    },
+    {
+      "emoji": "💬",
+      "name": "BigQuery agents + conversational analytics, with a custom front end",
+      "tags": [
+        "AI agents",
+        "BigQuery",
+        "Product"
+      ],
+      "summary": "Ask your data a question in plain English and get an answer you can trust, through a proper interface rather than a raw API.",
+      "does": [
+        "Runs on Google's Conversational Analytics API over BigQuery, with no Looker licence needed",
+        "Wraps it in a custom front end with filters and an intent agent that works out what you're really asking",
+        "Checks its own answers before showing them, and runs batches of test questions to catch made-up answers at scale",
+        "Tracks the Google Cloud cost of every agent, with a semantic layer and knowledge graph so business terms mean one thing",
+        "Includes purpose-built agents, like one that segments audiences, one that runs health and anomaly checks, and one that explains BigQuery billing spikes"
+      ],
+      "benefits": [
+        "Puts self-serve answers in front of people who don't write SQL",
+        "Far cheaper than an enterprise BI licence for most teams",
+        "Answers are tested and costs are visible before anyone relies on them",
+        "The same patterns are taught in my BigQuery agents workshops"
+      ]
+    },
+    {
+      "emoji": "🔗",
+      "name": "UTM naming checker",
+      "tags": [
+        "Audit",
+        "BigQuery",
+        "Campaigns"
+      ],
+      "summary": "Catches messy campaign tags (utm_source, utm_medium and friends) before they split your reporting into a hundred versions of 'Facebook'.",
+      "does": [
+        "Reads the naming rules from a simple Google Sheet that marketers can update themselves",
+        "Checks every UTM combination in the GA4 BigQuery export against those rules with SQL",
+        "Flags typos, wrong case, unknown sources and missing values, with the traffic each one affects",
+        "Lets people ask follow-up questions through BigQuery's built-in Gemini agent"
+      ],
+      "benefits": [
+        "Clean channel reporting without manual clean-up every month",
+        "Marketers own the rules; nobody has to edit code",
+        "Shows the cost of bad tagging in sessions and conversions, so fixes get prioritised"
+      ]
     },
     {
       "emoji": "🎭",
       "name": "Playwright tracking tests",
-      "tags": ["QA", "GTM", "Automation"],
+      "tags": [
+        "QA",
+        "GTM",
+        "Automation"
+      ],
       "summary": "A robot browser that clicks through a site and checks the tracking actually fired, in preview and in production.",
       "does": [
         "Opens pages and runs the key journeys (page views, clicks, forms) like a real visitor",
@@ -89,7 +153,10 @@
     {
       "emoji": "📰",
       "name": "Environmental scan automation",
-      "tags": ["Research", "AI"],
+      "tags": [
+        "Research",
+        "AI"
+      ],
       "summary": "A monthly sweep of what changed in measurement, privacy and AI, with every item dated and linked to its source.",
       "does": [
         "Searches a fixed window (the last month) across platforms, regulators, standards bodies and trusted practitioners",
@@ -102,7 +169,10 @@
         "Every claim can be checked against its source",
         "Turns news into a short list of actions"
       ],
-      "link": { "label": "Read the latest edition", "url": "/" }
+      "link": {
+        "label": "Read the latest edition",
+        "url": "/"
+      }
     }
   ],
   "outro": "Got a tool you'd like to see here, or want to compare notes? Leave a comment on the latest edition."
