@@ -225,6 +225,7 @@
   function toggle() {
     if (!panel) buildPanel();
     panel.hidden = !panel.hidden;
+    dock.classList.toggle("panel-open", !panel.hidden);
     launch.setAttribute('aria-expanded', String(!panel.hidden));
     try { sessionStorage.setItem('tb_open', panel.hidden ? '0' : '1'); } catch (e) {}
     if (!panel.hidden) { renderList(); panel.querySelector('.tb-search').focus(); dl.push({ event: 'datalayer_viewer_open' }); }
@@ -241,6 +242,44 @@
   gremlin.title = 'Chaos gremlin: breaks tracking for 30 seconds';
   gremlin.innerHTML = '<span aria-hidden="true">😈</span>';
   var chaosStatus = el('p', 'tb-chaos-status'); chaosStatus.setAttribute('role', 'status');
+
+  // the button lives in a little spot with a speech bubble; it explodes on click and comes back after 30s
+  var gSpot = el('div', 'tb-gspot');
+  var bubble = el('p', 'tb-bubble');
+  bubble.setAttribute('aria-hidden', 'true'); // the button's own label says the same thing to screen readers
+  bubble.innerHTML = '<b>Press me!</b> I am chaos mode. I break the site on purpose for 30 seconds so there\'s debugging data to look at.';
+  var bubbleX = el('button', 'tb-bubble-x', '✕'); bubbleX.type = 'button'; bubbleX.setAttribute('aria-label', 'Hide the chaos mode speech bubble');
+  bubbleX.addEventListener('click', function () { gSpot.classList.add('bubble-off'); save('dn_bubble_off', true); });
+  bubble.appendChild(bubbleX);
+  if (load('dn_bubble_off', false)) gSpot.classList.add('bubble-off');
+  var countdown = el('span', 'tb-countdown'); countdown.setAttribute('aria-hidden', 'true');
+  gSpot.appendChild(bubble); gSpot.appendChild(gremlin); gSpot.appendChild(countdown);
+
+  function explode() {
+    var boom = el('span', 'tb-boom'); boom.setAttribute('aria-hidden', 'true');
+    boom.appendChild(el('span', 'tb-boom-flash'));
+    boom.appendChild(el('span', 'tb-boom-word', 'KABOOM!'));
+    var bits = ['💥', '✨', '⭐', '💗', '🔩', '🧷', '🌸', '⚡', '🍬', '🔧', '💫', '🎀'];
+    bits.forEach(function (b, i) {
+      var a = (i / bits.length) * Math.PI * 2 + Math.random() * .4, d = 70 + Math.random() * 60;
+      var piece = el('span', 'tb-bit', b);
+      piece.style.setProperty('--dx', Math.round(Math.cos(a) * d) + 'px');
+      piece.style.setProperty('--dy', Math.round(Math.sin(a) * d - 30) + 'px');
+      piece.style.setProperty('--r', Math.round(Math.random() * 720 - 360) + 'deg');
+      boom.appendChild(piece);
+    });
+    gSpot.appendChild(boom);
+    gSpot.classList.add('is-exploding');
+    setTimeout(function () { gSpot.classList.remove('is-exploding'); gSpot.classList.add('is-gone'); }, 420);
+    setTimeout(function () { boom.remove(); }, 1400);
+  }
+  function rebuild() {
+    gSpot.classList.remove('is-gone', 'is-exploding');
+    gSpot.classList.add('is-back');
+    gSpot.classList.add('just-fixed'); // keep the bubble out of the way of the "Fixed" message
+    setTimeout(function () { gSpot.classList.remove('is-back'); }, 900);
+    setTimeout(function () { gSpot.classList.remove('just-fixed'); }, 4200);
+  }
 
   window.dnChaos = { active: function () { return Date.now() < chaosUntil; } };
 
@@ -262,6 +301,7 @@
   function startChaos() {
     if (window.dnChaos.active()) return;
     chaosUntil = Date.now() + CHAOS_MS;
+    explode();
     document.documentElement.classList.add('chaos');
     gremlin.setAttribute('aria-pressed', 'true');
     origPushRef().apply(dl, [{ event: 'chaos_start', chaos_mode: true, chaos_seconds: CHAOS_MS / 1000 }]);
@@ -293,7 +333,7 @@
     var tick = function () {
       var left = Math.ceil((chaosUntil - Date.now()) / 1000);
       if (left <= 0) return stopChaos();
-      gremlin.querySelector('span').textContent = String(left);
+      countdown.textContent = left + 's';
       chaosStatus.textContent = '😈 Chaos gremlin loose: tracking is deliberately broken for ' + left + ' more seconds.';
     };
     tick(); chaosTimers.push(setInterval(tick, 1000));
@@ -306,7 +346,7 @@
     chaosUntil = 0;
     document.documentElement.classList.remove('chaos');
     gremlin.setAttribute('aria-pressed', 'false');
-    gremlin.querySelector('span').textContent = '😈';
+    rebuild();
     dl.push({ event: 'chaos_end', chaos_mode: true });
     chaosStatus.textContent = '😇 Fixed. Everything is back to normal.';
     setTimeout(function () { chaosStatus.hidden = true; }, 4000);
@@ -344,7 +384,7 @@
   }
 
   function mount() {
-    dock.appendChild(gremlin); dock.appendChild(launch);
+    dock.appendChild(gSpot); dock.appendChild(launch);
     document.body.appendChild(dock);
     chaosStatus.hidden = true; document.body.appendChild(chaosStatus);
     try { if (sessionStorage.getItem('tb_open') === '1') toggle(); } catch (e) {}
