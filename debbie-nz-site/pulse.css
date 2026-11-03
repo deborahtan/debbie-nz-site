@@ -601,3 +601,38 @@ td.health-empty { border-radius: 0; border: 0; }
 .rx-tasks li::marker { color: var(--pink); }
 .rx-link { font-family: var(--display); font-weight: 700; font-size: 13.5px; color: var(--accent); text-decoration: none; }
 .rx-link:hover { text-decoration: underline; }
+
+/* ---------- How I use AI ---------- */
+.philosophy.pulse-wrap { max-width: 800px; }
+.philosophy .brand h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 6vw, 47px); line-height: 1.05; }
+.ph-list { list-style: none; counter-reset: ph; display: grid; gap: 14px; margin: 0 0 32px; }
+.ph-item { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 12px 24px -18px var(--shadow); }
+.ph-item > details > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto auto 1fr auto; gap: 12px; align-items: center; padding: 16px 20px; border-radius: 22px; }
+.ph-item > details > summary::-webkit-details-marker { display: none; }
+.ph-item > details > summary::after { content: "+"; font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--accent); transition: transform .2s; }
+.ph-item > details[open] > summary::after { transform: rotate(45deg); }
+.ph-item > details > summary:hover { background: color-mix(in srgb, var(--tint) 55%, transparent); }
+.ph-item > details > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ph-no { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--tint); color: var(--accent); font-family: var(--display); font-weight: 700; font-size: 14px; }
+.ph-emoji { font-size: 22px; }
+.ph-name { display: block; font-family: var(--display); font-weight: 700; font-size: 19px; line-height: 1.2; color: var(--fg); }
+.ph-sum { display: block; font-size: 14.5px; color: var(--fg-soft); line-height: 1.45; margin-top: 2px; }
+.ph-body { padding: 0 20px 18px 20px; }
+.ph-body p { font-size: 16px; line-height: 1.65; margin-bottom: 12px; }
+.ph-quote { margin: 14px 0 0; padding: 12px 16px; border-left: 4px solid var(--pink); background: color-mix(in srgb, var(--tint) 45%, transparent); border-radius: 0 14px 14px 0; }
+.ph-quote blockquote { font-family: var(--display); font-weight: 600; font-size: 16.5px; line-height: 1.45; color: var(--fg); margin: 0; }
+.ph-quote blockquote::before { content: "“"; }
+.ph-quote blockquote::after { content: "”"; }
+.ph-quote figcaption { font-size: 13.5px; color: var(--fg-faint); margin-top: 6px; }
+.ph-quote figcaption a { color: var(--accent); }
+.ph-sources { background: var(--card); border: 1.5px dashed var(--line-strong); border-radius: 20px; padding: 16px 20px; }
+.ph-sources h2 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 0 0 4px; }
+.ph-sources ol { padding-left: 22px; display: grid; gap: 6px; margin-top: 8px; }
+.ph-sources li { font-size: 14.5px; line-height: 1.5; }
+.ph-sources li::marker { color: var(--pink); font-weight: 700; }
+@media (max-width: 680px) {
+  .ph-item > details > summary { grid-template-columns: auto 1fr auto; padding: 14px 16px; row-gap: 4px; align-items: start; }
+  .ph-no, .ph-item > details > summary::after { margin-top: 2px; }
+  .ph-emoji { display: none; }
+  .ph-body { padding: 0 16px 16px; }
+}

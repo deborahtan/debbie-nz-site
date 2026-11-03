@@ -24,6 +24,7 @@ for (const f of readdirSync(join(ROOT, 'content', 'pulse')).filter((f) => f.ends
     foot: `${stories} stories · dated & sourced · commentary by Debbie` });
 }
 cards.push({ file: 'site.png', badge: '💗 On the Pulse', title: "What's moving in data, technology & measurement.", accent: 'measurement.', foot: 'A monthly read from Auckland, Aotearoa · by Debbie Tan' });
+cards.push({ file: 'philosophy.png', badge: '🧠 How I use AI', title: 'A tool, not a brain transplant.', accent: 'brain transplant.', foot: "Judgment stays mine · measured, costed, sceptical · by Debbie Tan" });
 cards.push({ file: 'whats-cooking.png', badge: "🍳 What's cooking", title: 'The automations taking the grunt work out of measurement.', accent: 'measurement.', foot: 'Tracking plans · GTM · audits · agents · by Debbie Tan' });
 cards.push({ file: 'shop.png', badge: '🧪 Test shop', title: 'A pretend shop for testing ecommerce tracking.', accent: 'tracking.', foot: 'Nothing is real · no money changes hands' });
 

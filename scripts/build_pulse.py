@@ -69,7 +69,7 @@ def title_html(issue):
 
 # ------------------------------------------------------------------ shell
 NAV_ITEMS = [("/", "on the pulse", "pulse"), ("/whats-cooking", "what's cooking", "cooking"), ("/roadmap", "roadmap", "roadmap"),
-             ("/about.html", "about", "about")]
+             ("/how-i-use-ai", "how i use ai", "ai"), ("/about.html", "about", "about")]
 
 RIBBON = """<div class="ribbon" role="note">
   <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
@@ -721,6 +721,52 @@ def render_roadmap(data, cooking):
     return "\n".join(out)
 
 
+def render_philosophy(data):
+    """How I use AI — Debbie's own position, each principle backed by a named 2026 source."""
+    out = [head("How I use AI — Debbie Tan", data["intro"], "/how-i-use-ai", "ai", "/og/philosophy.png")]
+    out.append('<main id="main" class="pulse-wrap philosophy">')
+    out.append(f'<header class="brand"><span class="badge">{e(data["badge"])}</span><h1>{e(data["title"])}</h1>'
+               f'<p>{e(data["intro"])}</p></header>')
+    out.append(f'<p class="lede">{e(data["standfirst"])}</p>')
+    out.append('<div class="dish-tools"><button type="button" data-ph-expand="open">Open all</button>'
+               '<button type="button" data-ph-expand="close">Close all</button></div>')
+
+    def quote_html(q):
+        return (f'<figure class="ph-quote"><blockquote>{e(q["text"])}</blockquote>'
+                f'<figcaption>— {e(q["who"])}, <a href="{e(q["url"])}" target="_blank" rel="noopener">{e(q["where"])}</a>, {e(q["date"])}</figcaption></figure>')
+
+    out.append('<ol class="ph-list">')
+    for n, pr in enumerate(data["principles"], 1):
+        paras = "".join(f"<p>{e(x)}</p>" for x in pr["body"])
+        quotes = quote_html(pr["quote"]) + (quote_html(pr["quote2"]) if pr.get("quote2") else "")
+        out.append(f"""<li class="ph-item" id="{slugify(pr['name'])}">
+  <details data-principle="{slugify(pr['name'])}" open>
+    <summary>
+      <span class="ph-no" aria-hidden="true">{n}</span>
+      <span class="ph-emoji" aria-hidden="true">{e(pr.get('emoji', '💭'))}</span>
+      <span class="ph-head"><span class="ph-name">{e(pr['name'])}</span><span class="ph-sum">{e(pr['summary'])}</span></span>
+    </summary>
+    <div class="ph-body">{paras}{quotes}</div>
+  </details>
+</li>""")
+    out.append("</ol>")
+
+    seen, srcs = set(), []
+    for pr in data["principles"]:
+        for key in ("quote", "quote2"):
+            q = pr.get(key)
+            if q and q["url"] not in seen:
+                seen.add(q["url"])
+                srcs.append(f'<li><a href="{e(q["url"])}" target="_blank" rel="noopener">{e(q["who"])} — {e(q["where"])}</a>, {e(q["date"])}</li>')
+    out.append(f'<section class="ph-sources"><h2>Where the quotes come from</h2>'
+               f'<p class="hint">{e(data["sources_note"])}</p><ol>{"".join(srcs)}</ol></section>')
+    out.append(f'<p class="note">{e(data["outro"])}</p>')
+    out.append("</main>")
+    out.append(FOOT)
+    return "\n".join(out)
+
+
+
 def render_page(title, desc, path, body_html, extra_class="", current=""):
     return "\n".join([head(title, desc, path, current), f'<main id="main" class="pulse-wrap {extra_class}">', body_html, "</main>", FOOT])
 
@@ -732,7 +778,7 @@ def render_404():
 
 
 def render_sitemap(issues):
-    urls = ["/", "/whats-cooking", "/roadmap", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
+    urls = ["/", "/whats-cooking", "/roadmap", "/how-i-use-ai", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
     rows = "".join(f"<url><loc>{SITE_URL}{u}</loc></url>" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
 
@@ -769,6 +815,7 @@ def main():
         roadmap_data = json.loads((CONTENT / "roadmap.json").read_text())
         (SITE / "whats-cooking.html").write_text(render_cooking(cooking_data, roadmap_data))
         (SITE / "roadmap.html").write_text(render_roadmap(roadmap_data, cooking_data))
+    (SITE / "how-i-use-ai.html").write_text(render_philosophy(json.loads((CONTENT / "philosophy.json").read_text())))
     privacy = CONTENT / "privacy.html"
     if privacy.exists():
         (SITE / "privacy.html").write_text(render_page(

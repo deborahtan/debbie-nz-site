@@ -104,6 +104,22 @@
   openFromHash();
   window.addEventListener('hashchange', openFromHash);
 
+  // ---------- How I use AI: open / close all ----------
+  var ph = document.querySelector('.philosophy');
+  if (ph) {
+    ph.querySelectorAll('[data-ph-expand]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('data-ph-expand') === 'open';
+        ph.querySelectorAll('.ph-item details').forEach(function (d) { d.open = open; });
+      });
+    });
+    ph.querySelectorAll('.ph-item details').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (d.open) dl.push({ event: 'principle_expand', item_id: d.getAttribute('data-principle') });
+      });
+    });
+  }
+
   // ---------- Roadmap ----------
   var rm = document.querySelector('.roadmap');
   if (rm) {

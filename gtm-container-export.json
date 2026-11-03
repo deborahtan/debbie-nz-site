@@ -680,7 +680,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "^(search|post_click|newsletter_like|comment_submit|share|project_expand|project_filter|roadmap_section_toggle|roadmap_item_click|consent_update|web_vitals|welcome_back|datalayer_viewer_open|psych_reveal|coupon_apply|coupon_error|payment_failed|payment_verification|form_submit)$"
+                "value": "^(search|post_click|newsletter_like|comment_submit|share|project_expand|project_filter|principle_expand|roadmap_section_toggle|roadmap_item_click|consent_update|web_vitals|welcome_back|datalayer_viewer_open|psych_reveal|coupon_apply|coupon_error|payment_failed|payment_verification|form_submit)$"
               }
             ]
           }
