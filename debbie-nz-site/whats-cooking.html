@@ -45,7 +45,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/">on the pulse</a>
       <a href="/whats-cooking" aria-current="page">what's cooking</a>
       <a href="/roadmap">roadmap</a>
-      <a href="/site-health">site health</a>
       <a href="/about.html">about</a>
       <a href="/shop">shop <span class="test-tag">test</span></a>
       <a href="/form-test.html">sign up <span class="test-tag">test</span></a>
@@ -66,7 +65,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <main id="main" class="pulse-wrap cooking">
-<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>What&#x27;s cooking 🍳</h1><p>The automations I&#x27;m building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.</p></header>
+<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>What&#x27;s cooking 🍳</h1><p>The automations I&#x27;m building to take the grunt work out of measurement, from the first tracking plan to the last health check. Tap any one to see what it does and why it helps.</p><p class="cooking-x"><a href="/roadmap">See how these fit the work on the Roadmap →</a></p></header>
 <div class="status-filter" role="group" aria-label="Filter by status"><button type="button" class="status-chip all" data-filter="all" aria-pressed="true">All <b>14</b></button><button type="button" class="status-chip st-done" data-filter="done" aria-pressed="false">✅ Done · in use <b>7</b></button><button type="button" class="status-chip st-drafted" data-filter="drafted" aria-pressed="false">✏️ Drafted <b>3</b></button><button type="button" class="status-chip st-testing" data-filter="testing" aria-pressed="false">🧪 Testing <b>1</b></button><button type="button" class="status-chip st-progress" data-filter="progress" aria-pressed="false">🛠️ In progress <b>2</b></button><button type="button" class="status-chip st-exploring" data-filter="exploring" aria-pressed="false">🧭 Exploring <b>1</b></button></div>
 <div class="dish-tools"><button type="button" data-expand="open">Open all</button><button type="button" data-expand="close">Close all</button></div>
 <section class="dish-group"><h2>The measurement pipeline</h2><p class="group-blurb">10 pieces that take a project from brief to trustworthy data, in the order they run.</p>
@@ -85,6 +84,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Plan</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Writing measurement plans</li><li>Writing full measurement frameworks</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Reads the brief and the site audit</li><li>Maps business goals to KPIs, then to the events and parameters that measure them</li><li>Writes the event spec and a data dictionary with consistent naming</li><li>Becomes the single source of truth that every later step builds from</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Days of planning becomes hours</li><li>The same naming rules across every project</li><li>Everything downstream (GTM, dev briefs, tests) traces back to one approved plan</li></ul></div>
       
@@ -105,6 +105,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Build</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Creating GTM containers</li><li>Adding new tags to existing setups</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Reads the approved tracking plan</li><li>Creates the tags, triggers and variables to match it exactly</li><li>Sets consent requirements on every tag</li><li>Outputs a container that imports in one step</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>No more hand-building tags one by one</li><li>The container always matches the spec</li><li>Easy to rebuild when the plan changes</li></ul></div>
       
@@ -125,6 +126,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       <p class="dish-next"><b>Next:</b> Drafted, not in use yet.</p>
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Build</span><span class="rx-col rx-to-do">To do</span></h3><ul class="rx-tasks"><li>Updating GA4 &amp; GTM configs</li><li>Small tweaks to existing tag configs</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Takes a set of approved changes (events, key events, custom definitions, settings)</li><li>Applies them to the GA4 property only after sign-off</li><li>Keeps a record of what changed and when</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>No manual clicking through GA4 admin</li><li>Changes match exactly what was approved</li><li>A clear audit trail of every change</li></ul></div>
       
@@ -145,6 +147,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Audit &amp; monitor</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Auditing complex tag setups</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Reviews GTM containers: tags, triggers, variables, naming, duplicates, unused items and consent settings</li><li>Reviews the GA4 property: data streams, events, key events, custom definitions, retention and product links</li><li>Checks everything against a fixed rule set, so the result is deterministic</li><li>Looks at configuration only, never personal data</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Hours of clicking through admin screens becomes minutes</li><li>Re-run it after changes and compare like with like</li><li>Catches gaps before they quietly cost months of data</li></ul></div>
       
@@ -165,6 +168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       <p class="dish-next"><b>Next:</b> Next: creating Jira and Confluence tickets automatically.</p>
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Build</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Writing developer briefs</li><li>Writing site data collection specs</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Writes a developer brief per event: the dataLayer code to add, where it fires and what each value should be</li><li>Adds acceptance criteria and test steps so &#x27;done&#x27; is clear</li><li>Coming next: creating Jira tickets and Confluence pages automatically, linked back to the plan</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Developers get exactly what they need, first time</li><li>Every ticket traces back to an approved line in the plan</li><li>Far less back-and-forth between analysts and developers</li></ul></div>
       
@@ -185,6 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       <p class="dish-next"><b>Next:</b> Refining.</p>
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Test</span><span class="rx-col rx-doing">Doing</span></h3><ul class="rx-tasks"><li>Funnel QA: run a booking and check tags fire at every step</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Opens pages and runs key journeys (page views, clicks, forms, checkout) like a real visitor</li><li>Watches network requests to see which tags fired and what they sent</li><li>Checks the dataLayer at each step against the spec</li><li>Reads the site&#x27;s Content Security Policy and flags any vendor it would block</li><li>Works in Tag Manager preview before release, and on the live site to diagnose problems</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Tests changes before they go live</li><li>Diagnoses production issues in minutes</li><li>Catches silent breakages, like a release that kills a conversion tag</li></ul></div>
       
@@ -205,6 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Insight &amp; agents</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Implementing conversational analytics</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Runs on Google&#x27;s Conversational Analytics API over BigQuery, with no Looker licence needed</li><li>Answers questions like &#x27;which events dropped this week?&#x27; or &#x27;is purchase missing currency?&#x27;</li><li>Validates its answers before showing them</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Event health without writing SQL</li><li>Answers you can trust, because they&#x27;re checked</li><li>Much cheaper than an enterprise BI licence</li></ul></div>
       
@@ -225,6 +231,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Audit &amp; monitor</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Setting up tracking health monitoring</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Runs health checks across key events when prompted</li><li>Flags drops, spikes, missing parameters and broken values</li><li>Runs on request rather than always-on, to keep costs under control</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Problems surface before a report goes out wrong</li><li>Cost stays predictable</li><li>Pairs with the conversational analytics agent for follow-up questions</li></ul></div>
       
@@ -245,6 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       <p class="dish-next"><b>Next:</b> Refining.</p>
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Insight &amp; agents</span><span class="rx-col rx-doing">Doing</span></h3><ul class="rx-tasks"><li>Evaluating and testing agents</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Runs batches of test questions against an agent</li><li>Scores the answers and flags made-up ones</li><li>Tracks the Google Cloud cost of each agent and each run</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Find weak spots before people rely on an agent</li><li>Scale testing without tying up anyone&#x27;s machine</li><li>Costs are visible, not a surprise on the bill</li></ul></div>
       
@@ -265,6 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       <p class="dish-next"><b>Next:</b> You&#x27;re reading it: On the Pulse is what this makes.</p>
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Stay ahead</span><span class="rx-col rx-done">Done</span></h3><ul class="rx-tasks"><li>Newsletters &amp; industry updates</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Searches a fixed window across Google release notes, practitioners and trusted publications</li><li>Keeps only what changed, with every item dated and sourced</li><li>Explains what it means for the work and what to do about it</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Hear about changes before they become problems</li><li>Staying current takes a read, not a day of searching</li><li>The same engine behind On the Pulse</li></ul></div>
       <a class="dish-link" href="/">Read the latest edition →</a>
@@ -288,6 +297,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Data &amp; dashboards</span><span class="rx-col rx-doing">Doing</span></h3><ul class="rx-tasks"><li>Pulling data by hand for ad hoc requests</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>A custom interface with filters, and an intent agent that works out what you&#x27;re really asking</li><li>A semantic layer so business terms mean one thing</li><li>Purpose-built agents, like segmentation, health checks and explaining BigQuery billing spikes</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Self-serve answers for people who don&#x27;t write SQL</li><li>The same patterns I teach in my BigQuery agents workshops</li></ul></div>
       
@@ -308,6 +318,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Test</span><span class="rx-col rx-doing">Doing</span></h3><ul class="rx-tasks"><li>Auditing UTM naming conventions</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Reads naming rules from a Google Sheet marketers can update</li><li>Checks every UTM combination in the GA4 BigQuery export with SQL</li><li>Flags typos, wrong case and unknown values, with the traffic each affects</li><li>Answers follow-up questions through BigQuery&#x27;s built-in Gemini agent</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Clean channel reporting without monthly clean-up</li><li>Marketers own the rules; no code edits</li><li>Shows the cost of bad tagging, so fixes get prioritised</li></ul></div>
       
@@ -328,6 +339,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Data &amp; dashboards</span><span class="rx-col rx-to-do">To do</span></h3><ul class="rx-tasks"><li>Reformatting data for different tools</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Connects a coding agent to BigQuery with Google&#x27;s own skills and tools</li><li>Puts guardrails in first: an IAM policy blocking write actions</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>Finds out what&#x27;s useful versus demo-only</li><li>Compares Google with Snowflake, Databricks and Microsoft</li></ul></div>
       <a class="dish-link" href="/pulse/2026-10#google-s-data-agent-kit-is-out-and-every-data-platform-now-h">Read the October edition →</a>
@@ -348,6 +360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </summary>
     <div class="dish-body">
       
+      <div class="dish-roadmap"><h3>On the roadmap <span class="rx-stage">Data &amp; dashboards</span><span class="rx-col rx-doing">Doing</span></h3><ul class="rx-tasks"><li>Creating reporting templates</li><li>Building data pipelines into BigQuery</li><li>Building dashboards</li><li>Designing data warehouses</li></ul><a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>
       <div class="dish-col"><h3>What it does</h3><ul><li>Pulls data into BigQuery automatically</li><li>Models it with version-controlled SQL</li><li>Feeds a dashboard that refreshes itself</li></ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul><li>No copy-paste reporting</li><li>A sandbox for testing new tools on real data</li></ul></div>
       
@@ -361,7 +374,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
   <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
-  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a> · <a href="/site-health">Site health</a></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
   <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
 </footer>
 <script src="/site.js" defer></script>

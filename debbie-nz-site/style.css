@@ -280,7 +280,7 @@ footer > span:first-child::after { content: " 🍜"; }
 .this-site li { font-size: 14.5px; margin-bottom: 8px; }
 @media (max-width: 680px) { .two-up { grid-template-columns: 1fr; } .this-site { padding: 0 16px 48px; } }
 
-/* ---------- TEST-BENCH TOOLS (dataLayer viewer, chaos gremlin, welcome) ---------- */
+/* ---------- TEST-BENCH TOOLS (dataLayer viewer, welcome back) ---------- */
 .tb-dock { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: flex; gap: 8px; align-items: flex-end; }
 .tb-launch {
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px; border-radius: 999px; cursor: pointer;
@@ -290,80 +290,6 @@ footer > span:first-child::after { content: " 🍜"; }
 .tb-launch:hover, .tb-launch[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
 .tb-badge { background: var(--tint); color: var(--accent); border-radius: 999px; padding: 0 8px; font-size: 11.5px; }
 .tb-badge.warn { background: color-mix(in srgb, var(--marigold) 30%, var(--card)); color: var(--marigold-ink); }
-.tb-gremlin {
-  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font-size: 18px; line-height: 1;
-  background: radial-gradient(circle at 35% 30%, #ff6b6b, #c62828 70%); color: #fff; font-family: var(--display); font-weight: 700;
-  box-shadow: 0 6px 0 #8e1b1b, 0 10px 20px -8px rgba(198, 40, 40, .7); transition: transform .1s, box-shadow .1s;
-}
-.tb-gremlin:hover { transform: translateY(-1px); }
-.tb-gremlin:active, .tb-gremlin[aria-pressed="true"] { transform: translateY(4px); box-shadow: 0 2px 0 #8e1b1b; }
-.tb-chaos-status { position: fixed; left: 50%; transform: translateX(-50%); bottom: 72px; z-index: 61; background: #c62828; color: #fff;
-  font-family: var(--display); font-weight: 700; padding: 8px 18px; border-radius: 999px; box-shadow: 0 10px 24px -10px rgba(0,0,0,.4); max-width: calc(100vw - 32px); text-align: center; }
-/* chaos button: speech bubble, cartoon explosion, comeback */
-.tb-gspot { position: relative; width: 44px; height: 50px; display: grid; place-items: start center; }
-.tb-bubble {
-  position: absolute; right: calc(100% + 12px); bottom: 10px; width: 230px; margin: 0;
-  background: var(--card); color: var(--fg); border: 2px solid var(--fg); border-radius: 18px; padding: 9px 30px 10px 13px;
-  font-family: var(--display); font-weight: 600; font-size: 13px; line-height: 1.35; box-shadow: 3px 4px 0 var(--fg);
-  animation: bubble-bob 2.6s ease-in-out infinite; transform-origin: right bottom;
-}
-.tb-bubble b { display: block; color: #c62828; font-size: 15px; }
-@media (prefers-color-scheme: dark) { .tb-bubble b { color: #ff8a8a; } }
-.tb-bubble::after { /* the tail, pointing at the button */
-  content: ""; position: absolute; right: -10px; bottom: 14px; width: 14px; height: 14px; background: var(--card);
-  border-right: 2px solid var(--fg); border-top: 2px solid var(--fg); transform: rotate(45deg) skew(10deg, 10deg);
-}
-.tb-bubble-x { position: absolute; top: 4px; right: 6px; width: 24px; height: 24px; border: 0; background: none; border-radius: 50%; cursor: pointer; color: var(--fg-soft); font-size: 11px; }
-.tb-bubble-x:hover, .tb-bubble-x:focus-visible { background: var(--tint); color: var(--accent); }
-.tb-gspot.bubble-off .tb-bubble, .tb-gspot.just-fixed .tb-bubble, html.chaos .tb-bubble, .tb-dock.panel-open .tb-bubble { display: none; }
-@keyframes bubble-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-1deg); } }
-
-.tb-countdown {
-  position: absolute; inset: 0 0 6px; display: none; place-items: center; border-radius: 50%;
-  font-family: var(--display); font-weight: 700; font-size: 14px; color: #c62828; background: var(--card);
-  border: 2px dashed #c62828; animation: count-pulse 1s ease-in-out infinite;
-}
-.tb-gspot.is-gone .tb-countdown { display: grid; }
-.tb-gspot.is-gone .tb-gremlin { visibility: hidden; }
-@keyframes count-pulse { 50% { transform: scale(1.06); } }
-
-.tb-gspot.is-exploding .tb-gremlin { animation: gremlin-pop .42s ease-in forwards; }
-@keyframes gremlin-pop {
-  0% { transform: scale(1); } 30% { transform: scale(.75, 1.25) rotate(-8deg); } 55% { transform: scale(1.5) rotate(10deg); filter: brightness(1.6); }
-  100% { transform: scale(0) rotate(40deg); opacity: 0; }
-}
-.tb-gspot.is-back .tb-gremlin { animation: gremlin-back .85s cubic-bezier(.3, 1.6, .5, 1) both; }
-@keyframes gremlin-back { 0% { transform: scale(0) rotate(-90deg); opacity: 0; } 60% { transform: scale(1.25) rotate(8deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
-
-.tb-boom { position: absolute; left: 50%; top: 22px; width: 0; height: 0; pointer-events: none; z-index: 2; }
-.tb-boom-flash {
-  position: absolute; left: -60px; top: -60px; width: 120px; height: 120px;
-  background: #ffd54a; clip-path: polygon(50% 0, 61% 28%, 92% 14%, 74% 42%, 100% 55%, 70% 63%, 82% 94%, 52% 74%, 30% 100%, 30% 70%, 0 78%, 22% 52%, 4% 26%, 34% 32%);
-  border: 0; animation: boom-flash .6s ease-out forwards; filter: drop-shadow(0 0 0 #c62828);
-}
-.tb-boom-word {
-  position: absolute; left: -50px; top: -18px; width: 100px; text-align: center; font-family: var(--display); font-weight: 800; font-size: 20px;
-  color: #c62828; -webkit-text-stroke: 1px #fff; text-shadow: 2px 2px 0 #3E2A24; animation: boom-word .9s ease-out forwards;
-}
-.tb-bit { position: absolute; left: -10px; top: -12px; font-size: 20px; animation: boom-bit 1.1s cubic-bezier(.2, .7, .4, 1) forwards; }
-@keyframes boom-flash { 0% { transform: scale(.2) rotate(0); opacity: 1; } 50% { transform: scale(1.1) rotate(20deg); opacity: 1; } 100% { transform: scale(1.4) rotate(35deg); opacity: 0; } }
-@keyframes boom-word { 0% { transform: scale(.3) rotate(-12deg); opacity: 0; } 25% { transform: scale(1.25) rotate(-6deg); opacity: 1; } 70% { opacity: 1; } 100% { transform: translateY(-34px) scale(1) rotate(-4deg); opacity: 0; } }
-@keyframes boom-bit { 0% { transform: translate(0, 0) scale(.4); opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(var(--dx), calc(var(--dy) + 40px)) rotate(var(--r)) scale(1); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) {
-  .tb-bubble, .tb-countdown { animation: none; }
-  .tb-bit, .tb-boom-word { display: none; }
-  .tb-boom-flash { animation: none; opacity: .9; transition: opacity .5s; }
-  .tb-gspot.is-exploding .tb-gremlin, .tb-gspot.is-back .tb-gremlin { animation: none; }
-}
-@media (max-width: 680px) {
-  .tb-bubble { width: 168px; font-size: 12px; padding: 7px 26px 8px 11px; bottom: 8px; }
-  .tb-bubble b { font-size: 13.5px; }
-}
-/* wobble the page content, not body: a transform on body would drag the fixed dock off screen */
-html.chaos body > nav, html.chaos body > main, html.chaos body > footer, html.chaos .ribbon { animation: wobble 1.6s ease-in-out infinite; }
-html.chaos .wordmark::after { content: " 😈"; }
-@keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(.35deg); } 75% { transform: rotate(-.35deg); } }
-@media (prefers-reduced-motion: reduce) { html.chaos body > nav, html.chaos body > main, html.chaos body > footer, html.chaos .ribbon { animation: none; } }
 
 .tb-panel {
   position: fixed; top: 12px; right: 12px; bottom: 72px; width: min(440px, calc(100vw - 24px)); z-index: 70;
@@ -395,7 +321,6 @@ html.chaos .wordmark::after { content: " 😈"; }
 .tb-item.cat-custom { border-left-color: var(--marigold); }
 .tb-item.cat-consent { border-left-color: var(--herb); }
 .tb-item.cat-gtm, .tb-item.cat-data, .tb-item.cat-gtag { border-left-color: #9B7BD4; }
-.tb-item.cat-chaos { border-left-color: #c62828; background: color-mix(in srgb, #c62828 10%, var(--bg)); }
 .tb-row { width: 100%; text-align: left; background: none; border: 0; padding: 8px 10px; cursor: pointer; color: var(--fg); display: grid; grid-template-columns: 1fr auto auto; gap: 2px 8px; align-items: baseline; border-radius: 12px; }
 .tb-row:hover { background: var(--tint); }
 .tb-name { font-family: var(--mono); font-weight: 700; font-size: 12px; overflow-wrap: anywhere; }
@@ -427,9 +352,3 @@ html.chaos .wordmark::after { content: " 😈"; }
 }
 /* keep the cookie banner clear of the dock */
 .consent { bottom: 76px; }
-@media (max-width: 680px) {
-  /* on phones the chaos message goes up top so it never covers the countdown */
-  .tb-chaos-status { top: 12px; bottom: auto; font-size: 13px; padding: 6px 14px; border-radius: 16px; }
-}
-/* the wobble rotates wide content past the screen edge; clip it so phones don't zoom out and lose the dock */
-html.chaos, html.chaos body { overflow-x: clip; }

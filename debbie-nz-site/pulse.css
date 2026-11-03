@@ -582,3 +582,22 @@ td.health-empty { border-radius: 0; border: 0; }
 @media (prefers-reduced-motion: reduce) { .rm-dot, .kb-card, .rm-sec > summary::after { transition: none; } }
 .dish { scroll-margin-top: 16px; }
 .dish.is-linked details { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent); transition: box-shadow .3s; }
+
+/* ---------- What's Cooking ↔ Roadmap ---------- */
+.cooking-x { margin-top: 10px; }
+.cooking-x a { font-family: var(--display); font-weight: 700; font-size: 14.5px; color: var(--accent); text-decoration: none; border-bottom: 2px dashed color-mix(in srgb, var(--accent) 45%, transparent); }
+.cooking-x a:hover { border-bottom-style: solid; }
+.dish-roadmap { grid-column: 1 / -1; background: color-mix(in srgb, var(--bg) 60%, var(--card)); border: 1.5px dashed var(--line-strong); border-radius: 14px; padding: 10px 14px; margin-bottom: 4px; }
+.dish-roadmap h3 { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-family: var(--display); font-weight: 700; font-size: 14.5px; margin: 0 0 6px; }
+.dish-roadmap h3::before { content: "🧭"; }
+.rx-stage { font-weight: 600; font-size: 12.5px; color: var(--fg-soft); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+.rx-col { font-size: 12px; border-radius: 999px; padding: 1px 9px; border: 1.5px solid transparent; }
+.rx-to-do { background: color-mix(in srgb, #9B7BD4 16%, var(--card)); color: #6A479E; border-color: color-mix(in srgb, #9B7BD4 45%, transparent); }
+.rx-doing { background: color-mix(in srgb, var(--marigold) 22%, var(--card)); color: var(--marigold-ink); border-color: color-mix(in srgb, var(--marigold) 55%, transparent); }
+.rx-done { background: color-mix(in srgb, var(--herb) 22%, var(--card)); color: var(--herb-ink); border-color: color-mix(in srgb, var(--herb) 55%, transparent); }
+@media (prefers-color-scheme: dark) { .rx-to-do { color: #CDB6F2; } }
+.rx-tasks { margin: 0 0 8px; padding-left: 20px; }
+.rx-tasks li { font-size: 14.5px; line-height: 1.5; margin-bottom: 3px; }
+.rx-tasks li::marker { color: var(--pink); }
+.rx-link { font-family: var(--display); font-weight: 700; font-size: 13.5px; color: var(--accent); text-decoration: none; }
+.rx-link:hover { text-decoration: underline; }

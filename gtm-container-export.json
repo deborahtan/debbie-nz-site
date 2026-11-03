@@ -93,21 +93,6 @@
                   {
                     "type": "TEMPLATE",
                     "key": "parameter",
-                    "value": "chaos_mode"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameterValue",
-                    "value": "{{DLV - chaos_mode}}"
-                  }
-                ]
-              },
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameter",
                     "value": "adopted_event"
                   },
                   {
@@ -157,36 +142,6 @@
             "type": "LIST",
             "key": "eventSettingsTable",
             "list": [
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameter",
-                    "value": "chaos_mode"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameterValue",
-                    "value": "{{DLV - chaos_mode}}"
-                  }
-                ]
-              },
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameter",
-                    "value": "chaos_seconds"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "parameterValue",
-                    "value": "{{DLV - chaos_seconds}}"
-                  }
-                ]
-              },
               {
                 "type": "MAP",
                 "map": [
@@ -725,7 +680,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "^(search|post_click|newsletter_like|comment_submit|share|project_expand|project_filter|roadmap_section_toggle|roadmap_item_click|consent_update|web_vitals|welcome_back|datalayer_viewer_open|chaos_start|chaos_end|psych_reveal|coupon_apply|coupon_error|payment_failed|payment_verification|form_submit)$"
+                "value": "^(search|post_click|newsletter_like|comment_submit|share|project_expand|project_filter|roadmap_section_toggle|roadmap_item_click|consent_update|web_vitals|welcome_back|datalayer_viewer_open|psych_reveal|coupon_apply|coupon_error|payment_failed|payment_verification|form_submit)$"
               }
             ]
           }
@@ -775,54 +730,6 @@
         "accountId": "6348004567",
         "containerId": "248383150",
         "variableId": "3",
-        "name": "DLV - chaos_mode",
-        "type": "v",
-        "parameter": [
-          {
-            "type": "INTEGER",
-            "key": "dataLayerVersion",
-            "value": "2"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "setDefaultValue",
-            "value": "false"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "name",
-            "value": "chaos_mode"
-          }
-        ]
-      },
-      {
-        "accountId": "6348004567",
-        "containerId": "248383150",
-        "variableId": "4",
-        "name": "DLV - chaos_seconds",
-        "type": "v",
-        "parameter": [
-          {
-            "type": "INTEGER",
-            "key": "dataLayerVersion",
-            "value": "2"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "setDefaultValue",
-            "value": "false"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "name",
-            "value": "chaos_seconds"
-          }
-        ]
-      },
-      {
-        "accountId": "6348004567",
-        "containerId": "248383150",
-        "variableId": "5",
         "name": "DLV - comment_status",
         "type": "v",
         "parameter": [
@@ -846,7 +753,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "6",
+        "variableId": "4",
         "name": "DLV - commitment_level",
         "type": "v",
         "parameter": [
@@ -870,7 +777,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "7",
+        "variableId": "5",
         "name": "DLV - consent_analytics",
         "type": "v",
         "parameter": [
@@ -894,7 +801,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "8",
+        "variableId": "6",
         "name": "DLV - consent_marketing",
         "type": "v",
         "parameter": [
@@ -918,7 +825,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "9",
+        "variableId": "7",
         "name": "DLV - consent_source",
         "type": "v",
         "parameter": [
@@ -942,7 +849,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "10",
+        "variableId": "8",
         "name": "DLV - content_group",
         "type": "v",
         "parameter": [
@@ -966,7 +873,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "11",
+        "variableId": "9",
         "name": "DLV - content_type",
         "type": "v",
         "parameter": [
@@ -990,7 +897,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "12",
+        "variableId": "10",
         "name": "DLV - coupon",
         "type": "v",
         "parameter": [
@@ -1014,7 +921,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "13",
+        "variableId": "11",
         "name": "DLV - currency",
         "type": "v",
         "parameter": [
@@ -1038,7 +945,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "14",
+        "variableId": "12",
         "name": "DLV - day_part",
         "type": "v",
         "parameter": [
@@ -1062,7 +969,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "15",
+        "variableId": "13",
         "name": "DLV - error_reason",
         "type": "v",
         "parameter": [
@@ -1086,7 +993,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "16",
+        "variableId": "14",
         "name": "DLV - failure_reason",
         "type": "v",
         "parameter": [
@@ -1110,7 +1017,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "17",
+        "variableId": "15",
         "name": "DLV - filter_status",
         "type": "v",
         "parameter": [
@@ -1134,7 +1041,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "18",
+        "variableId": "16",
         "name": "DLV - form_id",
         "type": "v",
         "parameter": [
@@ -1158,7 +1065,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "19",
+        "variableId": "17",
         "name": "DLV - form_name",
         "type": "v",
         "parameter": [
@@ -1182,7 +1089,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "20",
+        "variableId": "18",
         "name": "DLV - item_id",
         "type": "v",
         "parameter": [
@@ -1206,7 +1113,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "21",
+        "variableId": "19",
         "name": "DLV - item_name",
         "type": "v",
         "parameter": [
@@ -1230,7 +1137,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "22",
+        "variableId": "20",
         "name": "DLV - like_action",
         "type": "v",
         "parameter": [
@@ -1254,7 +1161,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "23",
+        "variableId": "21",
         "name": "DLV - link_location",
         "type": "v",
         "parameter": [
@@ -1278,7 +1185,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "24",
+        "variableId": "22",
         "name": "DLV - method",
         "type": "v",
         "parameter": [
@@ -1302,7 +1209,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "25",
+        "variableId": "23",
         "name": "DLV - metric_name",
         "type": "v",
         "parameter": [
@@ -1326,7 +1233,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "26",
+        "variableId": "24",
         "name": "DLV - metric_rating",
         "type": "v",
         "parameter": [
@@ -1350,7 +1257,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "27",
+        "variableId": "25",
         "name": "DLV - metric_value",
         "type": "v",
         "parameter": [
@@ -1374,7 +1281,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "28",
+        "variableId": "26",
         "name": "DLV - payment_type",
         "type": "v",
         "parameter": [
@@ -1398,7 +1305,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "29",
+        "variableId": "27",
         "name": "DLV - post_id",
         "type": "v",
         "parameter": [
@@ -1422,7 +1329,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "30",
+        "variableId": "28",
         "name": "DLV - search_term",
         "type": "v",
         "parameter": [
@@ -1446,7 +1353,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "31",
+        "variableId": "29",
         "name": "DLV - section_name",
         "type": "v",
         "parameter": [
@@ -1470,7 +1377,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "32",
+        "variableId": "30",
         "name": "DLV - section_open",
         "type": "v",
         "parameter": [
@@ -1494,7 +1401,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "33",
+        "variableId": "31",
         "name": "DLV - test_store",
         "type": "v",
         "parameter": [
@@ -1518,7 +1425,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "34",
+        "variableId": "32",
         "name": "DLV - value",
         "type": "v",
         "parameter": [
@@ -1542,7 +1449,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "35",
+        "variableId": "33",
         "name": "DLV - verification_result",
         "type": "v",
         "parameter": [
@@ -1566,7 +1473,7 @@
       {
         "accountId": "6348004567",
         "containerId": "248383150",
-        "variableId": "36",
+        "variableId": "34",
         "name": "DLV - visit_count",
         "type": "v",
         "parameter": [

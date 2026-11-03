@@ -69,7 +69,7 @@ def title_html(issue):
 
 # ------------------------------------------------------------------ shell
 NAV_ITEMS = [("/", "on the pulse", "pulse"), ("/whats-cooking", "what's cooking", "cooking"), ("/roadmap", "roadmap", "roadmap"),
-             ("/site-health", "site health", "health"), ("/about.html", "about", "about")]
+             ("/about.html", "about", "about")]
 
 RIBBON = """<div class="ribbon" role="note">
   <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
@@ -148,7 +148,7 @@ FOOT = """
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
   <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
-  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a> · <a href="/site-health">Site health</a></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
   <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
 </footer>
 <script src="/site.js" defer></script>
@@ -343,12 +343,14 @@ def render_home(issues):
     return "\n".join(out)
 
 
-def render_cooking(data):
+def render_cooking(data, roadmap=None):
     statuses = data["statuses"]
     projects = [p for g in data["groups"] for p in g["projects"]]
+    rmap = roadmap_index(roadmap, data)[1] if roadmap else {}
     out = [head("What's Cooking — Debbie Tan", data["intro"], "/whats-cooking", "cooking", "/og/whats-cooking.png")]
     out.append('<main id="main" class="pulse-wrap cooking">')
-    out.append(f'<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>{e(data["title"])}</h1><p>{e(data["intro"])}</p></header>')
+    out.append(f'<header class="brand"><span class="badge">🍳 fresh from the kitchen</span><h1>{e(data["title"])}</h1><p>{e(data["intro"])}</p>'
+               f'<p class="cooking-x"><a href="/roadmap">See how these fit the work on the Roadmap →</a></p></header>')
 
     # status legend doubles as a filter
     counts = {}
@@ -372,6 +374,18 @@ def render_cooking(data):
             does = "".join(f"<li>{e(x)}</li>" for x in p.get("does", []))
             bens = "".join(f"<li>{e(x)}</li>" for x in p.get("benefits", []))
             nxt = f'<p class="dish-next"><b>Next:</b> {e(p["next"])}</p>' if p.get("next") else ""
+            rm = rmap.get(p["name"])
+            rm_html = ""
+            if rm and (rm["tasks"] or rm["column"]):
+                bits = []
+                if rm["stages"]:
+                    bits.append(f'<span class="rx-stage">{e(" · ".join(dict.fromkeys(rm["stages"])))}</span>')
+                if rm["column"]:
+                    bits.append(f'<span class="rx-col rx-{rm["column"].lower().replace(" ", "-")}">{e(rm["column"])}</span>')
+                tasks = "".join(f'<li>{e(t)}</li>' for t in rm["tasks"])
+                rm_html = (f'<div class="dish-roadmap"><h3>On the roadmap {"".join(bits)}</h3>'
+                           f'<ul class="rx-tasks">{tasks}</ul>'
+                           f'<a class="rx-link" href="/roadmap#impact-effort">See it on the impact / effort matrix →</a></div>')
             link = f'<a class="dish-link" href="{e(p["link"]["url"])}">{e(p["link"]["label"])} →</a>' if p.get("link") else ""
             out.append(f"""<li class="dish" id="{slugify(p['name'])}" data-status="{p['status']}">
   <details data-project="{slugify(p['name'])}">
@@ -387,6 +401,7 @@ def render_cooking(data):
     </summary>
     <div class="dish-body">
       {nxt}
+      {rm_html}
       <div class="dish-col"><h3>What it does</h3><ul>{does}</ul></div>
       <div class="dish-col"><h3>Why it helps</h3><ul>{bens}</ul></div>
       {link}
@@ -587,17 +602,39 @@ def render_orders():
     return shop_shell("Your test orders", "Pretend order history", "/shop/orders", body, "orders")
 
 
+def roadmap_index(roadmap, cooking):
+    """Map each What's Cooking product to the roadmap entries that point at it, so the two pages stay in step."""
+    products = [pr for g in cooking["groups"] for pr in g["projects"]]
+
+    def find(ref):
+        hits = [pr for pr in products if ref.lower() in pr["name"].lower()]
+        if len(hits) != 1:
+            raise SystemExit(f"roadmap.json: product reference {ref!r} matched {len(hits)} products")
+        return hits[0]
+
+    idx = {}
+    def slot(pr):
+        return idx.setdefault(pr["name"], {"tasks": [], "stages": [], "column": None})
+    for st in roadmap["recap"]:
+        for ref in st["products"]:
+            slot(find(ref))["stages"].append(st["stage"])
+    for t in roadmap["tasks"]:
+        slot(find(t["product"]))["tasks"].append(t["task"])
+    for col in roadmap["kanban"]:
+        for card in col["cards"]:
+            slot(find(card["product"]))["column"] = col["name"]
+    return find, idx
+
+
+
 def render_roadmap(data, cooking):
     """Roadmap: (1) what I do, (2) tasks on an impact/effort matrix, (3) kanban of the products.
     Every task and card names a What's Cooking product; links, status and 'automated or not' come from there."""
     statuses = cooking["statuses"]
-    products = [p for g in cooking["groups"] for p in g["projects"]]
+    _find, _ = roadmap_index(data, cooking)
 
     def find(ref):
-        hits = [p for p in products if ref.lower() in p["name"].lower()]
-        if len(hits) != 1:
-            raise SystemExit(f"roadmap.json: product reference {ref!r} matched {len(hits)} products")
-        p = hits[0]
+        p = _find(ref)
         return p, f"/whats-cooking#{slugify(p['name'])}"
 
     def bubble(p, status=None):
@@ -695,7 +732,7 @@ def render_404():
 
 
 def render_sitemap(issues):
-    urls = ["/", "/whats-cooking", "/roadmap", "/site-health", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
+    urls = ["/", "/whats-cooking", "/roadmap", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
     rows = "".join(f"<url><loc>{SITE_URL}{u}</loc></url>" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
 
@@ -729,15 +766,17 @@ def main():
     cooking = CONTENT / "whats-cooking.json"
     if cooking.exists():
         cooking_data = json.loads(cooking.read_text())
-        (SITE / "whats-cooking.html").write_text(render_cooking(cooking_data))
-        (SITE / "roadmap.html").write_text(render_roadmap(json.loads((CONTENT / "roadmap.json").read_text()), cooking_data))
+        roadmap_data = json.loads((CONTENT / "roadmap.json").read_text())
+        (SITE / "whats-cooking.html").write_text(render_cooking(cooking_data, roadmap_data))
+        (SITE / "roadmap.html").write_text(render_roadmap(roadmap_data, cooking_data))
     privacy = CONTENT / "privacy.html"
     if privacy.exists():
         (SITE / "privacy.html").write_text(render_page(
             "Privacy & cookies — Debbie Tan", "What this site collects, why, and how to change your cookie choices.",
             "/privacy", privacy.read_text(), "privacy"))
     (SITE / "404.html").write_text(render_404())
-    (SITE / "site-health.html").write_text(render_health())
+    # Site health tab is off for now. The data is still collected (/api/csp-report, /api/client-error,
+    # /api/vitals) and render_health() below still works — put this line back to bring the tab back.
     shop = json.loads((CONTENT / "shop.json").read_text())
     (SITE / "shop").mkdir(exist_ok=True)
     for old in (SITE / "shop").glob("*.html"):

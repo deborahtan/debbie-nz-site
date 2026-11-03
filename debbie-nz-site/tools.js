@@ -1,7 +1,6 @@
 /* debbie.nz test-bench tools, on every page:
    1. dataLayer viewer  — a friendlier Omnibug: live events, categories, validation hints, search, JSON tree, copy
-   2. Chaos gremlin     — a small red button that deliberately breaks tracking for 30 seconds, then fixes it
-   3. Welcome back      — a time-of-day greeting for returning visitors */
+   2. Welcome back      — a time-of-day greeting for returning visitors */
 (function () {
   'use strict';
   var dl = (window.dataLayer = window.dataLayer || []);
@@ -25,8 +24,7 @@
     }
     var name = raw && raw.event ? String(raw.event) : '(no event — data push)';
     var cat = !raw || !raw.event ? 'data' : /^gtm\./.test(name) ? 'gtm' : ECOM.indexOf(name) >= 0 ? 'ecommerce'
-      : name === 'consent_update' ? 'consent' : raw.chaos_mode || /^chaos_/.test(name) ? 'chaos' : 'custom';
-    if (raw && raw.chaos_mode) cat = 'chaos';
+      : name === 'consent_update' ? 'consent' : 'custom';
     return { cat: cat, name: name, data: raw };
   }
 
@@ -59,6 +57,12 @@
   }
 
   function capture(raw) {
+    // GTM replaces dataLayer.push when it loads, and can call through to the push it replaced.
+    // Both wrappers then see the same object, so mark it and only record it once.
+    if (raw && typeof raw === 'object') {
+      if (raw.__dnSeen) return;
+      try { Object.defineProperty(raw, '__dnSeen', { value: true, enumerable: false }); } catch (e) {}
+    }
     var c = categorise(raw);
     c.t = Math.round(performance.now() - T0);
     c.warnings = validate(c);
@@ -69,20 +73,19 @@
     if (!paused && panel && !panel.hidden) renderList();
   }
   dl.slice().forEach(capture);
-  var origPush = dl.push;
-  dl.push = function () {
-    var r = origPush.apply(dl, arguments);
-    for (var i = 0; i < arguments.length; i++) capture(arguments[i]);
-    return r;
-  };
+  function wrap(inner) {
+    var fn = function () {
+      var r = inner.apply(dl, arguments);
+      for (var i = 0; i < arguments.length; i++) capture(arguments[i]);
+      return r;
+    };
+    fn.__dnWrapped = true;
+    return fn;
+  }
+  dl.push = wrap(dl.push);
   // GTM swaps in its own push when it loads; re-wrap so the viewer keeps listening
-  var wrapped = dl.push;
   setInterval(function () {
-    if (dl.push !== wrapped && !(window.dnChaos && window.dnChaos.active())) {
-      var gtmPush = dl.push;
-      dl.push = function () { var r = gtmPush.apply(dl, arguments); for (var i = 0; i < arguments.length; i++) capture(arguments[i]); return r; };
-      wrapped = dl.push;
-    }
+    if (!dl.push.__dnWrapped) dl.push = wrap(dl.push);
   }, 1000);
 
   var dock = el('div', 'tb-dock');
@@ -117,7 +120,7 @@
     var search = el('input', 'tb-search'); search.type = 'search'; search.placeholder = 'Search events and values…'; search.setAttribute('aria-label', 'Search the dataLayer');
     tools.appendChild(search);
     var chips = el('div', 'tb-chips'); chips.setAttribute('role', 'group'); chips.setAttribute('aria-label', 'Filter');
-    ['all', 'ecommerce', 'custom', 'consent', 'chaos', 'warnings'].forEach(function (f) {
+    ['all', 'ecommerce', 'custom', 'consent', 'warnings'].forEach(function (f) {
       var c = el('button', 'tb-chip cat-' + f, f); c.type = 'button'; c.setAttribute('aria-pressed', f === 'all' ? 'true' : 'false');
       c.addEventListener('click', function () { filter = f; chips.querySelectorAll('.tb-chip').forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); }); renderList(); });
       chips.appendChild(c);
@@ -234,127 +237,7 @@
   launch.addEventListener('click', toggle);
 
   // =====================================================================
-  // 2. Chaos gremlin
-  // =====================================================================
-  var CHAOS_MS = 30000, chaosUntil = 0, chaosTimers = [], prePush = null;
-  var gremlin = el('button', 'tb-gremlin'); gremlin.type = 'button';
-  gremlin.setAttribute('aria-label', 'Chaos gremlin: deliberately break tracking for 30 seconds');
-  gremlin.title = 'Chaos gremlin: breaks tracking for 30 seconds';
-  gremlin.innerHTML = '<span aria-hidden="true">😈</span>';
-  var chaosStatus = el('p', 'tb-chaos-status'); chaosStatus.setAttribute('role', 'status');
-
-  // the button lives in a little spot with a speech bubble; it explodes on click and comes back after 30s
-  var gSpot = el('div', 'tb-gspot');
-  var bubble = el('p', 'tb-bubble');
-  bubble.setAttribute('aria-hidden', 'true'); // the button's own label says the same thing to screen readers
-  bubble.innerHTML = '<b>Press me!</b> I am chaos mode. I break the site on purpose for 30 seconds so there\'s debugging data to look at.';
-  var bubbleX = el('button', 'tb-bubble-x', '✕'); bubbleX.type = 'button'; bubbleX.setAttribute('aria-label', 'Hide the chaos mode speech bubble');
-  bubbleX.addEventListener('click', function () { gSpot.classList.add('bubble-off'); save('dn_bubble_off', true); });
-  bubble.appendChild(bubbleX);
-  if (load('dn_bubble_off', false)) gSpot.classList.add('bubble-off');
-  var countdown = el('span', 'tb-countdown'); countdown.setAttribute('aria-hidden', 'true');
-  gSpot.appendChild(bubble); gSpot.appendChild(gremlin); gSpot.appendChild(countdown);
-
-  function explode() {
-    var boom = el('span', 'tb-boom'); boom.setAttribute('aria-hidden', 'true');
-    boom.appendChild(el('span', 'tb-boom-flash'));
-    boom.appendChild(el('span', 'tb-boom-word', 'KABOOM!'));
-    var bits = ['💥', '✨', '⭐', '💗', '🔩', '🧷', '🌸', '⚡', '🍬', '🔧', '💫', '🎀'];
-    bits.forEach(function (b, i) {
-      var a = (i / bits.length) * Math.PI * 2 + Math.random() * .4, d = 70 + Math.random() * 60;
-      var piece = el('span', 'tb-bit', b);
-      piece.style.setProperty('--dx', Math.round(Math.cos(a) * d) + 'px');
-      piece.style.setProperty('--dy', Math.round(Math.sin(a) * d - 30) + 'px');
-      piece.style.setProperty('--r', Math.round(Math.random() * 720 - 360) + 'deg');
-      boom.appendChild(piece);
-    });
-    gSpot.appendChild(boom);
-    gSpot.classList.add('is-exploding');
-    setTimeout(function () { gSpot.classList.remove('is-exploding'); gSpot.classList.add('is-gone'); }, 420);
-    setTimeout(function () { boom.remove(); }, 1400);
-  }
-  function rebuild() {
-    gSpot.classList.remove('is-gone', 'is-exploding');
-    gSpot.classList.add('is-back');
-    gSpot.classList.add('just-fixed'); // keep the bubble out of the way of the "Fixed" message
-    setTimeout(function () { gSpot.classList.remove('is-back'); }, 900);
-    setTimeout(function () { gSpot.classList.remove('just-fixed'); }, 4200);
-  }
-
-  window.dnChaos = { active: function () { return Date.now() < chaosUntil; } };
-
-  function mangle(o, n) {
-    // Each push gets a different, realistic kind of breakage
-    var c = JSON.parse(JSON.stringify(o));
-    c.chaos_mode = true;
-    var kind = n % 5;
-    if (c.ecommerce) {
-      if (kind === 0) delete c.ecommerce.currency;
-      if (kind === 1 && c.ecommerce.value !== undefined) c.ecommerce.value = String(c.ecommerce.value);
-      if (kind === 2) (c.ecommerce.items || []).forEach(function (it) { it.price = '$' + it.price; delete it.item_id; });
-      if (kind === 3) c.ecommerce.items = [];
-    }
-    if (kind === 4 && c.event) c.event = c.event.replace(/(^|_)(\w)/g, function (m, a, b) { return (a ? ' ' : '') + b.toUpperCase(); });
-    return c;
-  }
-
-  function startChaos() {
-    if (window.dnChaos.active()) return;
-    chaosUntil = Date.now() + CHAOS_MS;
-    explode();
-    document.documentElement.classList.add('chaos');
-    gremlin.setAttribute('aria-pressed', 'true');
-    origPushRef().apply(dl, [{ event: 'chaos_start', chaos_mode: true, chaos_seconds: CHAOS_MS / 1000 }]);
-    var n = 0;
-    prePush = dl.push;
-    dl.push = function () {
-      var out = [];
-      for (var i = 0; i < arguments.length; i++) {
-        var a = arguments[i];
-        if (a && a.event && !/^gtm\./.test(a.event)) {
-          var bad = mangle(a, n++);
-          out.push(bad);
-          if (n % 2) out.push(JSON.parse(JSON.stringify(bad))); // duplicate fire
-        } else out.push(a);
-      }
-      return prePush.apply(dl, out);
-    };
-    // JavaScript errors (reported to Site health, tagged [chaos])
-    chaosTimers.push(setInterval(function () {
-      setTimeout(function () { throw new Error('[chaos] Gremlin chewed through the dataLayer'); });
-    }, 6000));
-    setTimeout(function () { Promise.reject(new Error('[chaos] Gremlin dropped a promise')); }, 1500);
-    // A blocked third-party script → a Content Security Policy report
-    var s = document.createElement('script'); s.src = 'https://gremlin-tracker.invalid/pixel.js'; s.async = true;
-    s.onerror = function () { s.remove(); }; document.head.appendChild(s);
-    // A request that 404s
-    fetch('/api/gremlin-was-here').catch(function () {});
-    // Countdown
-    var tick = function () {
-      var left = Math.ceil((chaosUntil - Date.now()) / 1000);
-      if (left <= 0) return stopChaos();
-      countdown.textContent = left + 's';
-      chaosStatus.textContent = '😈 Chaos gremlin loose: tracking is deliberately broken for ' + left + ' more seconds.';
-    };
-    tick(); chaosTimers.push(setInterval(tick, 1000));
-    chaosStatus.hidden = false;
-  }
-  function origPushRef() { return prePush || dl.push; }
-  function stopChaos() {
-    chaosTimers.forEach(clearInterval); chaosTimers = [];
-    if (prePush) { dl.push = prePush; prePush = null; }
-    chaosUntil = 0;
-    document.documentElement.classList.remove('chaos');
-    gremlin.setAttribute('aria-pressed', 'false');
-    rebuild();
-    dl.push({ event: 'chaos_end', chaos_mode: true });
-    chaosStatus.textContent = '😇 Fixed. Everything is back to normal.';
-    setTimeout(function () { chaosStatus.hidden = true; }, 4000);
-  }
-  gremlin.addEventListener('click', function () { if (!window.dnChaos.active()) startChaos(); });
-
-  // =====================================================================
-  // 3. Welcome back
+  // 2. Welcome back
   // =====================================================================
   function greet() {
     var v = load('dn_visits', null), now = Date.now();
@@ -384,9 +267,8 @@
   }
 
   function mount() {
-    dock.appendChild(gSpot); dock.appendChild(launch);
+    dock.appendChild(launch);
     document.body.appendChild(dock);
-    chaosStatus.hidden = true; document.body.appendChild(chaosStatus);
     try { if (sessionStorage.getItem('tb_open') === '1') toggle(); } catch (e) {}
     greet();
   }
