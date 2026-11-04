@@ -1,3 +1,7 @@
 node_modules/
 .wrangler/
 .dev.vars
+
+# funnel QA run output (regenerated each run; uploaded as a CI artifact)
+funnel-report.json
+audit-report.json
