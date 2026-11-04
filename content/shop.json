@@ -1,0 +1,73 @@
+{
+  "name": "The (not set) Shop",
+  "tagline": "Small, silly goods for people who've stared at GA4 too long.",
+  "currency": "NZD",
+  "shipping": [
+    { "id": "standard", "label": "Standard (3–5 days)", "price": 5, "free_over": 50 },
+    { "id": "express", "label": "Express (next day, allegedly)", "price": 12 }
+  ],
+  "coupons": {
+    "CONSENT10": { "type": "percent", "value": 10, "label": "10% off, consensually" },
+    "NOTSET": { "type": "free_shipping", "label": "Free shipping, source unknown" },
+    "BADUTM": { "type": "invalid", "message": "BADUTM isn't a real code. Neither is utm_source=Facebook_FINAL_v2." }
+  },
+  "promo": { "id": "promo_consent10", "name": "Consent10 November", "creative": "ribbon_banner", "text": "Use CONSENT10 for 10% off. We asked first." },
+  "test_cards": [
+    { "number": "4242 4242 4242 4242", "result": "success", "label": "Payment succeeds" },
+    { "number": "4000 0000 0000 0002", "result": "declined", "label": "Card declined" },
+    { "number": "4000 0000 0000 3220", "result": "verify", "label": "Asks you to verify (pretend 3-D Secure)" },
+    { "number": "4000 0000 0000 0069", "result": "expired", "label": "Card expired" }
+  ],
+  "products": [
+    {
+      "id": "rogue-event", "name": "Adopt a Rogue Event", "emoji": "🦝", "price": 19, "category": "Adoptions", "category2": "Digital",
+      "digital": true,
+      "blurb": "Somewhere a dataLayer event called click_2_final_FINAL is firing on every scroll. Give it a loving home.",
+      "details": ["You name the event you're adopting", "Comes with a printable adoption certificate (in your heart)", "Digital: no shipping, no regrets"],
+      "custom_text": { "label": "Name of the event you're adopting", "placeholder": "e.g. click_2_final_FINAL", "max": 40, "param": "adopted_event" }
+    },
+    {
+      "id": "coffee-for-debbie", "name": "Buy Debbie a Coffee", "emoji": "☕", "price": 5.5, "category": "Support", "category2": "Psych",
+      "digital": true, "psych": true,
+      "blurb": "Fuel the next edition of On the Pulse with one (1) flat white.",
+      "details": ["Oat or regular", "Supports independent analytics commentary", "Fully caffeinated"],
+      "psych_title": "Sike! ☕",
+      "psych_message": "Don't send money. Shout me a flat white at Allpress, or come visit the office and say hi. That's worth more than any transaction."
+    },
+    {
+      "id": "tip-jar", "name": "Tip Jar", "emoji": "🫙", "price": 10, "category": "Support", "category2": "Psych",
+      "digital": true, "psych": true, "pay_what_you_want": true,
+      "blurb": "Pay what you want. Every cent goes straight to a good cause (me).",
+      "details": ["Choose your own amount", "No minimum, no judgement", "Instant warm fuzzies"],
+      "psych_title": "Sike! 🫙",
+      "psych_message": "Keep your money. Just give my boss good feedback about me lol 💌"
+    },
+    {
+      "id": "mystery-box", "name": "(not set) Mystery Box", "emoji": "🎁", "price": 13.13, "category": "Merch", "category2": "Mystery",
+      "blurb": "Contents: (not set). Source: (not set). Medium: (not set). Just like your reports.",
+      "details": ["Could be anything", "Probably direct / (none)", "Non-attributable by design"]
+    },
+    {
+      "id": "plushie-404", "name": "404 Error Plushie", "emoji": "🧸", "price": 24, "category": "Merch", "category2": "Plushies",
+      "blurb": "A very soft toy that couldn't be found. We looked everywhere. We found it. It's this one.",
+      "details": ["Embroidered 404 on the tummy", "Pairs well with a broken link", "Machine washable, unlike your data"],
+      "variants": { "label": "Size", "options": [ { "id": "small", "label": "Small (pocket bug)" }, { "id": "large", "label": "Large (critical incident)", "price": 34 } ] }
+    },
+    {
+      "id": "unattributed-ghost", "name": "Unattributed Revenue Ghost", "emoji": "👻", "price": 29, "category": "Merch", "category2": "Plushies",
+      "blurb": "We know it was sold. We just don't know why. A floaty little friend for every marketing meeting.",
+      "details": ["Glows faintly in last-click light", "Haunts dashboards, harmlessly", "Data-driven? Spiritually."]
+    },
+    {
+      "id": "bounce-ball", "name": "Bounce Rate Stress Ball", "emoji": "🥎", "price": 9, "category": "Merch", "category2": "Desk",
+      "blurb": "Not retired. Squeeze it every time someone asks for bounce rate in a GA4 world.",
+      "details": ["Engagement rate sold separately", "Bounces at roughly 1 − engagement rate", "Very squeezy"]
+    },
+    {
+      "id": "consent-blanket", "name": "Consent Banner Knitted Blanket", "emoji": "🧶", "price": 79, "category": "Merch", "category2": "Home",
+      "blurb": "Hand-knitted, cookie-free comfort. Covers you only after you say yes.",
+      "details": ["100% wool, 0% third-party cookies", "Respects Global Privacy Control", "Granted, not assumed"],
+      "variants": { "label": "Pattern", "options": [ { "id": "accept-all", "label": "Accept all" }, { "id": "essentials", "label": "Just the essentials" }, { "id": "customise", "label": "Customise (sold out)", "out_of_stock": true } ] }
+    }
+  ]
+}

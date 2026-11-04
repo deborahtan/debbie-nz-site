@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Same Worker name as the live site (debbie-nz-site.<account>.workers.dev)
+  "name": "debbie-nz-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./debbie-nz-site",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    // "false" = comments publish immediately (default); "true" = they wait for approval at /admin.html
+    "COMMENTS_MODERATED": "false"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "debbie-nz-pulse",
+      // No id needed: `wrangler deploy` creates this database on first deploy.
+      "migrations_dir": "migrations"
+    }
+  ]
+}

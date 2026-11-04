@@ -1,0 +1,91 @@
+name: Funnel QA
+
+# Walks the shop and engagement journeys in a real browser and checks every event against the
+# tracking plan. Fails the run if a tag is missing, malformed or fires twice.
+# Results appear on /funnel-qa. Needs the ADMIN_TOKEN secret (same value as the Worker's).
+on:
+  push:
+    branches: [main, pulse-homepage]
+    paths:
+      - 'debbie-nz-site/**'
+      - 'content/funnels.json'
+      - 'funnel-spec.json'
+      - 'scripts/funnel-qa.mjs'
+      - '.github/workflows/funnel-qa.yml'
+  schedule:
+    - cron: "41 17 * * *"   # 6:41am NZDT, before the daily audit
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Site to test (defaults to the SITE_URL variable)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  funnel-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright
+        run: |
+          npm i --no-save --no-package-lock playwright@1
+          npx playwright install --with-deps chromium
+
+      # The spec is generated from the tracking plan. Regenerating it here means a QA run can
+      # never test against a stale spec, and the diff check catches a spec committed out of date.
+      - name: Check the QA spec matches the tracking plan
+        run: |
+          python3 scripts/make_gtm.py
+          if ! git diff --quiet funnel-spec.json; then
+            echo "::error::funnel-spec.json is out of date. Run 'python3 scripts/make_gtm.py' and commit the result."
+            git --no-pager diff --stat funnel-spec.json
+            exit 1
+          fi
+
+      # Which site to test: an explicit input wins, then the SITE_URL repo variable, then this
+      # branch's Cloudflare preview alias — so a push tests what that push just deployed rather
+      # than production.
+      - name: Work out the target
+        id: target
+        run: |
+          URL="${{ github.event.inputs.site_url }}"
+          if [ -z "$URL" ]; then URL="${{ vars.SITE_URL }}"; fi
+          if [ -z "$URL" ]; then
+            SLUG=$(echo "${GITHUB_REF_NAME}" | tr '[:upper:]/_.' '[:lower:]---' | sed 's/[^a-z0-9-]//g; s/^-*//; s/-*$//')
+            URL="https://${SLUG}-debbie-nz-site.deborahtanyl.workers.dev"
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Testing $URL"
+
+      # Cloudflare builds after the push, so the new version may not be live yet. The deployed
+      # assets are the committed files, so comparing a served file against the one in this commit
+      # proves this exact commit is live before any assertion runs.
+      - name: Wait for the deploy to be live
+        if: github.event_name == 'push'
+        run: |
+          WANT=$(sha256sum debbie-nz-site/funnel-qa.js | cut -d' ' -f1)
+          for i in $(seq 1 40); do
+            GOT=$(curl -fsS --max-time 20 "${{ steps.target.outputs.url }}/funnel-qa.js" 2>/dev/null | sha256sum | cut -d' ' -f1)
+            if [ "$GOT" = "$WANT" ]; then echo "This commit is live (after $((i*15))s)."; exit 0; fi
+            sleep 15
+          done
+          echo "::warning::Timed out waiting for this commit to go live; testing whatever is deployed."
+
+      - name: Run funnel QA
+        env:
+          SITE_URL: ${{ steps.target.outputs.url }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: node scripts/funnel-qa.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: funnel-report
+          path: funnel-report.json

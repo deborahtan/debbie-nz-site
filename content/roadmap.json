@@ -1,0 +1,335 @@
+{
+  "title": "Roadmap",
+  "intro": "What I do day to day, where the time goes, and what I'm building in my own time so the repetitive parts run themselves and I stay ahead of change.",
+  "recap": [
+    {
+      "emoji": "🗺️",
+      "stage": "Plan",
+      "what": "Writing measurement plans, full measurement frameworks and site data collection specs.",
+      "time": "Writing every plan from a blank page.",
+      "products": [
+        "Measurement plan"
+      ]
+    },
+    {
+      "emoji": "🏷️",
+      "stage": "Build",
+      "what": "Creating GTM containers, updating GA4 and GTM configs, and briefing developers.",
+      "time": "Hand-building tags and clicking through admin screens.",
+      "products": [
+        "GTM container builder",
+        "GA4 + GTM config updater",
+        "Developer briefs"
+      ]
+    },
+    {
+      "emoji": "🎭",
+      "stage": "Test",
+      "what": "Running funnels end to end (a booking, a checkout) and checking every tag fires, plus checking UTM naming.",
+      "time": "Still mostly manual: click through, watch the network, repeat.",
+      "products": [
+        "Automated website overview",
+        "UTM naming checker"
+      ]
+    },
+    {
+      "emoji": "🔍",
+      "stage": "Audit & monitor",
+      "what": "Auditing complex tag setups and keeping an eye on tracking health.",
+      "time": "Big audits used to take days.",
+      "products": [
+        "GA4 + GTM audit",
+        "Event-health monitoring"
+      ]
+    },
+    {
+      "emoji": "🗄️",
+      "stage": "Data & dashboards",
+      "what": "Building BigQuery pipelines, designing data warehouses, dashboards and reporting templates.",
+      "time": "Standing a warehouse up properly the first time.",
+      "products": [
+        "Personal dashboard"
+      ]
+    },
+    {
+      "emoji": "💬",
+      "stage": "Insight & agents",
+      "what": "Setting up conversational analytics and testing that the agents give trustworthy answers.",
+      "time": "Checking agent answers by hand.",
+      "products": [
+        "Conversational analytics: event health",
+        "Agent evaluation"
+      ]
+    },
+    {
+      "emoji": "📰",
+      "stage": "Stay ahead",
+      "what": "Reading release notes and the industry and writing it up, and trying new tooling on real data before it matters — agent front ends over BigQuery, and whatever the kit of the month turns out to be.",
+      "time": "A day of reading for every hour of writing, and the ad hoc pulls that prompt the next experiment.",
+      "products": [
+        "news summary",
+        "BigQuery agents",
+        "Data Agent Kit"
+      ]
+    }
+  ],
+  "quadrants": {
+    "tl": {
+      "name": "Quick wins",
+      "hint": "High impact, low effort"
+    },
+    "tr": {
+      "name": "Big bets",
+      "hint": "High impact, high effort"
+    },
+    "bl": {
+      "name": "Fill-ins",
+      "hint": "Low impact, low effort"
+    },
+    "br": {
+      "name": "Time sinks",
+      "hint": "Low impact, high effort"
+    }
+  },
+  "tasks": [
+    {
+      "task": "Writing measurement plans",
+      "impact": "high",
+      "effort": "low",
+      "x": 8,
+      "y": 83,
+      "product": "Measurement plan"
+    },
+    {
+      "task": "Creating GTM containers",
+      "impact": "high",
+      "effort": "low",
+      "x": 19,
+      "y": 79,
+      "product": "GTM container builder"
+    },
+    {
+      "task": "Writing developer briefs",
+      "impact": "high",
+      "effort": "low",
+      "x": 29,
+      "y": 84,
+      "product": "Developer briefs"
+    },
+    {
+      "task": "Updating GA4 & GTM configs",
+      "impact": "high",
+      "effort": "low",
+      "x": 9,
+      "y": 71,
+      "product": "GA4 + GTM config updater"
+    },
+    {
+      "task": "Funnel QA: run a booking and check tags fire at every step",
+      "impact": "high",
+      "effort": "low",
+      "x": 21,
+      "y": 68,
+      "product": "Automated website overview"
+    },
+    {
+      "task": "Auditing UTM naming conventions",
+      "impact": "high",
+      "effort": "low",
+      "x": 30,
+      "y": 73,
+      "product": "UTM naming checker"
+    },
+    {
+      "task": "Creating reporting templates",
+      "impact": "high",
+      "effort": "low",
+      "x": 15,
+      "y": 58,
+      "product": "Personal dashboard"
+    },
+    {
+      "task": "Writing full measurement frameworks",
+      "impact": "high",
+      "effort": "medium",
+      "x": 40,
+      "y": 82,
+      "product": "Measurement plan"
+    },
+    {
+      "task": "Building data pipelines into BigQuery",
+      "impact": "high",
+      "effort": "medium",
+      "x": 51,
+      "y": 85,
+      "product": "Personal dashboard"
+    },
+    {
+      "task": "Writing site data collection specs",
+      "impact": "high",
+      "effort": "medium",
+      "x": 61,
+      "y": 79,
+      "product": "Developer briefs"
+    },
+    {
+      "task": "Newsletters & industry updates",
+      "impact": "high",
+      "effort": "medium",
+      "x": 44,
+      "y": 69,
+      "product": "news summary"
+    },
+    {
+      "task": "Building dashboards",
+      "impact": "high",
+      "effort": "medium",
+      "x": 56,
+      "y": 67,
+      "product": "Personal dashboard"
+    },
+    {
+      "task": "Designing data warehouses",
+      "impact": "high",
+      "effort": "medium",
+      "x": 48,
+      "y": 58,
+      "product": "Personal dashboard"
+    },
+    {
+      "task": "Implementing conversational analytics",
+      "impact": "high",
+      "effort": "high",
+      "x": 75,
+      "y": 83,
+      "product": "Conversational analytics: event health"
+    },
+    {
+      "task": "Setting up tracking health monitoring",
+      "impact": "high",
+      "effort": "high",
+      "x": 88,
+      "y": 79,
+      "product": "Event-health monitoring"
+    },
+    {
+      "task": "Auditing complex tag setups",
+      "impact": "high",
+      "effort": "high",
+      "x": 80,
+      "y": 68,
+      "product": "GA4 + GTM audit"
+    },
+    {
+      "task": "Evaluating and testing agents",
+      "impact": "high",
+      "effort": "high",
+      "x": 93,
+      "y": 64,
+      "product": "Agent evaluation"
+    },
+    {
+      "task": "Pulling data by hand for ad hoc requests",
+      "impact": "high",
+      "effort": "high",
+      "x": 70,
+      "y": 58,
+      "product": "BigQuery agents"
+    },
+    {
+      "task": "Reformatting data for different tools",
+      "impact": "high",
+      "effort": "high",
+      "x": 84,
+      "y": 55,
+      "product": "Data Agent Kit"
+    },
+    {
+      "task": "Small tweaks to existing tag configs",
+      "impact": "low",
+      "effort": "low",
+      "x": 12,
+      "y": 32,
+      "product": "GA4 + GTM config updater"
+    },
+    {
+      "task": "Adding new tags to existing setups",
+      "impact": "low",
+      "effort": "low",
+      "x": 26,
+      "y": 21,
+      "product": "GTM container builder"
+    }
+  ],
+  "kanban": [
+    {
+      "key": "todo",
+      "name": "To do",
+      "cards": [
+        {
+          "product": "GA4 + GTM config updater",
+          "note": "Drafted, not in use yet. Next: first live use"
+        },
+        {
+          "product": "Developer briefs",
+          "label": "Jira + Confluence tickets",
+          "note": "Next step for the developer briefs",
+          "status": "rnd"
+        },
+        {
+          "product": "Data Agent Kit",
+          "note": "Exploring what it can do"
+        }
+      ]
+    },
+    {
+      "key": "doing",
+      "name": "Doing",
+      "cards": [
+        {
+          "product": "Automated website overview"
+        },
+        {
+          "product": "Agent evaluation"
+        },
+        {
+          "product": "UTM naming checker"
+        },
+        {
+          "product": "BigQuery agents"
+        },
+        {
+          "product": "Personal dashboard"
+        }
+      ]
+    },
+    {
+      "key": "done",
+      "name": "Done",
+      "cards": [
+        {
+          "product": "Measurement plan"
+        },
+        {
+          "product": "GTM container builder"
+        },
+        {
+          "product": "GA4 + GTM audit"
+        },
+        {
+          "product": "Developer briefs"
+        },
+        {
+          "product": "Conversational analytics: event health"
+        },
+        {
+          "product": "Event-health monitoring"
+        },
+        {
+          "product": "news summary",
+          "note": "You're reading it"
+        }
+      ]
+    }
+  ]
+}

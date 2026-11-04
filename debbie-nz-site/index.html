@@ -3,145 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Debbie Tan</title>
+<title>On the Pulse — Debbie Tan</title>
+<meta name="description" content="A monthly read on AI, data, measurement and privacy, from Auckland, Aotearoa. Every item dated and sourced.">
+<link rel="canonical" href="https://debbie-nz-site.deborahtanyl.workers.dev/">
+<meta property="og:site_name" content="Debbie Tan — On the Pulse">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://debbie-nz-site.deborahtanyl.workers.dev/">
+<meta property="og:title" content="On the Pulse — Debbie Tan">
+<meta property="og:description" content="A monthly read on AI, data, measurement and privacy, from Auckland, Aotearoa. Every item dated and sourced.">
+<meta property="og:image" content="https://debbie-nz-site.deborahtanyl.workers.dev/og/2026-10.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="On the Pulse — Debbie Tan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<script src="/consent.js"></script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NXPF7HTS');</script>
 <!-- End Google Tag Manager -->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/baloo-2-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/pulse.css">
+<link rel="alternate" type="application/rss+xml" title="On the Pulse" href="/pulse/feed.xml">
 </head>
-<body>
+<body class="pulse">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXPF7HTS"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
+<a class="skip" href="#main">Skip to content</a>
 <nav>
   <a href="/" class="wordmark">Debbie Tan</a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="/writing.html">writing</a>
+      <a href="/" aria-current="page">on the pulse</a>
+      <a href="/whats-cooking">what's cooking</a>
+      <a href="/roadmap">roadmap</a>
+      <a href="/how-i-use-ai">how i use ai</a>
+      <a href="/funnel-qa">funnel qa</a>
       <a href="/about.html">about</a>
-      <a href="#" id="shop-teaser">shop (building)</a>
+      <a href="/shop">shop <span class="test-tag">test</span></a>
+      <a href="/form-test.html">sign up <span class="test-tag">test</span></a>
     </div>
     <div class="nav-search">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="site-search" placeholder="Search writing" autocomplete="off">
+      <input type="text" id="site-search" placeholder="Search" autocomplete="off" aria-label="Search">
     </div>
   </div>
 </nav>
-
-<div class="masthead">
-  <p class="location">Auckland, Aotearoa — data &amp; analytics, and everything else</p>
-  <h1>This is my <span class="accent-word">sandbox</span> — literally and otherwise.</h1>
-  <p class="lede">Thoughts, half-finished ideas, and the occasional finished one. Some of
-  this is analytics and AI, written the way I'd actually explain it to you
-  in person. Some of it is paint, lino, and things I'm making with my hands.
-  All of it is mine.</p>
+<div class="ribbon" role="note">
+  <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
+  <b>🧪 Also a test bench:</b> anything marked <span class="test-tag">test</span> (the shop and sign-up) is pretend, built for testing tracking.
+  <a href="/about#this-site">How this site works</a></p>
 </div>
 
-<div class="work-play">
-  <div class="wp-col">
-    <span class="wp-label">Work</span>
-    <ul>
-      <li><strong>Dentsu Aotearoa</strong>Associate Director, Data &amp; Analytics</li>
-      <li><strong>MeasureCamp Auckland</strong>Organiser</li>
-      <li><strong>IAB New Zealand</strong>Member, Data, Privacy &amp; Measurement Council</li>
-    </ul>
-  </div>
-  <div class="wp-col">
-    <span class="wp-label">Play</span>
-    <ul>
-      <li><strong>Tautai Gallery</strong>Volunteer</li>
-      <li><strong>SHE Choir Auckland</strong>Member</li>
-      <li><strong>Studio practice</strong>Watercolour, oil, lino print, zines</li>
-    </ul>
-  </div>
+<main id="main" class="pulse-wrap issue home" data-issue="2026-10">
+<header class="brand"><span class="badge">💗 On the Pulse · monthly</span><p>A real, ongoing monthly read on data, technology, measurement &amp; privacy from Auckland, Aotearoa. News is dated and sourced; the commentary is mine.</p></header>
+<div class="mast"><span>On the Pulse · October 2026</span><span>Published <b>29 October 2026</b> · covers 29 Sep – 29 Oct 2026</span></div>
+<h1><a href="/pulse/2026-10">AI labs kept shipping. Google quietly took <span>control.</span></a></h1>
+<div class="byline">Debbie Tan · 11 stories · 7 min read</div>
+<div class="engage engage-top" data-engage="2026-10">
+  <button class="like-btn" type="button" data-like="2026-10" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span class="like-label">Like</span><span class="like-count" data-like-count="2026-10"></span></button>
+  <a class="comment-jump" href="#comments"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span>Comment</span><span class="comment-n" data-comment-count="2026-10"></span></a>
+  <button class="share-btn" type="button" data-share="2026-10">Share</button>
 </div>
-
-<section class="posts">
-  <span class="section-label">Recent writing</span>
-  <ul class="post-list">
-
-    <li><a class="post-row" href="/writing/post-one.html" data-post-id="post-one">
-      <div class="post-top">
-        <h3>Post title goes here</h3>
-        <span class="read-time">6 min</span>
-      </div>
-      <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy until the real post is written.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-two.html" data-post-id="post-two">
-      <div class="post-top">
-        <h3>Another working title</h3>
-        <span class="read-time">8 min</span>
-      </div>
-      <p class="excerpt">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Swap this out before launch.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-three.html" data-post-id="post-three">
-      <div class="post-top">
-        <h3>Placeholder headline</h3>
-        <span class="read-time">4 min</span>
-      </div>
-      <p class="excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-    </a></li>
-
-    <li><a class="post-row" href="/writing/post-four.html" data-post-id="post-four">
-      <div class="post-top">
-        <h3>Yet another title</h3>
-        <span class="read-time">7 min</span>
-      </div>
-      <p class="excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </a></li>
-
-  </ul>
+<div class="greeting">Kia ora,</div>
+<p class="lede">Here&#x27;s the short version: the AI labs kept shipping, nothing in the stack broke, but Google is steadily moving control of measurement data towards Ads. This month it was consent and IP settings; from 11 January, server-side Tag Manager starts handing full IP addresses to Google&#x27;s ad tags unless you opt out. That&#x27;s the thread to act on. Data Agent Kit is the other one worth your time.</p>
+<section class="recap" aria-labelledby="recap-h"><h2 id="recap-h">⏱️ The month in 60 seconds</h2><ol><li><a href="#chatgpt-s-free-tier-is-now-running-on-gpt-6">ChatGPT&#x27;s free tier quietly moved to GPT‑6. Re-test anything built on how it behaves.</a></li><li><a href="#anthropic-shipped-a-lot-of-small-things-not-one-big-one">Anthropic shipped eight smaller releases instead of one big one; Docs, Slides and Design are now free.</a></li><li><a href="#claude-dashboards-the-one-worth-a-proper-look">Claude Dashboards puts live BI on top of a data warehouse (beta). Watch for a Looker connector.</a></li><li><a href="#anthropic-also-gave-away-a-slice-of-the-company">Anthropic set aside 5% of its shares for public benefit. Reputation, not product.</a></li><li><a href="#grok-5-was-talked-about-not-shipped">Grok 5 was talked about, not shipped.</a></li><li><a href="#how-companies-are-actually-using-ai-agents">54% of companies run AI agents, but only 25% measure them. Integration, not the model, is the new bottleneck.</a></li><li><span class="recap-flag act">act</span><a href="#google-ads-now-controls-your-consent-and-ip-data-not-ga4">Consent and IP control moved from GA4 into the linked Google Ads account.</a></li><li><span class="recap-flag new">new</span><a href="#server-side-tag-manager-will-start-passing-full-ip-addresses">From 11 January 2027, server-side GTM sends full IP addresses to Google&#x27;s ad tags by default. Decide on the opt-out now.</a></li><li><a href="#tag-manager-s-biggest-change-in-years-landed-then-everything">Tag Manager&#x27;s biggest change in a decade landed on 8 October. It&#x27;s quiet now, so finish any migrations.</a></li><li><a href="#bigquery-had-its-busiest-month-yet-for-ai-features">BigQuery had its busiest AI month yet. Try Conversational Analytics on one live dashboard.</a></li><li><span class="recap-flag new">new</span><a href="#google-s-data-agent-kit-is-out-and-every-data-platform-now-h">Google&#x27;s Data Agent Kit is generally available, and Snowflake, Databricks and Microsoft all have one too. The difference is where the guardrails sit.</a></li><li><a href="#google-ads-is-pushing-further-into-online-shopping">Google Ads switched on one-click checkout in US search and added channel-priority controls. Check your budget defaults.</a></li><li><a href="#market-moves">No market moves worth reporting, so that section stays empty.</a></li></ol></section>
+<nav class="toc" aria-label="In this edition"><span>In this edition</span><a href="#what-the-ai-companies-did">What the AI companies did</a><a href="#how-companies-are-actually-using-ai-agents">How companies are actually using AI agents</a><a href="#what-changed-in-our-google-stack">What changed in our Google stack</a><a href="#market-moves">Market moves</a></nav>
+<section class="sec"><h2 id="what-the-ai-companies-did">What the AI companies did <span class="count">5 things</span></h2>
+<article class="item">
+<h3 id="chatgpt-s-free-tier-is-now-running-on-gpt-6"><span class="no">01</span>ChatGPT&#x27;s free tier is now running on GPT‑6</h3>
+<p><span class="label">What happened</span>On 7–8 October, OpenAI switched the model behind unlimited free chats from GPT‑5.6 to GPT‑6. No price change — just a swap under the hood, plus a visual refresh.</p>
+<p><span class="label imp">Why it matters</span>This is the first time GPT‑6 has reached everyday ChatGPT users, not just developers testing it early. If you&#x27;ve built anything that relies on how ChatGPT responds — a demo, a comparison, a brief — it&#x27;s worth checking it still behaves the way you expect. The model changed quietly; nobody got a notification about it.</p>
+<p class="src-inline">Source: <a href="https://pricingsaas.com/companies/openai/diffs/2026D281" target="_blank" rel="noopener">pricingsaas.com product-change tracker, 8 Oct</a></p>
+</article>
+<article class="item">
+<h3 id="anthropic-shipped-a-lot-of-small-things-not-one-big-one"><span class="no">02</span>Anthropic shipped a lot of small things, not one big one</h3>
+<p><span class="label">What happened</span>Eight separate releases through October, no headline model: a fast small model (Claude Haiku 5.5, 7 Oct); Docs, Slides and Design made free for everyone (8 Oct); Claude Dashboards and Claude Motion entering beta the same day (more on Dashboards below); a Code Review tool went fully live for Team/Enterprise plans (15 Oct); a new &quot;Duet&quot; feature opened a waitlist (21 Oct); a security product went into beta (21 Oct); and the Agent Skills format was handed over to an open-source foundation (22 Oct).</p>
+<p><span class="label imp">Why it matters</span>This is Anthropic polishing the product, not chasing a bigger number. The one to actually try: Docs, Slides and Design are now free, so it&#x27;s worth testing whether Claude can take over a real deliverable instead of just drafting it.</p>
+<p class="src-inline">Source: <a href="https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026" target="_blank" rel="noopener">OrcaRouter, Anthropic shipped-in-October roundup</a></p>
+</article>
+<article class="item">
+<h3 id="claude-dashboards-the-one-worth-a-proper-look"><span class="no">03</span>Claude Dashboards — the one worth a proper look</h3>
+<p><span class="label">What it is</span>You connect your data (Snowflake, Databricks, Redshift, ClickHouse, or Claude&#x27;s existing connectors like Salesforce), describe what you want in plain English, and Claude builds a live dashboard. Click any number and it shows you the query behind it — or just asks Claude to explain the number in words if you don&#x27;t read SQL. Charts refresh as the underlying data changes, with a timestamp on each one.</p>
+<p><span class="label imp">My take</span>Worth a play for mocking up visuals — describe what you want, get a live chart, and click any number to see the query behind it. That&#x27;s a genuinely fast way to sketch what a dashboard could look like before anyone builds it. The part I&#x27;d watch is how the established enterprise BI vendors respond, because in an enterprise context the chart was never the hard bit. The hard bits are keeping track of what&#x27;s been built and by whom, keeping metric definitions consistent when several people can each spin up their own view, and the security questions — access control, SSO, and who is allowed to see which numbers. It&#x27;s built to sit alongside BI tools rather than replace them: dashboards push into Grafana, Hex, Mixpanel, monday.com, Omni, PostHog and Sigma, with Looker, Tableau and Perplexity support coming. On sharing, each viewer&#x27;s own data access controls what they see, and on Enterprise it&#x27;s off by default until an admin turns it on. Try it for the mock-up; keep the governed warehouse as the source of truth.</p>
+<p class="src-inline">Source: <a href="https://thenewstack.io/claude-dashboards-data-motion/" target="_blank" rel="noopener">The New Stack</a> · <a href="https://www.thestar.com.my/tech/tech-news/2026/10/09/anthropic-launches-dashboard-animation-tools-for-claude" target="_blank" rel="noopener">The Star</a></p>
+</article>
+<article class="item">
+<h3 id="anthropic-also-gave-away-a-slice-of-the-company"><span class="no">04</span>Anthropic also gave away a slice of the company</h3>
+<p><span class="label">What happened</span>On 18 October, Anthropic set aside 5% of company shares into a separate fund for public-benefit purposes (still needs shareholder sign-off), with more available later if the company&#x27;s value keeps rising.</p>
+<p><span class="label imp">Why it matters</span>Not a product change — more of a reputation move. Worth knowing in case it comes up in a conversation about which AI companies to trust.</p>
+<p class="src-inline">Source: <a href="https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026" target="_blank" rel="noopener">OrcaRouter, Anthropic shipped-in-October roundup</a></p>
+</article>
+<article class="item">
+<h3 id="grok-5-was-talked-about-not-shipped"><span class="no">05</span>Grok 5 was talked about, not shipped</h3>
+<p><span class="label">What happened</span>Elon Musk has repeated a figure for a much larger Grok model through October, but nothing has shipped yet. Betting markets price it at roughly 86% odds of arriving sometime before 2027.</p>
+<p><span class="label imp">Why it matters</span>Nothing to act on yet — just keeping it on the radar.</p>
+<p class="src-inline">Source: <a href="https://simplefunctions.dev/answer/grok-grok5" target="_blank" rel="noopener">simplefunctions.dev prediction market</a></p>
+</article>
 </section>
+<section class="sec"><h2 id="how-companies-are-actually-using-ai-agents">How companies are actually using AI agents <span class="count">2 reports</span></h2>
+<div class="stats-row"><div class="stat"><span class="n">54%</span><span class="l">Of companies have AI agents running</span></div><div class="stat"><span class="n">25%</span><span class="l">Actually measure if they&#x27;re working</span></div><div class="stat"><span class="n">80%</span><span class="l">Say they&#x27;re seeing real value</span></div><div class="stat"><span class="n">46%</span><span class="l">Say integration is the hard part now</span></div></div>
+<article class="item">
+<p>Two surveys, same story. A Liferay study of 500 US companies found 54% are running AI agents (72% in tech, down to 24% in education) — but only 25% measure whether they&#x27;re actually working, and only 24% have a company-wide policy on using AI at all.</p>
+<p>Anthropic&#x27;s own survey of agent users backs this up: the model itself isn&#x27;t the problem anymore. People now say the hard part is plugging it into existing systems (46%), getting at clean data (42%), and security (40%). The good news: 80% say they&#x27;re already seeing a real return.</p>
+<p><span class="label imp">Why it matters</span>This is the gap that shows up constantly — everyone&#x27;s running something, almost nobody can prove it&#x27;s working. If this becomes something we explore with a company in future, building the measurement framework and weighing cost against benefit for any agent pilot is already part of our methodology.</p>
+<p class="src-inline">Source: <a href="https://www.cmswire.com/the-wire/new-liferay-study-finds-54-of-companies-are-running-ai-agents-yet-only-25-measure-their-impact/" target="_blank" rel="noopener">CMSWire on the Liferay report</a> · <a href="https://arcade.dev/blog/5-takeaways-2026-state-of-ai-agents-claude" target="_blank" rel="noopener">Arcade.dev on Anthropic&#x27;s State of AI Agents Report</a></p>
+</article>
+</section>
+<section class="sec"><h2 id="what-changed-in-our-google-stack">What changed in our Google stack <span class="count">6 things</span></h2>
+<article class="item">
+<h3 id="google-ads-now-controls-your-consent-and-ip-data-not-ga4"><span class="no">06</span>Google Ads now controls your consent and IP data, not GA4</h3>
+<p><span class="label">What happened</span>Google has been shifting consent settings and IP address data out of Analytics and into the linked Ads account. IPs are now encrypted and sent straight to Ads, and this consolidation keeps rolling through the rest of 2026.</p>
+<p><span class="label imp">Why it matters</span>If anyone ever checks a company&#x27;s consent or IP setup, the Ads account is now where to look — not just the GA4 property. The control has genuinely moved.</p>
+<p class="src-inline">Source: <a href="https://support.google.com/analytics/answer/17016975" target="_blank" rel="noopener">support.google.com/analytics</a></p>
+</article>
+<article class="item">
+<h3 id="server-side-tag-manager-will-start-passing-full-ip-addresses"><span class="no">07</span>Server-side Tag Manager will start passing full IP addresses to Google&#x27;s ad tags</h3>
+<div class="meta">Late addition · surfaced 2 November 2026</div>
+<p><span class="label">What happened</span>Google has started emailing advertisers about a change to server-side Tag Manager. From 11 January 2027, IP handling moves from one container-wide redaction setting to tag-by-tag processing. Tags for Google Ads, Display &amp; Video 360, Search Ads 360 and Campaign Manager 360 (which includes Floodlight) will receive the visitor&#x27;s full IP address by default unless you opt out. Google Analytics tags keep redacting the IP. Tags for other platforms such as Meta, TikTok and LinkedIn keep their own controls over which signals they accept, and Google hasn&#x27;t said whether anything changes for them. Transformations can still strip the IP before any tag sees it. As of 2 November there was no entry in the Tag Manager release notes, and the help article for the opt-out isn&#x27;t named.</p>
+<p><span class="label imp">Why it matters</span>It&#x27;s on by default, and it follows straight on from the consent and IP control moving into Ads (above). If you run a server container, decide before January whether Google&#x27;s ad tags should get full IPs, and whether your privacy notice covers that. It&#x27;s also worth checking what your Meta Conversions API or TikTok Events API tags are sending: a server container is how many sites now feed those platforms (Google&#x27;s Tag Gateway only handles Google products), and what each of those tags sends is set tag by tag, not by Google.</p>
+<p class="src-inline">Source: <a href="https://ppc.land/google-ad-tags-gain-full-visitor-ip-addresses-in-server-side-gtm-in-2027/" target="_blank" rel="noopener">PPC Land, 2 Nov</a> · <a href="https://taggrs.io/google-tag-gateway-vs-server-side-gtm/" target="_blank" rel="noopener">TAGGRS on Tag Gateway vs server-side GTM</a></p>
+</article>
+<article class="item">
+<h3 id="tag-manager-s-biggest-change-in-years-landed-then-everything"><span class="no">08</span>Tag Manager&#x27;s biggest change in years landed — then everything went quiet</h3>
+<p><span class="label">What happened</span>Google standardised how tags configure themselves across Tag Manager on 8 October, with a follow-up tweak on 12 October. Simo Ahava (the GTM expert everyone in our field reads) called it the biggest Tag Manager change in a decade. Nothing new since.</p>
+<p><span class="label imp">Why it matters</span>Good time to finish any GTM migration work on our books while things are stable — check container setups against the new behaviour this fortnight, before the next change lands.</p>
+<p class="src-inline">Source: <a href="https://simoahava.com/analytics/optimized-tagging-experience-google-tag-manager/" target="_blank" rel="noopener">simoahava.com</a> · <a href="https://support.google.com/tagmanager/answer/4620708" target="_blank" rel="noopener">support.google.com/tagmanager</a></p>
+</article>
+<article class="item">
+<h3 id="bigquery-had-its-busiest-month-yet-for-ai-features"><span class="no">09</span>BigQuery had its busiest month yet for AI features</h3>
+<p><span class="label">What happened</span>A steady stream of new BigQuery features landed through late September and October — you can now chat with your data in plain English, ask it to explain key drivers behind a trend, and the system is getting better at understanding your data on its own.</p>
+<p><span class="label imp">Why it matters</span>The tools have moved faster than most of our actual workflows. Worth trying Conversational Analytics (BigQuery&#x27;s chat-with-data feature) on one live dashboard this quarter and seeing if it&#x27;s ready to use for real.</p>
+<p class="src-inline">Source: <a href="https://docs.cloud.google.com/bigquery/docs/release-notes" target="_blank" rel="noopener">BigQuery release notes</a></p>
+</article>
+<article class="item">
+<h3 id="google-s-data-agent-kit-is-out-and-every-data-platform-now-h"><span class="no">10</span>Google&#x27;s Data Agent Kit is out — and every data platform now has one</h3>
+<div class="meta">GA in October · preview since April</div>
+<p><span class="label">What happened</span>Google made its Data Agent Kit generally available after a preview that began at Cloud Next in April (version 1.0.0 landed 29 September, 1.1.0 on 13 October). It&#x27;s a free, open-source bundle of 37 Google-written skills plus tools that plug coding agents into more than fifteen Google Cloud data services, including BigQuery, Bigtable and managed Spark. It works inside Claude Code, Codex, Cursor, VS Code and Google&#x27;s Antigravity, and comes preinstalled in Cloud Shell.</p>
+<p><span class="label">What it can do</span>Write and tune BigQuery SQL to Google&#x27;s own best practice, build data pipelines (it can write, deploy and troubleshoot Airflow pipelines, and tell a quota or memory limit apart from a bug in your code), and run data science work from wrangling to model training. You pay only for the cloud services the agent uses.</p>
+<p><span class="label imp">How it compares</span>Snowflake, Databricks and Microsoft have all shipped the same idea this year, and all four work inside Claude Code. The differences are what each can reach and where the guardrails actually sit.</p>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col"></th><th scope="col">Google Data Agent Kit</th><th scope="col">Snowflake Cortex Code</th><th scope="col">Databricks agent skills</th><th scope="col">Microsoft Skills for Fabric</th></tr></thead><tbody><tr><th scope="row">What it is</th><td>Free, open-source skills + tools</td><td>Snowflake&#x27;s own coding agent</td><td>Official skills, installed via the Databricks CLI</td><td>Open-source skills (MIT)</td></tr><tr><th scope="row">Works in</th><td>Claude Code, Codex, Cursor, VS Code, Antigravity</td><td>Its own CLI and Snowsight, plus VS Code and a Claude Code plugin (previews)</td><td>Claude Code, GitHub Copilot, Cursor</td><td>Copilot CLI, VS Code, Claude Code, Cursor, Windsurf, Codex</td></tr><tr><th scope="row">Reaches beyond its own platform</th><td>Airflow, dbt and Spark (Google-managed)</td><td>Yes: AWS Glue, Databricks, Postgres, dbt, Airflow</td><td>No, Databricks only</td><td>No, Fabric only</td></tr><tr><th scope="row">Where the hard guardrail sits</th><td>IAM policy can block any write tool; the &#x27;don&#x27;t drop tables&#x27; rule is only advice</td><td>Snowflake&#x27;s data governance applies to the agent too</td><td>Unity Catalog governs its MCP tools (set up separately)</td><td>Skills are guidance only; actions go through Fabric&#x27;s MCP server</td></tr></tbody></table></div>
+<p><span class="label imp">Why it matters</span>The skills kit you use will follow your warehouse, not your coding agent. And the most important line in Google&#x27;s version is easy to miss: the instruction to ask before deleting anything is a suggestion the agent is asked to follow, not a lock. Anyone letting an agent loose on BigQuery should set the IAM policy that blocks write tools first, then open things up deliberately.</p>
+<p class="src-inline">Source: <a href="https://www.infoq.com/news/2026/10/data-agent-kit-ga/" target="_blank" rel="noopener">InfoQ, 24 Oct</a> · <a href="https://itbrief.com.au/story/google-cloud-launches-data-agent-kit-for-airflow-pipelines" target="_blank" rel="noopener">IT Brief</a> · <a href="https://cloud.google.com/blog/products/data-analytics/whats-new-in-the-agentic-data-cloud" target="_blank" rel="noopener">Google Cloud blog</a> · <a href="https://www.snowflake.com/content/snowflake-site/global/en/blog/cortex-code-governed-agent-data-stack" target="_blank" rel="noopener">Snowflake</a> · <a href="https://docs.databricks.com/aws/en/agent-skills/" target="_blank" rel="noopener">Databricks docs</a> · <a href="https://learn.microsoft.com/en-us/fabric/fundamentals/skills-for-fabric-overview" target="_blank" rel="noopener">Microsoft Learn</a></p>
+</article>
+<article class="item">
+<h3 id="google-ads-is-pushing-further-into-online-shopping"><span class="no">11</span>Google Ads is pushing further into online shopping</h3>
+<p><span class="label">What happened</span>Google Ads cleaned up old settings and switched on a one-click checkout feature (&quot;Universal Cart&quot;) for US search ads, plus clearer controls for which ad channel gets priority when budgets are tight.</p>
+<p><span class="label imp">Why it matters</span>Companies managing budget splits across channels should check those new priority settings before the next reporting cycle — the defaults may have changed.</p>
+<p class="src-inline">Source: <a href="https://relevantaudience.com" target="_blank" rel="noopener">relevantaudience.com</a> · <a href="https://ppcnewsfeed.com" target="_blank" rel="noopener">ppcnewsfeed.com</a></p>
+</article>
+</section>
+<section class="sec"><h2 id="market-moves">Market moves</h2>
+<div class="quiet"><strong>Nothing worth reporting this month.</strong> No real merger, acquisition, or agency shake-up turned up — just recycled AI statistics dressed up as news. Rather than pad this section, I&#x27;m leaving it empty.</div>
+</section>
+<div class="take"><span class="label-take">My take</span><p>Nobody&#x27;s waiting for one big &quot;GPT‑6 moment&quot; anymore — the big labs are just shipping constantly and letting people absorb the changes quietly. And the thing everyone keeps running into isn&#x27;t the AI itself anymore — it&#x27;s getting it to actually plug into existing systems and data, safely. That shows up twice this month: once in the agent-adoption surveys, and once in Google quietly moving who controls your consent data. The AI is ready. The plumbing isn&#x27;t.</p></div>
+<h4 class="rec-head">Do this fortnight</h4><div class="rec"><ol><li>Check which accounts have consent and IP data sitting in Google Ads now, not just GA4.</li><li>If you run server-side GTM, decide before 11 January whether Google&#x27;s ad tags should receive full IP addresses — and check what your Meta and TikTok server tags already send.</li><li>Double-check GTM container setups against the new tag behaviour while things are quiet.</li><li>Try BigQuery&#x27;s chat-with-data feature on one live dashboard, just to see what it can do.</li></ol></div>
+<h4 class="rec-head">Do this quarter</h4><div class="rec"><ol><li>If we&#x27;ve built anything on ChatGPT&#x27;s free tier, test it again — the model underneath just changed.</li><li>Before any coding agent touches BigQuery, set the IAM policy that blocks write tools — don&#x27;t rely on the Data Agent Kit&#x27;s &#x27;ask first&#x27; skill.</li><li>Keep the measurement framework and cost-vs-benefit review ready for whenever an agent pilot comes up — most companies still can&#x27;t prove theirs are working.</li><li>Review channel-priority settings on paid search budgets rather than leaving them on default.</li></ol></div>
+<div class="sign">Ngā mihi,<br>Debbie</div>
+<div class="engage engage-bottom" data-engage="2026-10">
+  <button class="like-btn" type="button" data-like="2026-10" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span class="like-label">Like</span><span class="like-count" data-like-count="2026-10"></span></button>
+  <a class="comment-jump" href="#comments"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span>Comment</span><span class="comment-n" data-comment-count="2026-10"></span></a>
+  <button class="share-btn" type="button" data-share="2026-10">Share</button>
+</div>
+<details class="src"><summary>All sources (21)</summary><ol><li><a href="https://pricingsaas.com/companies/openai/diffs/2026D281" target="_blank" rel="noopener">pricingsaas.com — OpenAI product-change tracker, 8 Oct 2026</a></li><li><a href="https://www.orcarouter.ai/blog/claude-news-what-anthropic-shipped-in-october-2026" target="_blank" rel="noopener">OrcaRouter — &quot;What Anthropic shipped in October 2026&quot;</a></li><li><a href="https://thenewstack.io/claude-dashboards-data-motion/" target="_blank" rel="noopener">The New Stack — Claude Dashboards and Motion detail</a></li><li><a href="https://www.thestar.com.my/tech/tech-news/2026/10/09/anthropic-launches-dashboard-animation-tools-for-claude" target="_blank" rel="noopener">The Star — Anthropic launches dashboard and animation tools</a></li><li><a href="https://simplefunctions.dev/answer/grok-grok5" target="_blank" rel="noopener">simplefunctions.dev — Grok 5 release-date prediction market</a></li><li><a href="https://www.cmswire.com/the-wire/new-liferay-study-finds-54-of-companies-are-running-ai-agents-yet-only-25-measure-their-impact/" target="_blank" rel="noopener">CMSWire — Liferay 2026 Agentic AI Adoption and Governance Report</a></li><li><a href="https://arcade.dev/blog/5-takeaways-2026-state-of-ai-agents-claude" target="_blank" rel="noopener">Arcade.dev — 5 takeaways from Anthropic&#x27;s 2026 State of AI Agents Report</a></li><li><a href="https://support.google.com/analytics/answer/17016975" target="_blank" rel="noopener">support.google.com/analytics — GA4/Ads data-controls consolidation</a></li><li><a href="https://simoahava.com/analytics/optimized-tagging-experience-google-tag-manager/" target="_blank" rel="noopener">Simo Ahava — GTM gtag merger, 13 Oct 2026</a></li><li><a href="https://support.google.com/tagmanager/answer/4620708" target="_blank" rel="noopener">support.google.com/tagmanager</a></li><li><a href="https://docs.cloud.google.com/bigquery/docs/release-notes" target="_blank" rel="noopener">BigQuery release notes</a></li><li><a href="https://relevantaudience.com" target="_blank" rel="noopener">relevantaudience.com — DV360 / Universal Cart coverage</a></li><li><a href="https://ppcnewsfeed.com" target="_blank" rel="noopener">ppcnewsfeed.com — Google Ads commerce updates</a></li><li><a href="https://ppc.land/google-ad-tags-gain-full-visitor-ip-addresses-in-server-side-gtm-in-2027/" target="_blank" rel="noopener">PPC Land — Google ad tags gain full visitor IP addresses in server-side GTM (2 Nov 2026)</a></li><li><a href="https://taggrs.io/google-tag-gateway-vs-server-side-gtm/" target="_blank" rel="noopener">TAGGRS — Google Tag Gateway vs server-side GTM</a></li><li><a href="https://www.infoq.com/news/2026/10/data-agent-kit-ga/" target="_blank" rel="noopener">InfoQ — Google&#x27;s Data Agent Kit hits GA (24 Oct 2026)</a></li><li><a href="https://itbrief.com.au/story/google-cloud-launches-data-agent-kit-for-airflow-pipelines" target="_blank" rel="noopener">IT Brief — Data Agent Kit for Airflow pipelines</a></li><li><a href="https://cloud.google.com/blog/products/data-analytics/whats-new-in-the-agentic-data-cloud" target="_blank" rel="noopener">Google Cloud — What&#x27;s new in the Agentic Data Cloud</a></li><li><a href="https://www.snowflake.com/content/snowflake-site/global/en/blog/cortex-code-governed-agent-data-stack" target="_blank" rel="noopener">Snowflake — Cortex Code expands</a></li><li><a href="https://docs.databricks.com/aws/en/agent-skills/" target="_blank" rel="noopener">Databricks — Agent skills for AI coding assistants</a></li><li><a href="https://learn.microsoft.com/en-us/fabric/fundamentals/skills-for-fabric-overview" target="_blank" rel="noopener">Microsoft Learn — Skills for Fabric</a></li></ol></details>
+<p class="note">For NZ: nothing above is NZ-specific — all of it comes from global/US sources, so local timing and availability (feature rollouts, pricing, data residency) may lag what&#x27;s reported here.</p>
+<section class="comments" id="comments" data-comments="2026-10">
+  <h2>Comments <span class="count" data-comment-count="2026-10"></span></h2>
+  <form class="comment-form" novalidate>
+    <h3>Join the conversation</h3>
+    <label for="c-email">Your email</label>
+    <input id="c-email" name="email" type="email" required maxlength="120" autocomplete="email" inputmode="email" placeholder="you@gmail.com">
+    <p class="hint">We only use your email to check you're a real person: it needs to be from a mainstream provider (Gmail, Outlook, iCloud, Yahoo, Proton, Xtra…). It's <b>never stored, shown or shared</b>. Your comment appears under a friendly nickname like <b>Sunny Kererū</b>. <a href="/privacy#comments">How comments work</a></p>
+    <label for="c-body">Comment</label>
+    <textarea id="c-body" name="body" required maxlength="2000" rows="5"></textarea>
+    <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    <div class="turnstile" data-sitekey="1x00000000000000000000AA"></div>
+    <button type="submit">Post comment</button>
+    <p class="hint small">Protected by Cloudflare Turnstile, an invisible check that you're not a bot.</p>
+    <p class="form-status" role="status"></p>
+  </form>
+  <ol class="comment-list" aria-live="polite"><li class="comment-empty">Loading comments…</li></ol>
+</section>
+<section class="archive" aria-labelledby="prev-h"><h2 id="prev-h">Previous editions</h2><ol><li data-issue-card="2026-08"><a class="arch-row" href="/pulse/2026-08" data-post-id="2026-08">
+  <div class="arch-top"><span class="no">August 2026</span>
+  <span class="counts"><span class="ct"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.5h2c.7-1.4 2.2-2.5 4.3-2.5 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg><span data-like-count="2026-08">–</span></span><span class="ct"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg><span data-comment-count="2026-08">–</span></span></span></div>
+  <h3>Google quietly made AI Max mandatory for most Search campaigns</h3>
+  <p>Google quietly made its AI system the default for how most Search campaigns run, effective this week — with no public announcement, no rollback, and notification by email alone. Nielsen closed on…</p>
+</a></li></ol></section>
+</main>
 
 <footer>
   <span>© Debbie Tan — Auckland, Aotearoa</span>
-  <span>Some posts are AI-assisted. All are read, questioned, and approved by me.</span>
+  <span class="hit-counter" data-hit-counter hidden><span class="hc-label">You are visitor no.</span> <span class="hc-odo" data-hit-digits aria-hidden="true"></span><span class="sr-only" data-hit-sr></span> <span class="hc-label">✨ since 2026</span></span>
+  <span class="foot-links"><a href="/privacy">Privacy</a> · <a href="/privacy#consent" data-consent-open>Cookie settings</a></span>
+  <span>News roundups are AI-assisted, then read, questioned and approved by me. My commentary is my own.</span>
 </footer>
-
-<script>
-  window.dataLayer = window.dataLayer || [];
-
-  const searchInput = document.getElementById('site-search');
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && this.value.trim().length > 0) {
-      const query = this.value.trim();
-      window.dataLayer.push({ event: 'search', search_term: query });
-      console.log('[dataLayer push] search:', query);
-    }
-  });
-
-  document.getElementById('shop-teaser').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.dataLayer.push({ event: 'shop_teaser_click' });
-    console.log('[dataLayer push] shop_teaser_click');
-    alert('Shop is currently being built — check back soon.');
-  });
-
-  document.querySelectorAll('.post-row').forEach(function(card) {
-    card.addEventListener('click', function() {
-      window.dataLayer.push({
-        event: 'post_click',
-        post_id: this.dataset.postId,
-        content_group: 'blog'
-      });
-      console.log('[dataLayer push] post_click:', this.dataset.postId);
-    });
-  });
-</script>
-
+<script src="/site.js" defer></script>
+<script src="/tools.js" defer></script>
+<script src="/pulse.js" defer></script>
 </body>
 </html>
-
