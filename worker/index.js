@@ -190,6 +190,15 @@ async function api(request, env, url) {
     return json({ total: row.total });
   }
 
+  // GET /api/funnel-qa — the most recent funnel QA run, for the /funnel-qa page
+  if (parts[0] === 'funnel-qa' && method === 'GET') {
+    const row = await env.DB.prepare("SELECT created_at, data FROM audits WHERE kind='funnel' ORDER BY id DESC LIMIT 1").first();
+    if (!row) return json({ run: null }, 200, 60);
+    let data = null;
+    try { data = JSON.parse(row.data); } catch (e) {}
+    return json({ run: data, recorded_at: row.created_at }, 200, 60);
+  }
+
   // GET /api/me?v=visitor — the friendly nickname for this browser (same one used on comments)
   if (parts[0] === 'me' && method === 'GET') {
     const v = cleanVisitor(url.searchParams.get('v'));
@@ -285,7 +294,7 @@ async function api(request, env, url) {
     // POST /api/admin/audit  {kind: lighthouse|accessibility, page, data}
     if (parts[1] === 'audit' && method === 'POST') {
       const b = await readJson(request, 300000);
-      if (!['lighthouse', 'accessibility'].includes(b.kind)) return json({ error: 'Unknown kind' }, 400);
+      if (!['lighthouse', 'accessibility', 'funnel'].includes(b.kind)) return json({ error: 'Unknown kind' }, 400);
       await env.DB.prepare('INSERT INTO audits (kind, page, data) VALUES (?, ?, ?)')
         .bind(b.kind, pathOnly(b.page || '/'), JSON.stringify(b.data || {}).slice(0, 250000)).run();
       return json({ ok: true });

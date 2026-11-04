@@ -1,0 +1,62 @@
+name: Funnel QA
+
+# Walks the shop and engagement journeys in a real browser and checks every event against the
+# tracking plan. Fails the run if a tag is missing, malformed or fires twice.
+# Results appear on /funnel-qa. Needs the ADMIN_TOKEN secret (same value as the Worker's).
+on:
+  push:
+    branches: [main, pulse-homepage]
+    paths:
+      - 'debbie-nz-site/**'
+      - 'content/funnels.json'
+      - 'funnel-spec.json'
+      - 'scripts/funnel-qa.mjs'
+      - '.github/workflows/funnel-qa.yml'
+  schedule:
+    - cron: "41 17 * * *"   # 6:41am NZDT, before the daily audit
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Site to test (defaults to the SITE_URL variable)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  funnel-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright
+        run: |
+          npm i --no-save --no-package-lock playwright@1
+          npx playwright install --with-deps chromium
+
+      # The spec is generated from the tracking plan. Regenerating it here means a QA run can
+      # never test against a stale spec, and the diff check catches a spec committed out of date.
+      - name: Check the QA spec matches the tracking plan
+        run: |
+          python3 scripts/make_gtm.py
+          if ! git diff --quiet funnel-spec.json; then
+            echo "::error::funnel-spec.json is out of date. Run 'python3 scripts/make_gtm.py' and commit the result."
+            git --no-pager diff --stat funnel-spec.json
+            exit 1
+          fi
+
+      - name: Run funnel QA
+        env:
+          SITE_URL: ${{ github.event.inputs.site_url || vars.SITE_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: node scripts/funnel-qa.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: funnel-report
+          path: funnel-report.json

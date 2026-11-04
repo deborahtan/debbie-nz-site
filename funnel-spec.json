@@ -1,0 +1,445 @@
+{
+  "_generated_by": "scripts/make_gtm.py \u2014 do not edit by hand",
+  "measurement": {
+    "gtm_id": "GTM-NXPF7HTS"
+  },
+  "global_params": [
+    "test_store"
+  ],
+  "events": {
+    "view_item_list": {
+      "type": "ecommerce",
+      "fires_when": "Shop listing viewed",
+      "where": "/shop",
+      "required": [
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": null,
+      "expect_test_store": true
+    },
+    "select_item": {
+      "type": "ecommerce",
+      "fires_when": "A product clicked in a list",
+      "where": "/shop",
+      "required": [
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": null,
+      "expect_test_store": true
+    },
+    "view_item": {
+      "type": "ecommerce",
+      "fires_when": "Product page viewed",
+      "where": "/shop/{product}",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "add_to_wishlist": {
+      "type": "ecommerce",
+      "fires_when": "Wishlist button",
+      "where": "/shop/{product}",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "add_to_cart": {
+      "type": "ecommerce",
+      "fires_when": "Add to cart, or + in the cart",
+      "where": "/shop/{product}, /shop/cart",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "remove_from_cart": {
+      "type": "ecommerce",
+      "fires_when": "\u2212 or Remove in the cart",
+      "where": "/shop/cart",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "view_cart": {
+      "type": "ecommerce",
+      "fires_when": "Cart viewed",
+      "where": "/shop/cart",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "begin_checkout": {
+      "type": "ecommerce",
+      "fires_when": "Checkout opened",
+      "where": "/shop/checkout",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "add_shipping_info": {
+      "type": "ecommerce",
+      "fires_when": "Delivery chosen (skipped when the cart is all digital)",
+      "where": "/shop/checkout",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "add_payment_info": {
+      "type": "ecommerce",
+      "fires_when": "Payment attempted (card, Apple Pay, Google Pay)",
+      "where": "/shop/checkout",
+      "required": [
+        "currency",
+        "value",
+        "items"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "purchase": {
+      "type": "ecommerce",
+      "fires_when": "Order confirmed. Fires once per order; reload-safe",
+      "where": "/shop/order",
+      "required": [
+        "currency",
+        "value",
+        "items",
+        "transaction_id"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "refund": {
+      "type": "ecommerce",
+      "fires_when": "Refund requested",
+      "where": "/shop/orders",
+      "required": [
+        "currency",
+        "value",
+        "items",
+        "transaction_id"
+      ],
+      "item_required": [
+        "item_id",
+        "item_name",
+        "price",
+        "quantity"
+      ],
+      "currency": "NZD",
+      "expect_test_store": true
+    },
+    "view_promotion": {
+      "type": "ecommerce",
+      "fires_when": "CONSENT10 promo seen",
+      "where": "/shop",
+      "required": [
+        "items"
+      ],
+      "item_required": [],
+      "currency": null,
+      "expect_test_store": true
+    },
+    "select_promotion": {
+      "type": "ecommerce",
+      "fires_when": "CONSENT10 promo clicked",
+      "where": "/shop",
+      "required": [
+        "items"
+      ],
+      "item_required": [],
+      "currency": null,
+      "expect_test_store": true
+    },
+    "search": {
+      "type": "custom",
+      "fires_when": "Site search submitted (Enter)",
+      "where": "All pages",
+      "required": [
+        "search_term"
+      ],
+      "expect_test_store": false
+    },
+    "post_click": {
+      "type": "custom",
+      "fires_when": "Previous edition card clicked",
+      "where": "Home, editions",
+      "required": [
+        "post_id",
+        "content_group"
+      ],
+      "expect_test_store": false
+    },
+    "newsletter_like": {
+      "type": "custom",
+      "fires_when": "Like / unlike an edition",
+      "where": "Home, editions",
+      "required": [
+        "item_id",
+        "like_action"
+      ],
+      "expect_test_store": false
+    },
+    "comment_submit": {
+      "type": "custom",
+      "fires_when": "Comment posted (never the text or email)",
+      "where": "Home, editions",
+      "required": [
+        "item_id",
+        "comment_status"
+      ],
+      "expect_test_store": false
+    },
+    "share": {
+      "type": "custom",
+      "fires_when": "Share button (GA4 recommended event)",
+      "where": "Home, editions",
+      "required": [
+        "method",
+        "content_type",
+        "item_id"
+      ],
+      "expect_test_store": false
+    },
+    "project_expand": {
+      "type": "custom",
+      "fires_when": "A tool card opened",
+      "where": "/whats-cooking",
+      "required": [
+        "item_id"
+      ],
+      "expect_test_store": false
+    },
+    "project_filter": {
+      "type": "custom",
+      "fires_when": "Status filter used",
+      "where": "/whats-cooking",
+      "required": [
+        "filter_status"
+      ],
+      "expect_test_store": false
+    },
+    "principle_expand": {
+      "type": "custom",
+      "fires_when": "A principle opened on How I use AI",
+      "where": "/how-i-use-ai",
+      "required": [
+        "item_id"
+      ],
+      "expect_test_store": false
+    },
+    "roadmap_section_toggle": {
+      "type": "custom",
+      "fires_when": "A Roadmap section opened or closed",
+      "where": "/roadmap",
+      "required": [
+        "section_name",
+        "section_open"
+      ],
+      "expect_test_store": false
+    },
+    "roadmap_item_click": {
+      "type": "custom",
+      "fires_when": "A task, recap link or kanban card clicked through to its product",
+      "where": "/roadmap",
+      "required": [
+        "link_location",
+        "item_id"
+      ],
+      "expect_test_store": false
+    },
+    "consent_update": {
+      "type": "custom",
+      "fires_when": "Cookie choice made or reloaded",
+      "where": "All pages",
+      "required": [
+        "consent_analytics",
+        "consent_marketing",
+        "consent_source"
+      ],
+      "expect_test_store": false
+    },
+    "web_vitals": {
+      "type": "custom",
+      "fires_when": "Core Web Vitals (only with analytics consent)",
+      "where": "All pages",
+      "required": [
+        "metric_name",
+        "metric_value",
+        "metric_rating"
+      ],
+      "expect_test_store": false
+    },
+    "welcome_back": {
+      "type": "custom",
+      "fires_when": "Returning-visitor greeting shown",
+      "where": "All pages",
+      "required": [
+        "visit_count",
+        "day_part"
+      ],
+      "expect_test_store": false
+    },
+    "datalayer_viewer_open": {
+      "type": "custom",
+      "fires_when": "dataLayer viewer opened",
+      "where": "All pages",
+      "required": [],
+      "expect_test_store": false
+    },
+    "psych_reveal": {
+      "type": "custom",
+      "fires_when": "'Sike!' reveal on coffee / tip jar",
+      "where": "/shop/{product}",
+      "required": [
+        "item_id",
+        "item_name"
+      ],
+      "expect_test_store": true
+    },
+    "coupon_apply": {
+      "type": "custom",
+      "fires_when": "Valid coupon applied",
+      "where": "/shop/checkout",
+      "required": [
+        "coupon"
+      ],
+      "expect_test_store": true
+    },
+    "coupon_error": {
+      "type": "custom",
+      "fires_when": "Invalid coupon (try BADUTM)",
+      "where": "/shop/checkout",
+      "required": [
+        "coupon",
+        "error_reason"
+      ],
+      "expect_test_store": true
+    },
+    "payment_failed": {
+      "type": "custom",
+      "fires_when": "Declined, expired, failed verification or cancelled wallet",
+      "where": "/shop/checkout",
+      "required": [
+        "payment_type",
+        "failure_reason",
+        "value",
+        "currency"
+      ],
+      "expect_test_store": true
+    },
+    "payment_verification": {
+      "type": "custom",
+      "fires_when": "Pretend 3-D Secure answered",
+      "where": "/shop/checkout",
+      "required": [
+        "payment_type",
+        "verification_result"
+      ],
+      "expect_test_store": true
+    },
+    "form_submit": {
+      "type": "custom",
+      "fires_when": "Test sign-up form submitted (hashed email only)",
+      "where": "/form-test",
+      "required": [
+        "form_id",
+        "form_name",
+        "commitment_level"
+      ],
+      "expect_test_store": false
+    }
+  }
+}

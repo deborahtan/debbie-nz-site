@@ -1,0 +1,263 @@
+{
+  "_note": "What the QA runner clicks. What each event must CONTAIN comes from funnel-spec.json, which is generated from scripts/make_gtm.py — so journeys and the tracking plan stay independent but can't contradict each other.",
+  "journeys": [
+    {
+      "id": "shop-purchase",
+      "name": "Shop: browse to purchase",
+      "why": "The full ecommerce funnel. If this passes, the revenue-shaped events are intact.",
+      "consent": {
+        "analytics": true,
+        "marketing": true
+      },
+      "steps": [
+        {
+          "do": "goto",
+          "path": "/shop",
+          "expect": [
+            "view_item_list"
+          ]
+        },
+        {
+          "do": "click",
+          "selector": "[data-select-item=\"plushie-404\"]",
+          "expect": [
+            "select_item"
+          ],
+          "settle": 900
+        },
+        {
+          "do": "expect_url",
+          "pattern": "/shop/plushie-404",
+          "expect": [
+            "view_item"
+          ]
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Add to cart\")",
+          "expect": [
+            "add_to_cart"
+          ]
+        },
+        {
+          "do": "goto",
+          "path": "/shop/cart",
+          "expect": [
+            "view_cart"
+          ]
+        },
+        {
+          "do": "goto",
+          "path": "/shop/checkout",
+          "expect": [
+            "begin_checkout"
+          ]
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=email]",
+          "value": "qa-runner@example.com"
+        },
+        {
+          "do": "click",
+          "selector": "[data-next=contact]"
+        },
+        {
+          "do": "click",
+          "selector": "[data-next=shipping]",
+          "expect": [
+            "add_shipping_info"
+          ]
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=card]",
+          "value": "4242 4242 4242 4242"
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=exp]",
+          "value": "12 / 34"
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=cvc]",
+          "value": "123"
+        },
+        {
+          "do": "click",
+          "selector": ".pay-btn",
+          "expect": [
+            "add_payment_info"
+          ],
+          "settle": 1500
+        },
+        {
+          "do": "expect_url",
+          "pattern": "/shop/order",
+          "expect": [
+            "purchase"
+          ],
+          "settle": 1200
+        }
+      ]
+    },
+    {
+      "id": "shop-declined",
+      "name": "Shop: declined card",
+      "why": "A failed payment must report the failure and must NOT fire purchase.",
+      "consent": {
+        "analytics": true,
+        "marketing": false
+      },
+      "steps": [
+        {
+          "do": "goto",
+          "path": "/shop/bounce-ball"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Add to cart\")",
+          "expect": [
+            "add_to_cart"
+          ]
+        },
+        {
+          "do": "goto",
+          "path": "/shop/checkout",
+          "expect": [
+            "begin_checkout"
+          ]
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=email]",
+          "value": "qa-runner@example.com"
+        },
+        {
+          "do": "click",
+          "selector": "[data-next=contact]"
+        },
+        {
+          "do": "click",
+          "selector": "[data-next=shipping]"
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=card]",
+          "value": "4000 0000 0000 0002"
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=exp]",
+          "value": "12 / 34"
+        },
+        {
+          "do": "fill",
+          "selector": "input[name=cvc]",
+          "value": "123"
+        },
+        {
+          "do": "click",
+          "selector": ".pay-btn",
+          "expect": [
+            "payment_failed"
+          ],
+          "forbid": [
+            "purchase"
+          ],
+          "settle": 1500
+        }
+      ]
+    },
+    {
+      "id": "engagement",
+      "name": "Newsletter: search, like and share",
+      "why": "The engagement events on the homepage.",
+      "consent": {
+        "analytics": true,
+        "marketing": false
+      },
+      "steps": [
+        {
+          "do": "goto",
+          "path": "/"
+        },
+        {
+          "do": "fill",
+          "selector": "#site-search",
+          "value": "attribution"
+        },
+        {
+          "do": "press",
+          "selector": "#site-search",
+          "key": "Enter",
+          "expect": [
+            "search"
+          ]
+        },
+        {
+          "do": "click",
+          "selector": ".like-btn",
+          "expect": [
+            "newsletter_like"
+          ],
+          "settle": 900
+        }
+      ]
+    },
+    {
+      "id": "consent",
+      "name": "Consent: choices reach the dataLayer",
+      "why": "Consent Mode has to update before anything else is trusted.",
+      "consent": null,
+      "steps": [
+        {
+          "do": "goto",
+          "path": "/"
+        },
+        {
+          "do": "click",
+          "selector": ".consent .consent-yes",
+          "expect": [
+            "consent_update"
+          ],
+          "settle": 800
+        }
+      ]
+    },
+    {
+      "id": "signup",
+      "name": "Sign-up form",
+      "why": "The test form's submit event.",
+      "consent": {
+        "analytics": true,
+        "marketing": false
+      },
+      "steps": [
+        {
+          "do": "goto",
+          "path": "/form-test.html"
+        },
+        {
+          "do": "fill",
+          "selector": "#fname",
+          "value": "QA Runner"
+        },
+        {
+          "do": "fill",
+          "selector": "#email",
+          "value": "qa-runner@example.com"
+        },
+        {
+          "do": "click",
+          "selector": "button[type=submit]",
+          "expect": [
+            "form_submit"
+          ],
+          "settle": 1200
+        }
+      ]
+    }
+  ]
+}

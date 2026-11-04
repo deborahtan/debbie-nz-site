@@ -69,7 +69,7 @@ def title_html(issue):
 
 # ------------------------------------------------------------------ shell
 NAV_ITEMS = [("/", "on the pulse", "pulse"), ("/whats-cooking", "what's cooking", "cooking"), ("/roadmap", "roadmap", "roadmap"),
-             ("/how-i-use-ai", "how i use ai", "ai"), ("/about.html", "about", "about")]
+             ("/how-i-use-ai", "how i use ai", "ai"), ("/funnel-qa", "funnel qa", "qa"), ("/about.html", "about", "about")]
 
 RIBBON = """<div class="ribbon" role="note">
   <p><b>💗 A real site:</b> ongoing news on data &amp; technology, with Debbie's own human-written commentary.
@@ -768,6 +768,22 @@ def render_philosophy(data):
 
 
 
+def render_funnel_qa():
+    """Funnel QA — shows the latest run recorded by scripts/funnel-qa.mjs."""
+    body = """<header class="brand"><span class="badge">🧪 tracking QA</span><h1>Funnel QA</h1>
+<p>A real browser walks the shop and engagement journeys, watches the dataLayer and the GA4 network hits,
+and checks both against the tracking plan. The plan, the GTM container and these checks all come from one
+definition, so they can't drift apart. It runs on every push and every morning.</p></header>
+<p class="hint">Every assertion is a plain comparison against the spec — no judgement calls, so the same site
+always gives the same verdict. Anything that could identify a person is stripped before the result is stored.</p>
+<div id="fq-root"><p class="note">Loading the latest run…</p></div>"""
+    return render_page("Funnel QA — Debbie Tan", "Automated tracking QA: every funnel step checked against the tracking plan.",
+                       "/funnel-qa", body, "funnel-qa", current="qa").replace(
+        '<script src="/pulse.js" defer></script>',
+        '<script src="/pulse.js" defer></script>\n<script src="/funnel-qa.js" defer></script>')
+
+
+
 def render_page(title, desc, path, body_html, extra_class="", current=""):
     return "\n".join([head(title, desc, path, current), f'<main id="main" class="pulse-wrap {extra_class}">', body_html, "</main>", FOOT])
 
@@ -779,7 +795,7 @@ def render_404():
 
 
 def render_sitemap(issues):
-    urls = ["/", "/whats-cooking", "/roadmap", "/how-i-use-ai", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
+    urls = ["/", "/whats-cooking", "/roadmap", "/how-i-use-ai", "/funnel-qa", "/shop", "/about", "/privacy"] + [f"/pulse/{i['slug']}" for i in issues]
     rows = "".join(f"<url><loc>{SITE_URL}{u}</loc></url>" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
 
@@ -817,6 +833,7 @@ def main():
         (SITE / "whats-cooking.html").write_text(render_cooking(cooking_data, roadmap_data))
         (SITE / "roadmap.html").write_text(render_roadmap(roadmap_data, cooking_data))
     (SITE / "how-i-use-ai.html").write_text(render_philosophy(json.loads((CONTENT / "philosophy.json").read_text())))
+    (SITE / "funnel-qa.html").write_text(render_funnel_qa())
     privacy = CONTENT / "privacy.html"
     if privacy.exists():
         (SITE / "privacy.html").write_text(render_page(
